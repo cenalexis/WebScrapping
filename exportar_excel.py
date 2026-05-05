@@ -35,10 +35,13 @@ def conectar():
     return sqlite3.connect(DB_PATH)
 
 
-def cargar_vacantes(desde: str | None = None) -> pd.DataFrame:
+def cargar_vacantes(desde: str | None = None, solo_portal: str | None = None) -> pd.DataFrame:
     conn = conectar()
-    filtro = "WHERE v.fecha_extraccion >= ?" if desde else ""
-    params = [desde] if desde else []
+    filtros = []
+    params  = []
+    if desde:        filtros.append("v.fecha_extraccion >= ?"); params.append(desde)
+    if solo_portal:  filtros.append("p.nombre = ?");           params.append(solo_portal)
+    filtro = ("WHERE " + " AND ".join(filtros)) if filtros else ""
 
     query = f"""
     SELECT
@@ -89,9 +92,9 @@ def _estilizar(ws, color: str = "1F4E79"):
     ws.freeze_panes = "A2"
 
 
-def exportar(salida: str = "", desde: str | None = None):
+def exportar(salida: str = "", desde: str | None = None, solo_portal: str | None = None):
     print(f"Leyendo: {DB_PATH}")
-    df = cargar_vacantes(desde=desde)
+    df = cargar_vacantes(desde=desde, solo_portal=solo_portal)
     print(f"  {len(df):,} vacantes")
 
     if df.empty:
