@@ -25,3 +25,8 @@ __pycache__/
 # Windows
 Thumbs.db
 desktop.ini
+
+# Credenciales Google Drive — NUNCA subir a GitHub
+credentials.json
+token.json
+ultima_ejecucion.txt

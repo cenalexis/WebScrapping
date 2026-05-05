@@ -1,44 +1,72 @@
 @echo off
 :: ============================================================
 :: lanzar_scrapers.bat
-:: Activa el entorno virtual y corre ambos scrapers en secuencia.
-:: Este archivo es el que ejecuta el Task Scheduler de Windows.
+:: Se ejecuta 15 minutos despues de cada inicio de sesion.
+:: Tiene guardia propia: si ya corrio en las ultimas 20 horas,
+:: sale sin hacer nada (para no correr dos veces en el dia).
 :: ============================================================
 
 set PROYECTO=C:\Users\alexis\Documents\CISE_2026
-set VENV=%PROYECTO%\cise_scraper\Scripts\activate.bat
 set LOG=%PROYECTO%\scraper.log
+set MARCA=%PROYECTO%\ultima_ejecucion.txt
 
-echo. >> "%LOG%"
-echo ============================================================ >> "%LOG%"
-echo EJECUCION PROGRAMADA: %date% %time% >> "%LOG%"
-echo ============================================================ >> "%LOG%"
+:: ── Esperar 15 minutos para que Windows termine de cargar ───────────────
+timeout /t 900 /nobreak > nul
 
-:: Activar entorno virtual (si no existe, usar Python del sistema)
-if exist "%VENV%" (
-    call "%VENV%"
-) else (
-    echo AVISO: entorno virtual no encontrado, usando Python del sistema >> "%LOG%"
+:: ── Guardia: evitar correr mas de una vez cada 20 horas ──────────────────
+if exist "%MARCA%" (
+    for /f %%i in ('powershell -NoProfile -Command "(New-TimeSpan -Start (Get-Content \"%MARCA%\") -End (Get-Date)).TotalHours"') do set HORAS=%%i
+    powershell -NoProfile -Command "if ([double]'%HORAS%' -lt 20) { exit 1 }"
+    if %ERRORLEVEL% EQU 1 (
+        echo %date% %time% - Ultima ejecucion hace menos de 20 horas. Saltando. >> "%LOG%"
+        exit /b 0
+    )
 )
 
-:: Multitrabajos
+:: ── Registrar inicio ─────────────────────────────────────────────────────
+echo %date% %time% > "%MARCA%"
+echo. >> "%LOG%"
+echo ============================================================ >> "%LOG%"
+echo INICIO AUTOMATICO: %date% %time% >> "%LOG%"
+echo ============================================================ >> "%LOG%"
+
+:: ── Activar entorno virtual ───────────────────────────────────────────────
+if exist "%PROYECTO%\cise_scraper\Scripts\activate.bat" (
+    call "%PROYECTO%\cise_scraper\Scripts\activate.bat"
+) else (
+    echo AVISO: usando Python del sistema >> "%LOG%"
+)
+
+:: ── Multitrabajos ─────────────────────────────────────────────────────────
 echo. >> "%LOG%"
 echo --- Multitrabajos --- >> "%LOG%"
 python "%PROYECTO%\Notebooks\scraper_mt_v2.py" >> "%LOG%" 2>&1
 
-:: Espera 5 minutos entre portales para no saturar
+:: Pausa entre portales
 timeout /t 300 /nobreak > nul
 
-:: Computrabajo
+:: ── Computrabajo ──────────────────────────────────────────────────────────
 echo. >> "%LOG%"
 echo --- Computrabajo --- >> "%LOG%"
 python "%PROYECTO%\Notebooks\scraper_computrabajo.py" >> "%LOG%" 2>&1
 
-:: Backup automático de la BD
+:: ── Exportar Excel automaticamente ───────────────────────────────────────
 echo. >> "%LOG%"
-echo --- Backup --- >> "%LOG%"
+echo --- Exportando Excel --- >> "%LOG%"
+python "%PROYECTO%\exportar_excel.py" >> "%LOG%" 2>&1
+
+:: ── Subir a Google Drive (solo si credentials.json existe) ───────────────
+if exist "%PROYECTO%\credentials.json" (
+    echo. >> "%LOG%"
+    echo --- Subiendo a Google Drive --- >> "%LOG%"
+    python "%PROYECTO%\subir_drive.py" >> "%LOG%" 2>&1
+)
+
+:: ── Backup de la BD ───────────────────────────────────────────────────────
+echo. >> "%LOG%"
+echo --- Backup BD --- >> "%LOG%"
 python "%PROYECTO%\backup_db.py" >> "%LOG%" 2>&1
 
 echo. >> "%LOG%"
-echo Ejecucion finalizada: %date% %time% >> "%LOG%"
+echo FIN: %date% %time% >> "%LOG%"
 echo ============================================================ >> "%LOG%"
