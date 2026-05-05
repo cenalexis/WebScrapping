@@ -1,0 +1,27 @@
+# Entorno virtual — pesa cientos de MB, no va a GitHub
+cise_scraper/
+venv/
+.venv/
+
+# Base de datos — se guarda localmente y en backups/
+*.db
+*.sqlite
+
+# Exports generados con exportar_excel.py
+exports/
+*.xlsx
+
+# Logs
+*.log
+
+# Caché Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# VS Code
+.vscode/
+
+# Windows
+Thumbs.db
+desktop.ini
