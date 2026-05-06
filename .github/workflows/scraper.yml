@@ -12,12 +12,14 @@ permissions:
 jobs:
   scrape:
     runs-on: ubuntu-latest
-    timeout-minutes: 150   # 2.5 horas máximo
+    timeout-minutes: 180   # 3 horas máximo (aumentar si se agregan más scrapers)
 
     env:
-      CHROME_VER: "0"      # 0 = auto-detectar versión instalada
+      CHROME_VER: "0"               # 0 = auto-detectar versión instalada
       DB_PATH: vacantes_laborales.db
       EXPORTS_DIR: exports
+      GDRIVE_CREDENTIALS_PATH: credentials.json
+      GDRIVE_TOKEN_PATH: token.json
 
     steps:
       # ── 1. Código ────────────────────────────────────────────────────────────
@@ -40,9 +42,6 @@ jobs:
         with:
           chrome-version: stable
 
-      - name: Verificar Chrome
-        run: google-chrome --version
-
       # ── 4. Recuperar BD anterior ─────────────────────────────────────────────
       - name: Descargar BD del release anterior
         run: |
@@ -54,35 +53,47 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # ── 5. Scrapers ──────────────────────────────────────────────────────────
-      - name: Scraper Multitrabajos
-        run: |
-          python Notebooks/scraper_mt_v2.py
-        continue-on-error: true   # si falla uno, el otro sigue igual
+      # ══════════════════════════════════════════════════════════════════════════
+      # SCRAPERS  — agregar un bloque por cada portal nuevo
+      # ══════════════════════════════════════════════════════════════════════════
 
-      - name: Pausa entre portales (60 s)
-        run: sleep 60
-
-      - name: Scraper Computrabajo
-        run: |
-          python Notebooks/scraper_computrabajo.py
+      - name: Scraper — Multitrabajos
+        run: python Notebooks/scraper_mt_v2.py
         continue-on-error: true
 
-      # ── 6. Exportar ──────────────────────────────────────────────────────────
+      - name: Pausa entre portales
+        run: sleep 60
+
+      - name: Scraper — Computrabajo
+        run: python Notebooks/scraper_computrabajo.py
+        continue-on-error: true
+
+      # Ejemplo de cómo agregar el siguiente portal (descomentar cuando esté listo):
+      # - name: Pausa entre portales
+      #   run: sleep 60
+      # - name: Scraper — SocioEmpleo
+      #   run: python Notebooks/scraper_socioempleo.py
+      #   continue-on-error: true
+
+      # ══════════════════════════════════════════════════════════════════════════
+      # EXPORTAR
+      # ══════════════════════════════════════════════════════════════════════════
+
       - name: Exportar Excel + CSV
         run: python exportar_excel.py
 
-      # ── 7. Subir datos al release ────────────────────────────────────────────
-      - name: Publicar datos en release latest-data
+      # ══════════════════════════════════════════════════════════════════════════
+      # PUBLICAR — GitHub Release (siempre) + Google Drive (si hay token)
+      # ══════════════════════════════════════════════════════════════════════════
+
+      - name: Publicar en release latest-data (GitHub)
         run: |
-          # Crear el release si no existe
           gh release view latest-data 2>/dev/null || \
             gh release create latest-data \
               --title "Datos CISE 2026 — última actualización" \
               --notes "Actualización automática. Descarga el .db, .xlsx o .csv." \
               --prerelease
 
-          # Subir los 3 archivos (sobreescribe los anteriores)
           gh release upload latest-data \
             vacantes_laborales.db \
             exports/vacantes_*.xlsx \
@@ -91,13 +102,26 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # ── 8. Resumen en el log de Actions ──────────────────────────────────────
+      - name: Restaurar credenciales Google Drive
+        if: ${{ secrets.GDRIVE_TOKEN != '' }}
+        run: |
+          echo '${{ secrets.GDRIVE_CREDENTIALS }}' > credentials.json
+          echo '${{ secrets.GDRIVE_TOKEN }}'       > token.json
+
+      - name: Subir a Google Drive
+        if: ${{ secrets.GDRIVE_TOKEN != '' }}
+        run: python subir_drive.py
+        continue-on-error: true
+
+      # ── Resumen visible en la pestaña Actions ─────────────────────────────────
       - name: Resumen
         run: |
-          echo "### Datos publicados en release latest-data" >> $GITHUB_STEP_SUMMARY
+          echo "### Datos publicados — $(date '+%Y-%m-%d %H:%M UTC')" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| Archivo | Tamaño |" >> $GITHUB_STEP_SUMMARY
           echo "|---------|--------|" >> $GITHUB_STEP_SUMMARY
           for f in vacantes_laborales.db exports/vacantes_*; do
-            echo "| $f | $(du -sh $f | cut -f1) |" >> $GITHUB_STEP_SUMMARY
+            [ -f "$f" ] && echo "| \`$(basename $f)\` | $(du -sh $f | cut -f1) |" >> $GITHUB_STEP_SUMMARY
           done
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📥 [Descargar datos](https://github.com/${{ github.repository }}/releases/tag/latest-data)" >> $GITHUB_STEP_SUMMARY

@@ -39,11 +39,15 @@ from googleapiclient.http import MediaFileUpload
 
 # ── CONFIGURACIÓN ─────────────────────────────────────────────────────────────
 PROYECTO        = r"C:\Users\alexis\Documents\CISE_2026"
-CREDENTIALS     = os.path.join(PROYECTO, "credentials.json")
-TOKEN           = os.path.join(PROYECTO, "token.json")
-EXPORTS_DIR     = os.path.join(PROYECTO, "exports")
-BACKUPS_DIR     = os.path.join(PROYECTO, "backups")
-CARPETA_DRIVE   = "CISE_2026"          # nombre de la carpeta que se crea en tu Drive
+CREDENTIALS     = os.environ.get("GDRIVE_CREDENTIALS_PATH",
+                                  os.path.join(PROYECTO, "credentials.json"))
+TOKEN           = os.environ.get("GDRIVE_TOKEN_PATH",
+                                  os.path.join(PROYECTO, "token.json"))
+EXPORTS_DIR     = os.environ.get("EXPORTS_DIR",
+                                  os.path.join(PROYECTO, "exports"))
+BACKUPS_DIR     = os.environ.get("BACKUPS_DIR",
+                                  os.path.join(PROYECTO, "backups"))
+CARPETA_DRIVE   = os.environ.get("GDRIVE_FOLDER", "CISE_2026")
 
 SCOPES = ["https://www.googleapis.com/auth/drive.file"]
 
