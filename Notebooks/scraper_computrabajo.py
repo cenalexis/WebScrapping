@@ -47,32 +47,63 @@ logging.basicConfig(
 log = logging.getLogger(__name__)
 
 # ── CIUDADES ──────────────────────────────────────────────────────────────────
+# Clave = slug usado en la URL: /empleos-en-{clave}
+# Formato: {provincia}-en-{ciudad}  (según estructura real del sitio)
 CIUDADES = {
-    "quito"         : "Quito (Pichincha)",
-    "guayaquil"     : "Guayaquil (Guayas)",
-    "cuenca"        : "Cuenca (Azuay)",
-    "ambato"        : "Ambato (Tungurahua)",
-    "loja"          : "Loja (Loja)",
-    "riobamba"      : "Riobamba (Chimborazo)",
-    "ibarra"        : "Ibarra (Imbabura)",
-    "latacunga"     : "Latacunga (Cotopaxi)",
-    "guaranda"      : "Guaranda (Bolívar)",
-    "azogues"       : "Azogues (Cañar)",
-    "tulcan"        : "Tulcán (Carchi)",
-    "machala"       : "Machala (El Oro)",
-    "manta"         : "Manta (Manabí)",
-    "portoviejo"    : "Portoviejo (Manabí)",
-    "esmeraldas"    : "Esmeraldas (Esmeraldas)",
-    "santo-domingo" : "Santo Domingo (Sto. Dom. Tsáchilas)",
-    "babahoyo"      : "Babahoyo (Los Ríos)",
-    "milagro"       : "Milagro (Guayas)",
-    "daule"         : "Daule (Guayas)",
-    "santa-elena"   : "Santa Elena (Santa Elena)",
-    "nueva-loja"    : "Nueva Loja / Lago Agrio (Sucumbíos)",
-    "tena"          : "Tena (Napo)",
-    "puyo"          : "Puyo (Pastaza)",
-    "macas"         : "Macas (Morona Santiago)",
-    "zamora"        : "Zamora (Zamora Chinchipe)",
+    "pichincha-en-quito"                              : "Quito (Pichincha)",
+    "guayas-en-guayaquil"                             : "Guayaquil (Guayas)",
+    "azuay-en-cuenca"                                 : "Cuenca (Azuay)",
+    "tungurahua-en-ambato"                            : "Ambato (Tungurahua)",
+    "loja-en-loja"                                    : "Loja (Loja)",
+    "chimborazo-en-riobamba"                          : "Riobamba (Chimborazo)",
+    "imbabura-en-ibarra"                              : "Ibarra (Imbabura)",
+    "cotopaxi-en-latacunga"                           : "Latacunga (Cotopaxi)",
+    "bolivar-en-guaranda"                             : "Guaranda (Bolívar)",
+    "canar-en-azogues"                                : "Azogues (Cañar)",
+    "carchi-en-tulcan"                                : "Tulcán (Carchi)",
+    "el-oro-en-machala"                               : "Machala (El Oro)",
+    "manabi-en-manta"                                 : "Manta (Manabí)",
+    "manabi-en-portoviejo"                            : "Portoviejo (Manabí)",
+    "esmeraldas-en-esmeraldas"                        : "Esmeraldas (Esmeraldas)",
+    "santo-domingo-de-los-tsachilas-en-santo-domingo" : "Santo Domingo (Tsáchilas)",
+    "los-rios-en-babahoyo"                            : "Babahoyo (Los Ríos)",
+    "guayas-en-milagro"                               : "Milagro (Guayas)",
+    "guayas-en-daule"                                 : "Daule (Guayas)",
+    "santa-elena-en-santa-elena"                      : "Santa Elena (Santa Elena)",
+    "sucumbios-en-nueva-loja"                         : "Nueva Loja / Lago Agrio (Sucumbíos)",
+    "napo-en-tena"                                    : "Tena (Napo)",
+    "pastaza-en-puyo"                                 : "Puyo (Pastaza)",
+    "morona-santiago-en-macas"                        : "Macas (Morona Santiago)",
+    "zamora-chinchipe-en-zamora"                      : "Zamora (Zamora Chinchipe)",
+}
+
+# Atajos para --ciudad desde la línea de comandos (nombre corto → clave CIUDADES)
+ALIAS_CIUDAD = {
+    "quito"        : "pichincha-en-quito",
+    "guayaquil"    : "guayas-en-guayaquil",
+    "cuenca"       : "azuay-en-cuenca",
+    "ambato"       : "tungurahua-en-ambato",
+    "loja"         : "loja-en-loja",
+    "riobamba"     : "chimborazo-en-riobamba",
+    "ibarra"       : "imbabura-en-ibarra",
+    "latacunga"    : "cotopaxi-en-latacunga",
+    "guaranda"     : "bolivar-en-guaranda",
+    "azogues"      : "canar-en-azogues",
+    "tulcan"       : "carchi-en-tulcan",
+    "machala"      : "el-oro-en-machala",
+    "manta"        : "manabi-en-manta",
+    "portoviejo"   : "manabi-en-portoviejo",
+    "esmeraldas"   : "esmeraldas-en-esmeraldas",
+    "santo-domingo": "santo-domingo-de-los-tsachilas-en-santo-domingo",
+    "babahoyo"     : "los-rios-en-babahoyo",
+    "milagro"      : "guayas-en-milagro",
+    "daule"        : "guayas-en-daule",
+    "santa-elena"  : "santa-elena-en-santa-elena",
+    "nueva-loja"   : "sucumbios-en-nueva-loja",
+    "tena"         : "napo-en-tena",
+    "puyo"         : "pastaza-en-puyo",
+    "macas"        : "morona-santiago-en-macas",
+    "zamora"       : "zamora-chinchipe-en-zamora",
 }
 
 
@@ -941,12 +972,18 @@ if __name__ == "__main__":
                     help="Muestra HTML real sin guardar en BD")
     a = ap.parse_args()
 
+    def _resolver_ciudad(nombre: str) -> str:
+        """Devuelve la clave de CIUDADES a partir de un alias o clave directa."""
+        return ALIAS_CIUDAD.get(nombre, nombre)
+
     if a.diagnostico:
-        diagnostico(a.ciudad or "quito", headless=not a.visible)
+        slug = _resolver_ciudad(a.ciudad or "quito")
+        diagnostico(slug, headless=not a.visible)
     elif a.ciudad:
-        if a.ciudad not in CIUDADES:
-            print(f"Ciudad no válida. Opciones: {', '.join(CIUDADES.keys())}")
+        slug = _resolver_ciudad(a.ciudad)
+        if slug not in CIUDADES:
+            print(f"Ciudad no válida. Opciones: {', '.join(ALIAS_CIUDAD.keys())}")
             sys.exit(1)
-        run({a.ciudad: CIUDADES[a.ciudad]}, a.paginas, headless=not a.visible)
+        run({slug: CIUDADES[slug]}, a.paginas, headless=not a.visible)
     else:
         run(max_paginas=a.paginas, headless=not a.visible)
