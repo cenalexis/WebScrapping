@@ -1,17 +1,15 @@
 """
-scraper_computrabajo.py  —  Computrabajo Ecuador, scraper incremental
-======================================================================
-Estrategia de cobertura nacional:
-    Computrabajo Ecuador NO tiene un listado global funcional.
-    La solución: iterar sobre las 24 provincias + ciudades principales.
-    Cada ciudad tiene su propia URL: /empleos-en-{ciudad}?p=N
+scraper_computrabajo.py  —  Computrabajo Ecuador, scraper incremental v2
+========================================================================
+Estrategia: iterar por ciudad porque /empleos-en-ecuador no funciona.
+Paginación: /empleos-en-{ciudad}?p=N
 
 Uso:
-    python scraper_computrabajo.py                   # todas las ciudades
-    python scraper_computrabajo.py --ciudad quito    # solo una ciudad
-    python scraper_computrabajo.py --paginas 3       # prueba rápida
-    python scraper_computrabajo.py --diagnostico     # ver selectores reales
-    python scraper_computrabajo.py --visible         # ver el browser
+    python scraper_computrabajo.py                    # todas las ciudades
+    python scraper_computrabajo.py --ciudad quito     # solo quito
+    python scraper_computrabajo.py --ciudad quito --paginas 2  # prueba rápida
+    python scraper_computrabajo.py --diagnostico      # ver HTML real del sitio
+    python scraper_computrabajo.py --visible          # abrir ventana del browser
 """
 
 import os, sys, re, sqlite3, hashlib, time, random, logging, argparse
@@ -25,7 +23,7 @@ import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from selenium.common.exceptions import TimeoutException
 from bs4 import BeautifulSoup
 import pandas as pd
 
@@ -34,7 +32,7 @@ DB_PATH    = r"C:\Users\alexis\Documents\CISE_2026\vacantes_laborales.db"
 LOG_PATH   = r"C:\Users\alexis\Documents\CISE_2026\scraper.log"
 CHROME_VER = 147
 BASE_URL   = "https://ec.computrabajo.com"
-RACHA_STOP = 8   # URLs consecutivas ya en BD → parar página
+RACHA_STOP = 8
 
 os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
 
@@ -48,71 +46,61 @@ logging.basicConfig(
 )
 log = logging.getLogger(__name__)
 
-# ── CIUDADES Y PROVINCIAS DE ECUADOR ─────────────────────────────────────────
-# Clave = slug en la URL de Computrabajo
-# Valor = nombre legible para logs y BD
+# ── CIUDADES ──────────────────────────────────────────────────────────────────
 CIUDADES = {
-    # Sierra
-    "quito"              : "Quito (Pichincha)",
-    "cuenca"             : "Cuenca (Azuay)",
-    "ambato"             : "Ambato (Tungurahua)",
-    "loja"               : "Loja (Loja)",
-    "riobamba"           : "Riobamba (Chimborazo)",
-    "ibarra"             : "Ibarra (Imbabura)",
-    "latacunga"          : "Latacunga (Cotopaxi)",
-    "guaranda"           : "Guaranda (Bolívar)",
-    "azogues"            : "Azogues (Cañar)",
-    "tulcan"             : "Tulcán (Carchi)",
-    # Costa
-    "guayaquil"          : "Guayaquil (Guayas)",
-    "machala"            : "Machala (El Oro)",
-    "manta"              : "Manta (Manabí)",
-    "portoviejo"         : "Portoviejo (Manabí)",
-    "esmeraldas"         : "Esmeraldas (Esmeraldas)",
-    "santo-domingo"      : "Santo Domingo (Sto. Domingo Tsáchilas)",
-    "babahoyo"           : "Babahoyo (Los Ríos)",
-    "milagro"            : "Milagro (Guayas)",
-    "daule"              : "Daule (Guayas)",
-    "santa-elena"        : "Santa Elena (Santa Elena)",
-    # Amazonía
-    "nueva-loja"         : "Nueva Loja / Lago Agrio (Sucumbíos)",
-    "tena"               : "Tena (Napo)",
-    "puyo"               : "Puyo (Pastaza)",
-    "macas"              : "Macas (Morona Santiago)",
-    "zamora"             : "Zamora (Zamora Chinchipe)",
+    "quito"         : "Quito (Pichincha)",
+    "guayaquil"     : "Guayaquil (Guayas)",
+    "cuenca"        : "Cuenca (Azuay)",
+    "ambato"        : "Ambato (Tungurahua)",
+    "loja"          : "Loja (Loja)",
+    "riobamba"      : "Riobamba (Chimborazo)",
+    "ibarra"        : "Ibarra (Imbabura)",
+    "latacunga"     : "Latacunga (Cotopaxi)",
+    "guaranda"      : "Guaranda (Bolívar)",
+    "azogues"       : "Azogues (Cañar)",
+    "tulcan"        : "Tulcán (Carchi)",
+    "machala"       : "Machala (El Oro)",
+    "manta"         : "Manta (Manabí)",
+    "portoviejo"    : "Portoviejo (Manabí)",
+    "esmeraldas"    : "Esmeraldas (Esmeraldas)",
+    "santo-domingo" : "Santo Domingo (Sto. Dom. Tsáchilas)",
+    "babahoyo"      : "Babahoyo (Los Ríos)",
+    "milagro"       : "Milagro (Guayas)",
+    "daule"         : "Daule (Guayas)",
+    "santa-elena"   : "Santa Elena (Santa Elena)",
+    "nueva-loja"    : "Nueva Loja / Lago Agrio (Sucumbíos)",
+    "tena"          : "Tena (Napo)",
+    "puyo"          : "Puyo (Pastaza)",
+    "macas"         : "Macas (Morona Santiago)",
+    "zamora"        : "Zamora (Zamora Chinchipe)",
 }
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# BASE DE DATOS  (misma BD que Multitrabajos)
+# BASE DE DATOS  — schema idéntico a scraper_mt_v2
 # ══════════════════════════════════════════════════════════════════════════════
 
 def conectar() -> sqlite3.Connection:
-    conn = sqlite3.connect(DB_PATH)
-    conn.execute("PRAGMA journal_mode=WAL")
-    return conn
+    c = sqlite3.connect(DB_PATH)
+    c.execute("PRAGMA journal_mode=WAL")
+    return c
 
 
 def crear_schema():
-    """Crea las tablas si no existen (mismo schema que scraper_mt_v2)."""
-    conn = conectar()
-    conn.executescript("""
+    c = conectar()
+    c.executescript("""
     CREATE TABLE IF NOT EXISTS portales (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        nombre TEXT UNIQUE NOT NULL,
-        url_base TEXT,
+        nombre TEXT UNIQUE NOT NULL, url_base TEXT,
         activo INTEGER DEFAULT 1,
         fecha_alta TEXT DEFAULT (datetime('now'))
     );
     CREATE TABLE IF NOT EXISTS ejecuciones (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         portal_id INTEGER REFERENCES portales(id),
-        fecha_inicio TEXT,
-        fecha_fin TEXT,
-        total_nuevas INTEGER DEFAULT 0,
-        total_omitidas INTEGER DEFAULT 0,
-        errores INTEGER DEFAULT 0,
-        estado TEXT DEFAULT 'en_curso'
+        fecha_inicio TEXT, fecha_fin TEXT,
+        total_nuevas INTEGER DEFAULT 0, total_omitidas INTEGER DEFAULT 0,
+        errores INTEGER DEFAULT 0, estado TEXT DEFAULT 'en_curso'
     );
     CREATE TABLE IF NOT EXISTS vacantes (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -120,129 +108,113 @@ def crear_schema():
         portal_id INTEGER REFERENCES portales(id),
         ejecucion_id INTEGER REFERENCES ejecuciones(id),
         url_detalle TEXT UNIQUE,
-        cargo_raw TEXT,
-        empresa_raw TEXT,
-        ubicacion_raw TEXT,
-        modalidad_raw TEXT,
-        jornada_raw TEXT,
-        contrato_raw TEXT,
-        area_raw TEXT,
-        subarea_raw TEXT,
-        industria_raw TEXT,
-        idioma_raw TEXT,
-        licencia_raw TEXT,
-        descripcion_raw TEXT,
-        requisitos_raw TEXT,
-        beneficios_raw TEXT,
+        cargo_raw TEXT, empresa_raw TEXT, ubicacion_raw TEXT, modalidad_raw TEXT,
+        jornada_raw TEXT, contrato_raw TEXT, area_raw TEXT, subarea_raw TEXT,
+        industria_raw TEXT, idioma_raw TEXT, licencia_raw TEXT,
+        descripcion_raw TEXT, requisitos_raw TEXT, beneficios_raw TEXT,
         texto_raw TEXT,
         vacantes_num INTEGER,
-        salario_min REAL,
-        salario_max REAL,
-        salario_a_convenir INTEGER DEFAULT 1,
-        experiencia_anos INTEGER,
-        instruccion_raw TEXT,
-        codigo_dpa TEXT,
-        codigo_ciiu TEXT,
-        codigo_ciuo TEXT,
-        ciiu_procesado INTEGER DEFAULT 0,
-        ciuo_procesado INTEGER DEFAULT 0,
+        salario_min REAL, salario_max REAL, salario_a_convenir INTEGER DEFAULT 1,
+        experiencia_anos INTEGER, instruccion_raw TEXT,
+        codigo_dpa TEXT, codigo_ciiu TEXT, codigo_ciuo TEXT,
+        ciiu_procesado INTEGER DEFAULT 0, ciuo_procesado INTEGER DEFAULT 0,
         xgb_imputado INTEGER DEFAULT 0,
-        fecha_publicacion TEXT,
-        fecha_extraccion TEXT
+        fecha_publicacion TEXT, fecha_extraccion TEXT
     );
     """)
-    conn.executemany(
-        "INSERT OR IGNORE INTO portales (nombre, url_base) VALUES (?,?)",
-        [
-            ("multitrabajos", "https://www.multitrabajos.com/empleos"),
-            ("computrabajo",  "https://ec.computrabajo.com"),
-            ("socioempleo",   "https://socioempleo.gob.ec"),
-        ],
-    )
-    conn.commit()
-    conn.close()
+    c.executemany("INSERT OR IGNORE INTO portales (nombre, url_base) VALUES (?,?)", [
+        ("multitrabajos", "https://www.multitrabajos.com/empleos"),
+        ("computrabajo",  "https://ec.computrabajo.com"),
+        ("socioempleo",   "https://socioempleo.gob.ec"),
+    ])
+    c.commit(); c.close()
+    log.info("Schema listo")
 
 
 def urls_en_bd() -> set:
-    conn = conectar()
-    rows = conn.execute(
+    c    = conectar()
+    rows = c.execute(
         "SELECT url_detalle FROM vacantes WHERE url_detalle IS NOT NULL"
     ).fetchall()
-    conn.close()
+    c.close()
     return {r[0] for r in rows}
 
 
-def iniciar_ejecucion(portal: str) -> int:
-    conn = conectar()
-    pid = conn.execute(
-        "SELECT id FROM portales WHERE nombre = ?", (portal,)
+def iniciar_ejecucion() -> int:
+    c   = conectar()
+    pid = c.execute(
+        "SELECT id FROM portales WHERE nombre='computrabajo'"
     ).fetchone()[0]
-    cur = conn.execute(
+    cur = c.execute(
         "INSERT INTO ejecuciones (portal_id, fecha_inicio, estado) VALUES (?,?,?)",
         (pid, datetime.now().isoformat(), "en_curso"),
     )
-    eid = cur.lastrowid
-    conn.commit()
-    conn.close()
-    return eid
+    eid = cur.lastrowid; c.commit(); c.close(); return eid
 
 
 def cerrar_ejecucion(eid: int, nuevas: int, omitidas: int, errores: int):
-    conn = conectar()
-    conn.execute(
-        """UPDATE ejecuciones
-           SET fecha_fin=?, total_nuevas=?, total_omitidas=?, errores=?, estado='completado'
-           WHERE id=?""",
+    c = conectar()
+    c.execute(
+        "UPDATE ejecuciones SET fecha_fin=?,total_nuevas=?,total_omitidas=?,"
+        "errores=?,estado='completado' WHERE id=?",
         (datetime.now().isoformat(), nuevas, omitidas, errores, eid),
     )
-    conn.commit()
-    conn.close()
+    c.commit(); c.close()
+
+
+# Todos los campos del schema — idéntico orden a scraper_mt_v2 para consistencia
+_CAMPOS_VACANTE = (
+    "hash_id", "portal_id", "ejecucion_id", "url_detalle",
+    "cargo_raw", "empresa_raw", "ubicacion_raw", "modalidad_raw",
+    "jornada_raw", "contrato_raw", "area_raw", "subarea_raw",
+    "industria_raw", "idioma_raw", "licencia_raw",
+    "descripcion_raw", "requisitos_raw", "beneficios_raw", "texto_raw",
+    "vacantes_num", "salario_min", "salario_max", "salario_a_convenir",
+    "experiencia_anos", "instruccion_raw",
+    "fecha_publicacion", "fecha_extraccion",
+)
 
 
 def guardar_vacante(item: dict, eid: int) -> bool:
     url = item.get("url_detalle", "")
     if not url:
         return False
-    hash_id = hashlib.md5(url.encode()).hexdigest()
-    conn    = conectar()
-    pid     = conn.execute(
-        "SELECT id FROM portales WHERE nombre = 'computrabajo'"
+    hid = hashlib.md5(url.encode()).hexdigest()
+    c   = conectar()
+    pid = c.execute(
+        "SELECT id FROM portales WHERE nombre='computrabajo'"
     ).fetchone()[0]
 
-    campos = (
-        "hash_id", "portal_id", "ejecucion_id", "url_detalle",
-        "cargo_raw", "empresa_raw", "ubicacion_raw", "modalidad_raw",
-        "jornada_raw", "contrato_raw", "area_raw", "subarea_raw",
-        "industria_raw", "descripcion_raw", "requisitos_raw",
-        "beneficios_raw", "texto_raw",
-        "vacantes_num", "salario_min", "salario_max", "salario_a_convenir",
-        "experiencia_anos", "instruccion_raw",
-        "fecha_publicacion", "fecha_extraccion",
-    )
     vals = (
-        hash_id, pid, eid, url,
-        item.get("cargo_raw"), item.get("empresa_raw"), item.get("ubicacion_raw"),
-        item.get("modalidad_raw"), item.get("jornada_raw"), item.get("contrato_raw"),
-        item.get("area_raw"), item.get("subarea_raw"), item.get("industria_raw"),
-        item.get("descripcion_raw"), item.get("requisitos_raw"),
-        item.get("beneficios_raw"), item.get("texto_raw"),
-        item.get("vacantes_num"), item.get("salario_min"), item.get("salario_max"),
-        item.get("salario_a_convenir", 1), item.get("experiencia_anos"),
-        item.get("instruccion_raw"),
-        item.get("fecha_publicacion"), item.get("fecha_extraccion", datetime.now().isoformat()),
+        hid, pid, eid, url,
+        item.get("cargo_raw"),        item.get("empresa_raw"),
+        item.get("ubicacion_raw"),    item.get("modalidad_raw"),
+        item.get("jornada_raw"),      item.get("contrato_raw"),
+        item.get("area_raw"),         item.get("subarea_raw"),
+        item.get("industria_raw"),    item.get("idioma_raw"),
+        item.get("licencia_raw"),
+        item.get("descripcion_raw"),  item.get("requisitos_raw"),
+        item.get("beneficios_raw"),   item.get("texto_raw"),
+        item.get("vacantes_num"),
+        item.get("salario_min"),      item.get("salario_max"),
+        item.get("salario_a_convenir", 1),
+        item.get("experiencia_anos"), item.get("instruccion_raw"),
+        item.get("fecha_publicacion"),
+        item.get("fecha_extraccion", datetime.now().isoformat()),
     )
-    ph  = ",".join(["?"] * len(campos))
+    ph = ",".join(["?"] * len(_CAMPOS_VACANTE))
     try:
-        cur      = conn.execute(
-            f"INSERT OR IGNORE INTO vacantes ({','.join(campos)}) VALUES ({ph})", vals
+        cur      = c.execute(
+            f"INSERT OR IGNORE INTO vacantes ({','.join(_CAMPOS_VACANTE)}) "
+            f"VALUES ({ph})", vals
         )
         inserted = cur.rowcount > 0
-        conn.commit()
-    except Exception as exc:
-        log.error(f"DB error: {exc}")
+        c.commit()
+    except Exception as e:
+        log.error(f"DB error guardando {url}: {e}")
         inserted = False
     finally:
-        conn.close()
+        c.close()
     return inserted
 
 
@@ -262,108 +234,124 @@ def crear_driver(headless: bool = True) -> uc.Chrome:
         "AppleWebKit/537.36 (KHTML, like Gecko) "
         f"Chrome/{CHROME_VER}.0.0.0 Safari/537.36"
     )
-    driver = uc.Chrome(options=opts, version_main=CHROME_VER)
-    driver.execute_script(
+    d = uc.Chrome(options=opts, version_main=CHROME_VER)
+    d.execute_script(
         "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
     )
-    return driver
+    return d
 
 
-def espera_humana(mn: float = 2.0, mx: float = 4.5):
+def _espera(mn: float = 2.0, mx: float = 4.5):
     time.sleep(random.uniform(mn, mx))
 
 
-def _cargar_pagina(driver, url: str, selector_espera: str = "h1,h2,article") -> bool:
-    """Carga la URL y espera que aparezca el selector. Retorna False si falla."""
+def _cargar(driver, url: str, css: str = "h1,h2,article,div") -> bool:
     driver.get(url)
     try:
         WebDriverWait(driver, 25).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, selector_espera))
+            EC.presence_of_element_located((By.CSS_SELECTOR, css))
         )
         return True
     except TimeoutException:
-        log.warning(f"Timeout cargando: {url}")
+        log.warning(f"Timeout: {url}")
         time.sleep(8)
         return False
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# DIAGNÓSTICO  (correr una vez para verificar selectores)
+# DIAGNÓSTICO — corre con --diagnostico para ver la estructura real del HTML
 # ══════════════════════════════════════════════════════════════════════════════
 
-def diagnostico(ciudad_slug: str = "quito", headless: bool = False):
+def diagnostico(slug: str = "quito", headless: bool = False):
     """
-    Abre el listado de una ciudad y reporta:
-    - Selectores de tarjetas de vacante
-    - Estructura de la primera tarjeta (título, empresa, ubicación, URL)
-    - Estructura de la primera página de detalle
-
-    Correr con:  python scraper_computrabajo.py --diagnostico --ciudad quito
+    Muestra el HTML real de la página de listado y de la primera vacante de detalle.
+    Imprime los selectores que funcionan y los que no.
+    Usa esto para verificar/ajustar los selectores si el sitio cambia.
     """
-    url_listado = f"{BASE_URL}/empleos-en-{ciudad_slug}"
-    log.info(f"DIAGNÓSTICO en: {url_listado}")
-
     driver = crear_driver(headless=headless)
     try:
-        _cargar_pagina(driver, url_listado)
-        espera_humana(3, 5)
+        url_listado = f"{BASE_URL}/empleos-en-{slug}"
+        log.info(f"Cargando: {url_listado}")
+        _cargar(driver, url_listado)
+        _espera(3, 5)
         soup = BeautifulSoup(driver.page_source, "html.parser")
 
-        print(f"\n{'='*60}")
-        print(f"DIAGNÓSTICO — {url_listado}")
-        print(f"Título de página: {driver.title}")
-        print(f"Bytes: {len(driver.page_source):,}")
-        print(f"{'='*60}\n")
+        print(f"\n{'='*65}")
+        print(f"DIAGNÓSTICO LISTADO: {url_listado}")
+        print(f"Título: {driver.title}")
+        print(f"Bytes : {len(driver.page_source):,}")
+        print(f"{'='*65}")
 
-        # Buscar contenedores de tarjetas
+        # Probar todos los selectores de tarjeta posibles
         candidatos = [
-            "article.box_offer", "article[class*='offer']",
-            "article[class*='job']", "div.box_offer",
-            "div[class*='offer']", "li[class*='offer']",
-            "div[class*='job-card']", "div[class*='jobItem']",
-            "[data-offerid]", "[data-id]",
+            "article.box_offer",
+            "article[class*='box_offer']",
+            "article[class*='offer']",
+            "div.box_offer",
+            "div[class*='box_offer']",
+            "li[class*='offer']",
+            "[data-offerid]",
+            "[data-id]",
+            "article",
         ]
-        print("── Buscando contenedores de tarjetas ──")
-        tarjeta_encontrada = None
+        print("\n── Selectores de tarjeta ──")
+        tarjeta = None
         for sel in candidatos:
             elems = soup.select(sel)
             if elems:
                 print(f"  ✅ '{sel}' → {len(elems)} elementos")
                 print(f"     Clases: {' '.join(elems[0].get('class', []))}")
-                tarjeta_encontrada = elems[0]
-                break
+                if tarjeta is None:
+                    tarjeta = elems[0]
             else:
                 print(f"  ❌ '{sel}'")
 
-        if tarjeta_encontrada:
-            print(f"\n── Primera tarjeta (snippet) ──")
-            print(tarjeta_encontrada.prettify()[:1200])
+        if tarjeta:
+            print("\n── HTML primera tarjeta (completo) ──")
+            print(tarjeta.prettify()[:2000])
 
-            # Buscar URL de detalle
-            link = tarjeta_encontrada.find("a", href=True)
-            if link:
-                url_det = link["href"]
-                if not url_det.startswith("http"):
-                    url_det = BASE_URL + url_det
-                print(f"\n── Cargando detalle: {url_det} ──")
-                _cargar_pagina(driver, url_det)
-                espera_humana(2, 4)
-                soup_det = BeautifulSoup(driver.page_source, "html.parser")
-                print(f"Título detalle: {driver.title}")
-                # Mostrar primeros 3000 chars del body sin scripts
-                for tag in soup_det(["script", "style", "noscript"]):
-                    tag.decompose()
-                print("\n── Texto del detalle (primeros 3000 chars) ──")
-                print(soup_det.get_text(separator="\n", strip=True)[:3000])
-
-        # Verificar paginación
-        print(f"\n── Paginación ──")
-        for sel in ["a[href*='?p=']", "a[href*='?pg=']", "a.pager", ".pagination a",
-                    "a[aria-label*='siguiente']", "a[aria-label*='Siguiente']"]:
+        # Paginación
+        print("\n── Paginación ──")
+        for sel in ["a[href*='?p=']", "a[href*='page=']", ".pagination a",
+                    "a[data-page]", "nav a"]:
             elems = soup.select(sel)
             if elems:
-                print(f"  ✅ '{sel}' → {len(elems)} elementos")
-                print(f"     Primer href: {elems[0].get('href','')}")
+                print(f"  ✅ '{sel}' → hrefs: {[e.get('href','') for e in elems[:3]]}")
+
+        # Primera URL de detalle
+        det_url = None
+        for a in soup.find_all("a", href=True):
+            h = a["href"]
+            if re.search(r'/(trabajo-de|oferta-de-trabajo|empleo-de)', h):
+                det_url = BASE_URL + h if not h.startswith("http") else h
+                break
+
+        if det_url:
+            print(f"\n{'='*65}")
+            print(f"DIAGNÓSTICO DETALLE: {det_url}")
+            print(f"{'='*65}")
+            _cargar(driver, det_url)
+            _espera(2, 4)
+            soup2 = BeautifulSoup(driver.page_source, "html.parser")
+            print(f"Título: {driver.title}")
+
+            # Selectores de secciones
+            print("\n── Selectores de contenido ──")
+            for sel in ["#desc_offer", "div[id*='desc']", "div[id*='offer']",
+                        "div.fs16", "section.bSection", "div[class*='description']",
+                        "ul.info_offer", "ul[class*='info']", "div[class*='info']"]:
+                elems = soup2.select(sel)
+                if elems:
+                    print(f"  ✅ '{sel}' → {len(elems)} | "
+                          f"texto: {elems[0].get_text(strip=True)[:120]!r}")
+
+            # Texto limpio completo
+            for tag in soup2(["script","style","noscript"]): tag.decompose()
+            txt = soup2.get_text(separator="\n", strip=True)
+            print(f"\n── Texto completo (primeros 4000 chars) ──")
+            print(txt[:4000])
+        else:
+            print("\n⚠️  No se encontró URL de detalle en el listado")
 
     finally:
         driver.quit()
@@ -373,154 +361,169 @@ def diagnostico(ciudad_slug: str = "quito", headless: bool = False):
 # EXTRACCIÓN — LISTADO
 # ══════════════════════════════════════════════════════════════════════════════
 
-# Selectores de tarjeta en cascada (el primero que funcione gana)
-_SEL_TARJETA = [
+# Selectores en orden de prioridad; el primero que devuelva resultados gana
+_SELS_TARJETA = [
     "article.box_offer",
+    "article[class*='box_offer']",
     "article[class*='offer']",
-    "article[class*='job']",
     "div.box_offer",
     "div[class*='box_offer']",
     "li[class*='offer']",
     "[data-offerid]",
 ]
 
-def _sel_tarjetas(soup: BeautifulSoup) -> list:
-    """Retorna las tarjetas de empleo usando el primer selector que encuentre algo."""
-    for sel in _SEL_TARJETA:
+# Regex para detectar URLs de detalle de Computrabajo
+_RE_URL_DETALLE = re.compile(
+    r'/(trabajo-de|oferta-de-trabajo|empleo-de)[^"\'>\s]*', re.IGNORECASE
+)
+
+
+def _tarjetas(soup: BeautifulSoup) -> list:
+    for sel in _SELS_TARJETA:
         items = soup.select(sel)
         if items:
             return items
-    # Fallback: cualquier <article> con un <a> que lleve a /trabajo-de- o /oferta-
+    # Fallback: cualquier article que contenga un link de detalle
     return [
-        a for a in soup.find_all("article")
-        if a.find("a", href=re.compile(r'/(trabajo-de|oferta|empleo)-'))
+        art for art in soup.find_all("article")
+        if art.find("a", href=_RE_URL_DETALLE)
     ]
 
 
 def _parsear_tarjeta(t, ciudad_nombre: str) -> dict | None:
-    """Extrae campos básicos de una tarjeta de listado."""
-    link = (
-        t.find("a", href=re.compile(r'/(trabajo-de|oferta)-')) or
-        t.find("a", class_=re.compile(r'js-o-link|offer-link|title')) or
-        t.find("h2", {"class": True}) and t.find("a", href=True)
-    )
+    # URL de detalle — buscar link con patrón de Computrabajo
+    link = t.find("a", href=_RE_URL_DETALLE)
+    if not link:
+        # Fallback: cualquier link que lleve a computrabajo
+        link = t.find("a", href=re.compile(r'computrabajo\.com'))
     if not link:
         link = t.find("a", href=True)
     if not link:
         return None
 
-    href = link.get("href", "")
-    url_det = (BASE_URL + href if not href.startswith("http") else href)
-    if not url_det or "computrabajo" not in url_det:
+    href    = link.get("href", "")
+    url_det = BASE_URL + href if not href.startswith("http") else href
+    if "computrabajo" not in url_det:
         return None
 
-    # Título — buscar h2 > a o el propio link
-    h2  = t.find("h2")
-    cargo = (h2.get_text(strip=True) if h2
-             else link.get("title", "") or link.get_text(strip=True))
+    # Cargo — h2 tiene preferencia, luego el title= del link, luego texto del link
+    h2    = t.find("h2")
+    cargo = (
+        h2.get_text(strip=True) if h2
+        else link.get("title", "").strip() or link.get_text(strip=True)
+    )
+    if not cargo:
+        return None
 
-    # Empresa — segundo tag <a> o <p class*=company>
+    # Empresa — buscar por clases conocidas de Computrabajo, luego fallback
     empresa = ""
     for cand in t.find_all(["a", "p", "span"]):
-        cl = " ".join(cand.get("class", []))
+        cl  = " ".join(cand.get("class", []))
         txt = cand.get_text(strip=True)
-        if txt and txt != cargo and len(txt) < 80:
-            if any(k in cl for k in ["company", "empresa", "fc_base", "t_bold"]):
-                empresa = txt
-                break
-    # Fallback: segundo <a>
+        if not txt or txt == cargo or len(txt) > 100:
+            continue
+        if any(k in cl for k in ["company", "empresa", "fc_base", "t_bold",
+                                   "brand", "employer"]):
+            empresa = txt
+            break
+    # Fallback: segundo <a> de la tarjeta
     if not empresa:
-        links = t.find_all("a", href=True)
-        for lnk in links[1:]:
-            txt = lnk.get_text(strip=True)
-            if txt and len(txt) < 80 and txt != cargo:
+        for a in t.find_all("a", href=True)[1:]:
+            txt = a.get_text(strip=True)
+            if txt and txt != cargo and len(txt) < 100:
                 empresa = txt
                 break
 
-    # Fecha publicación
+    # Fecha de publicación
     fecha_pub = ""
-    for tag in t.find_all(["span", "p", "time"]):
-        txt = tag.get_text(strip=True).lower()
-        if any(k in txt for k in ["hace ", "ayer", "hoy", "hora", "día", "semana"]):
-            fecha_pub = tag.get_text(strip=True)
+    for tag in t.find_all(["span", "p", "time", "div"]):
+        txt = tag.get_text(strip=True)
+        if len(txt) < 40 and any(
+            k in txt.lower()
+            for k in ["hace ", "ayer", "hoy", "hora", "día", "días", "semana"]
+        ):
+            fecha_pub = txt
             break
 
+    # Ubicación de la tarjeta (puede ser más específica que la ciudad)
+    ubicacion = ciudad_nombre
+    for tag in t.find_all(["span", "p"]):
+        cl  = " ".join(tag.get("class", []))
+        txt = tag.get_text(strip=True)
+        if any(k in cl for k in ["location", "ubicacion", "city", "lugar"]):
+            if txt:
+                ubicacion = txt
+                break
+
     return {
-        "url_detalle"     : url_det,
-        "cargo_raw"       : cargo,
-        "empresa_raw"     : empresa,
-        "ubicacion_raw"   : ciudad_nombre,
+        "url_detalle"      : url_det,
+        "cargo_raw"        : cargo,
+        "empresa_raw"      : empresa,
+        "ubicacion_raw"    : ubicacion,
         "fecha_publicacion": fecha_pub,
-        "fecha_extraccion": datetime.now().isoformat(),
+        "fecha_extraccion" : datetime.now().isoformat(),
     }
 
 
 def scrape_listado_ciudad(
-    driver, ciudad_slug: str, ciudad_nombre: str,
-    urls_conocidas: set, max_paginas: int = 999
+    driver, slug: str, nombre: str,
+    urls_conocidas: set, max_paginas: int = 999,
 ) -> tuple[list[dict], int]:
-    """
-    Pagina a través de /empleos-en-{ciudad}?p=N hasta que no haya más resultados
-    o hasta detectar racha de RACHA_STOP vacantes consecutivas ya en BD.
-    """
+
     items: list[dict] = []
-    urls_sesion: set  = set()
+    sesion: set       = set()
     omitidas          = 0
 
     for pag in range(1, max_paginas + 1):
-        url = (f"{BASE_URL}/empleos-en-{ciudad_slug}"
+        url = (f"{BASE_URL}/empleos-en-{slug}"
                if pag == 1
-               else f"{BASE_URL}/empleos-en-{ciudad_slug}?p={pag}")
+               else f"{BASE_URL}/empleos-en-{slug}?p={pag}")
 
-        log.info(f"    [{ciudad_slug}] Página {pag}: {url}")
-        ok = _cargar_pagina(driver, url, selector_espera="article,h1,h2")
-        if not ok:
+        log.info(f"    [{slug}] p{pag}: {url}")
+        if not _cargar(driver, url, "article,h1,h2,div"):
             break
-        espera_humana(1.5, 3.0)
+        _espera(2, 3.5)
 
-        soup      = BeautifulSoup(driver.page_source, "html.parser")
-        tarjetas  = _sel_tarjetas(soup)
+        soup     = BeautifulSoup(driver.page_source, "html.parser")
+        tarjetas = _tarjetas(soup)
 
         if not tarjetas:
-            log.info(f"    [{ciudad_slug}] Sin tarjetas en página {pag} → fin ciudad")
+            log.info(f"    [{slug}] Sin tarjetas → fin ciudad")
             break
 
-        nuevas_pag    = 0
-        racha_conocidas = 0
+        nuevas   = 0
+        racha    = 0
 
         for t in tarjetas:
-            datos = _parsear_tarjeta(t, ciudad_nombre)
-            if not datos or not datos.get("cargo_raw"):
+            datos = _parsear_tarjeta(t, nombre)
+            if not datos:
                 continue
-
             url_det = datos["url_detalle"]
-            if url_det in urls_sesion:
+            if url_det in sesion:
                 continue
-            urls_sesion.add(url_det)
+            sesion.add(url_det)
 
             if url_det in urls_conocidas:
-                omitidas += 1
-                racha_conocidas += 1
+                omitidas += 1; racha += 1
                 continue
 
-            racha_conocidas = 0
-            nuevas_pag     += 1
+            racha  = 0
+            nuevas += 1
             items.append(datos)
 
         log.info(
-            f"    [{ciudad_slug}] p{pag}: +{nuevas_pag} nuevas | "
-            f"omitidas={omitidas} | racha={racha_conocidas}/{RACHA_STOP}"
+            f"    [{slug}] p{pag}: +{nuevas} nuevas | "
+            f"omit={omitidas} | racha={racha}/{RACHA_STOP}"
         )
 
-        if racha_conocidas >= RACHA_STOP:
-            log.info(f"    [{ciudad_slug}] Modo incremental: ciudad ya procesada")
+        if racha >= RACHA_STOP:
+            log.info(f"    [{slug}] Incremental: ciudad ya procesada")
+            break
+        if nuevas == 0:
+            log.info(f"    [{slug}] Página vacía → fin ciudad")
             break
 
-        if nuevas_pag == 0:
-            log.info(f"    [{ciudad_slug}] Página vacía → fin ciudad")
-            break
-
-        espera_humana(2.0, 4.0)
+        _espera(2, 4)
 
     return items, omitidas
 
@@ -529,61 +532,104 @@ def scrape_listado_ciudad(
 # EXTRACCIÓN — DETALLE
 # ══════════════════════════════════════════════════════════════════════════════
 
-_STOP_SECCIONES = {
-    "descripción", "descripcion", "requisitos", "beneficios",
-    "condiciones", "ofrecemos", "sobre la empresa", "información",
-    "postulación", "publicado", "hace ", "ayer", "hoy",
-}
+def _info_lista(soup: BeautifulSoup, keyword: str) -> str:
+    """
+    Computrabajo expone metadatos en <ul class='info_offer'> o tabla similar.
+    Busca el <li> (o <p>/<span>) que contenga el keyword-label y devuelve el valor.
+    """
+    # Estrategia 1: <ul class*='info'> <li> con el label
+    for ul in soup.find_all("ul", class_=re.compile(r'info', re.I)):
+        for li in ul.find_all("li"):
+            txt = li.get_text(separator=" ", strip=True)
+            if keyword.lower() in txt.lower() and len(txt) < 200:
+                # Quitar el label y devolver el valor
+                valor = re.sub(
+                    re.escape(keyword), "", txt, flags=re.IGNORECASE
+                ).strip(" :-\n")
+                if valor:
+                    return valor
 
-_METADATA_TOKENS = {
-    "full-time", "part-time", "presencial", "remoto", "híbrido",
-    "indefinido", "temporal", "por obra", "hace ", "ayer", "hoy",
-}
-
-
-def _texto_seccion(soup: BeautifulSoup, titulo: str) -> str:
-    """Extrae contenido de una sección dado su título visible."""
+    # Estrategia 2: buscar en todo el soup por etiqueta + siguiente hermano
     tag = soup.find(
-        lambda t: t.name in ["h2","h3","h4","p","span","strong","b","div"]
-        and titulo.lower() in t.get_text(strip=True).lower()
-        and len(t.get_text(strip=True)) < 80
-        and not t.find(["h2","h3"])
+        lambda t: t.name in ["dt", "th", "strong", "b", "span", "p", "label"]
+        and keyword.lower() in t.get_text(strip=True).lower()
+        and len(t.get_text(strip=True)) < 60
     )
-    if not tag:
-        return ""
+    if tag:
+        # Intentar el siguiente hermano o el dd/td
+        for sib in tag.find_next_siblings():
+            txt = sib.get_text(strip=True)
+            if txt and len(txt) < 150:
+                return txt
+        # Intentar el padre
+        if tag.parent:
+            txt = tag.parent.get_text(separator=" ", strip=True)
+            txt = re.sub(re.escape(keyword), "", txt, flags=re.IGNORECASE).strip(" :-")
+            if txt:
+                return txt[:150]
 
-    textos = []
-    nodo   = tag
-    for _ in range(3):
-        if list(nodo.find_next_siblings()):
-            break
-        if nodo.parent:
-            nodo = nodo.parent
+    return ""
 
-    for sib in nodo.find_next_siblings():
-        txt = sib.get_text(separator="\n", strip=True)
-        if not txt:
+
+def _seccion_detalle(soup: BeautifulSoup, titulos: list[str]) -> str:
+    """
+    Extrae el bloque de texto de una sección por su título.
+    Primero prueba selectores de ID/clase propios de Computrabajo,
+    luego búsqueda por texto del encabezado.
+    """
+    # Selectores específicos de Computrabajo por título
+    ids_conocidos = {
+        "descripción": ["#desc_offer", "div[id*='desc']", "section[id*='desc']",
+                        "div.fs16", "div[class*='description']"],
+        "requisitos" : ["#requirements", "div[id*='req']", "section[id*='req']"],
+        "beneficios" : ["#benefits",    "div[id*='ben']", "section[id*='ben']"],
+    }
+    for titulo in titulos:
+        for t_key, sels in ids_conocidos.items():
+            if t_key in titulo.lower():
+                for sel in sels:
+                    elem = soup.select_one(sel)
+                    if elem:
+                        txt = elem.get_text(separator="\n", strip=True)
+                        if txt and len(txt) > 30:
+                            return txt
+
+    # Búsqueda por texto de encabezado
+    _stop = {"descripción","descripcion","requisitos","beneficios","condiciones",
+             "ofrecemos","sobre la empresa","postulación","publicado"}
+    for titulo in titulos:
+        tag = soup.find(
+            lambda t: t.name in ["h2","h3","h4","p","span","strong","b","div"]
+            and titulo.lower() in t.get_text(strip=True).lower()
+            and len(t.get_text(strip=True)) < 80
+            and not t.find(["h2","h3"])
+        )
+        if not tag:
             continue
-        primera = txt.split("\n")[0].strip().lower()
-        if primera in _STOP_SECCIONES or (
-            any(s in primera for s in _STOP_SECCIONES) and len(primera) < 40
-        ):
-            break
-        # Rechazar si parece metadata de sidebar
-        lineas  = [l for l in txt.split("\n") if l.strip()]
-        n_cortas = sum(1 for l in lineas if len(l) < 35)
-        if lineas and n_cortas / len(lineas) > 0.8:
-            t_lower = txt.lower()
-            if any(tok in t_lower for tok in _METADATA_TOKENS):
+        textos = []
+        nodo   = tag
+        for _ in range(3):
+            if list(nodo.find_next_siblings()):
                 break
-        textos.append(txt)
-        if len(textos) >= 12:
-            break
+            if nodo.parent:
+                nodo = nodo.parent
+        for sib in nodo.find_next_siblings():
+            txt = sib.get_text(separator="\n", strip=True)
+            if not txt:
+                continue
+            if any(s in txt.split("\n")[0].strip().lower() for s in _stop):
+                break
+            textos.append(txt)
+            if len(textos) >= 12:
+                break
+        resultado = "\n".join(textos).strip()
+        if resultado and len(resultado) > 20:
+            return resultado
 
-    return "\n".join(textos).strip()
+    return ""
 
 
-def extraer_salario(texto: str) -> dict:
+def _extraer_salario(texto: str) -> dict:
     if not texto:
         return {"salario_min": None, "salario_max": None, "salario_a_convenir": 1}
     t = texto.replace(".", "").replace(",", ".")
@@ -591,8 +637,8 @@ def extraer_salario(texto: str) -> dict:
         r'\$\s*(\d{2,6}(?:\.\d{1,2})?)\s*[-–]\s*\$?\s*(\d{2,6}(?:\.\d{1,2})?)', t
     )
     if m:
-        return {"salario_min": float(m.group(1)), "salario_max": float(m.group(2)),
-                "salario_a_convenir": 0}
+        return {"salario_min": float(m.group(1)),
+                "salario_max": float(m.group(2)), "salario_a_convenir": 0}
     m = re.search(r'(?:\$|USD\s*)(\d{2,6}(?:\.\d{1,2})?)', t)
     if m:
         v = float(m.group(1))
@@ -605,7 +651,7 @@ def extraer_salario(texto: str) -> dict:
     }
 
 
-def extraer_experiencia(texto: str) -> int | None:
+def _extraer_experiencia(texto: str) -> int | None:
     if not texto:
         return None
     t = re.sub(r'años?', 'anos', texto.lower())
@@ -624,7 +670,7 @@ def extraer_experiencia(texto: str) -> int | None:
     return None
 
 
-def extraer_instruccion(texto: str) -> str:
+def _extraer_instruccion(texto: str) -> str:
     if not texto:
         return ""
     t = texto.lower()
@@ -641,241 +687,212 @@ def extraer_instruccion(texto: str) -> str:
 
 
 def scrape_detalle_ct(driver, url: str) -> dict:
-    """Extrae campos completos de la página de detalle de una vacante."""
-    ok = _cargar_pagina(driver, url, "h1,h2,.description,#section-description")
-    if not ok:
+    if not _cargar(driver, url, "h1,h2,#desc_offer,div.fs16,article"):
         return {}
-
-    espera_humana(1.5, 3.0)
+    _espera(1.5, 3.0)
     soup = BeautifulSoup(driver.page_source, "html.parser")
 
-    # Texto completo raw
+    # Texto completo (con scripts/nav eliminados para no contaminar)
     for tag in soup(["script","style","noscript","header","footer","nav"]):
         tag.decompose()
     texto_raw = soup.get_text(separator="\n", strip=True)
 
-    # ── Campos de metadatos por íconos o atributos ────────────────────────────
-    # Computrabajo usa <ul class="info_offer"> con <li> para cada dato
-    def _de_lista_info(keyword: str) -> str:
-        """Busca un <li> que contenga keyword y retorna su texto."""
-        for li in soup.find_all("li"):
-            txt = li.get_text(strip=True)
-            if keyword.lower() in txt.lower() and len(txt) < 120:
-                # quitar el label del keyword mismo
-                return re.sub(re.escape(keyword), "", txt, flags=re.IGNORECASE).strip(" :-")
-        return ""
+    # ── Metadatos de la oferta ────────────────────────────────────────────────
+    jornada   = (_info_lista(soup, "Jornada")        or
+                 _info_lista(soup, "Tipo de jornada") or
+                 _info_lista(soup, "Full-time")       or "")
+    contrato  = (_info_lista(soup, "Contrato")        or
+                 _info_lista(soup, "Tipo de contrato") or "")
+    modalidad = (_info_lista(soup, "Modalidad")       or
+                 _info_lista(soup, "Presencial")       or
+                 _info_lista(soup, "Remoto")           or "")
+    area      = (_info_lista(soup, "Área")            or
+                 _info_lista(soup, "Sector")           or
+                 _info_lista(soup, "Categoría")        or "")
+    subarea   =  _info_lista(soup, "Sub")              or ""
+    industria = (_info_lista(soup, "Industria")        or
+                 _info_lista(soup, "Empresa del sector") or "")
+    idioma    =  _info_lista(soup, "Idioma")           or ""
+    licencia  =  _info_lista(soup, "Licencia")         or ""
 
-    # Jornada y tipo de contrato
-    jornada  = (_de_lista_info("Jornada") or
-                _de_lista_info("full-time") or
-                _de_lista_info("part-time") or "")
-    contrato = (_de_lista_info("Contrato") or
-                _de_lista_info("Tipo de contrato") or "")
-
-    # Si jornada tiene coma → separar (igual que Multitrabajos)
+    # Si jornada lleva la coma (ej "Full-time, Indefinido"), separar
     if "," in jornada and not contrato:
-        partes   = [p.strip() for p in jornada.split(",")]
+        partes   = [x.strip() for x in jornada.split(",")]
         jornada  = partes[0]
         contrato = partes[1] if len(partes) > 1 else ""
 
-    # Área / sector
-    area = (_de_lista_info("Área") or
-            _de_lista_info("Sector") or
-            _de_lista_info("Categoría") or "")
-
-    # Número de vacantes
+    # ── Vacantes ──────────────────────────────────────────────────────────────
     vac_num = None
+    # Patrón "X vacante(s) disponible(s)" en texto completo
     m = re.search(r'(\d+)\s+vacantes?\s+disponibles?', texto_raw, re.IGNORECASE)
     if m:
         vac_num = int(m.group(1))
     else:
-        for tag in soup.find_all(["p","span","li"]):
+        # Buscar en elementos cortos del DOM
+        for tag in soup.find_all(["p","span","li","div"]):
             txt = tag.get_text(strip=True)
-            if len(txt) < 60 and re.search(
-                r'\d+\s+vacantes?\s+disponibles?', txt, re.IGNORECASE
-            ):
-                m2 = re.search(r'(\d+)', txt)
+            if len(txt) < 60:
+                m2 = re.search(r'(\d+)\s+vacantes?\s+disponibles?', txt, re.IGNORECASE)
                 if m2:
-                    vac_num = int(m2.group(1))
-                    break
+                    vac_num = int(m2.group(1)); break
+                if re.search(r'múltiples?\s+vacantes?', txt, re.IGNORECASE):
+                    vac_num = None; break
 
-    # Secciones de contenido
-    descripcion = (_texto_seccion(soup, "Descripción del empleo") or
-                   _texto_seccion(soup, "Descripción") or
-                   _texto_seccion(soup, "Funciones"))
+    # ── Secciones de contenido ────────────────────────────────────────────────
+    descripcion = _seccion_detalle(soup, [
+        "Descripción del empleo", "Descripción", "Funciones", "Acerca del puesto"
+    ])
+    requisitos  = _seccion_detalle(soup, [
+        "Requisitos", "Perfil requerido", "Se requiere", "Buscamos"
+    ])
+    beneficios  = _seccion_detalle(soup, [
+        "Beneficios", "Ofrecemos", "Te ofrecemos", "Qué ofrecemos"
+    ])
 
-    requisitos  = (_texto_seccion(soup, "Requisitos") or
-                   _texto_seccion(soup, "Perfil requerido") or
-                   _texto_seccion(soup, "Se requiere"))
+    # Texto de extracción numérica: secciones primero, texto_raw como fallback
+    txt_ext     = f"{descripcion}\n{requisitos}".strip() or texto_raw
 
-    beneficios  = (_texto_seccion(soup, "Beneficios") or
-                   _texto_seccion(soup, "Ofrecemos") or
-                   _texto_seccion(soup, "Te ofrecemos"))
-
-    texto_ext   = f"{descripcion}\n{requisitos}".strip() or texto_raw
-    sal         = extraer_salario(texto_ext)
-    exp_anos    = extraer_experiencia(texto_ext)
-    instruccion = extraer_instruccion(texto_ext)
+    sal         = _extraer_salario(txt_ext)
+    exp_anos    = _extraer_experiencia(txt_ext)
+    instruccion = _extraer_instruccion(txt_ext)
 
     return {
-        "descripcion_raw"   : descripcion,
-        "requisitos_raw"    : requisitos,
-        "beneficios_raw"    : beneficios,
-        "texto_raw"         : texto_raw[:8000],  # limitar tamaño
-        "jornada_raw"       : jornada,
-        "contrato_raw"      : contrato,
-        "area_raw"          : area,
-        "vacantes_num"      : vac_num,
-        "salario_min"       : sal["salario_min"],
-        "salario_max"       : sal["salario_max"],
+        "modalidad_raw"    : modalidad,
+        "jornada_raw"      : jornada,
+        "contrato_raw"     : contrato,
+        "area_raw"         : area,
+        "subarea_raw"      : subarea,
+        "industria_raw"    : industria,
+        "idioma_raw"       : idioma,
+        "licencia_raw"     : licencia,
+        "descripcion_raw"  : descripcion,
+        "requisitos_raw"   : requisitos,
+        "beneficios_raw"   : beneficios,
+        "texto_raw"        : texto_raw[:10000],
+        "vacantes_num"     : vac_num,
+        "salario_min"      : sal["salario_min"],
+        "salario_max"      : sal["salario_max"],
         "salario_a_convenir": sal["salario_a_convenir"],
-        "experiencia_anos"  : exp_anos,
-        "instruccion_raw"   : instruccion,
+        "experiencia_anos" : exp_anos,
+        "instruccion_raw"  : instruccion,
     }
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# PIPELINE PRINCIPAL
+# PIPELINE
 # ══════════════════════════════════════════════════════════════════════════════
 
 def run(
     ciudades_seleccionadas: dict | None = None,
     max_paginas: int = 999,
     headless: bool = True,
-):
-    """
-    Pipeline incremental para todas las ciudades (o las que se pasen).
-    Comparte la misma BD que scraper_mt_v2.py — sin duplicados entre portales.
-    """
+) -> list[dict]:
+
     log.info("=" * 60)
     log.info(f"COMPUTRABAJO  {datetime.now().isoformat()}")
     log.info("=" * 60)
 
     crear_schema()
-    eid = iniciar_ejecucion("computrabajo")
-
+    eid            = iniciar_ejecucion()
     urls_conocidas = urls_en_bd()
     log.info(f"URLs ya en BD: {len(urls_conocidas):,}")
 
-    ciudades_a_scrapear = ciudades_seleccionadas or CIUDADES
+    ciudades = ciudades_seleccionadas or CIUDADES
 
-    # ── PASO 1: Listados por ciudad ───────────────────────────────────────────
-    log.info(f"PASO 1: Listados — {len(ciudades_a_scrapear)} ciudad(es)")
-    driver      = crear_driver(headless=headless)
-    todos_items : list[dict] = []
+    # PASO 1: Listados
+    log.info(f"PASO 1: Listados — {len(ciudades)} ciudad(es)")
+    driver       = crear_driver(headless=headless)
+    todos        : list[dict] = []
     tot_omitidas = 0
-
     try:
-        for slug, nombre in ciudades_a_scrapear.items():
+        for slug, nombre in ciudades.items():
             log.info(f"  Ciudad: {nombre}")
-            items_ciudad, omit = scrape_listado_ciudad(
-                driver, slug, nombre, urls_conocidas, max_paginas=max_paginas
+            lote, omit = scrape_listado_ciudad(
+                driver, slug, nombre, urls_conocidas, max_paginas
             )
             tot_omitidas += omit
-
-            if items_ciudad:
-                todos_items.extend(items_ciudad)
-                for i in items_ciudad:
+            if lote:
+                todos.extend(lote)
+                for i in lote:
                     urls_conocidas.add(i["url_detalle"])
-                log.info(
-                    f"  {nombre}: {len(items_ciudad)} nuevas | "
-                    f"acumulado={len(todos_items)}"
-                )
-            else:
-                log.info(f"  {nombre}: sin vacantes nuevas")
-
-            espera_humana(3.0, 6.0)  # pausa entre ciudades
-
+                log.info(f"  {nombre}: +{len(lote)} | acumulado={len(todos)}")
+            _espera(3, 6)
     finally:
         driver.quit()
-        log.info(f"Paso 1: {len(todos_items)} nuevas para detallar")
+        log.info(f"Paso 1 listo: {len(todos)} para detallar")
 
-    if not todos_items:
+    if not todos:
         log.info("Sin vacantes nuevas.")
         cerrar_ejecucion(eid, 0, tot_omitidas, 0)
         return []
 
-    # ── PASO 2: Detalles ──────────────────────────────────────────────────────
+    # PASO 2: Detalles
     log.info("PASO 2: Detalles")
     driver    = crear_driver(headless=headless)
     guardadas = 0
     errores   = 0
-
     try:
-        for idx, item in enumerate(todos_items, 1):
+        for idx, item in enumerate(todos, 1):
             url = item.get("url_detalle", "")
             if not url:
                 continue
-            log.info(f"  [{idx}/{len(todos_items)}] {item.get('cargo_raw','')[:55]}")
+            log.info(f"  [{idx}/{len(todos)}] {item.get('cargo_raw','')[:55]}")
             try:
-                detalle = scrape_detalle_ct(driver, url)
-                item.update(detalle)
+                det = scrape_detalle_ct(driver, url)
+                item.update(det)
                 if guardar_vacante(item, eid):
                     guardadas += 1
                 else:
                     tot_omitidas += 1
-            except Exception as exc:
+            except Exception as e:
                 errores += 1
-                log.error(f"    Error: {exc}")
-            espera_humana(2.0, 4.5)
+                log.error(f"    Error: {e}")
+            _espera(2, 4.5)
     finally:
         driver.quit()
 
     cerrar_ejecucion(eid, guardadas, tot_omitidas, errores)
 
-    # ── Resumen ───────────────────────────────────────────────────────────────
+    # Reporte de cobertura
     log.info("=" * 60)
-    log.info("RESUMEN COMPUTRABAJO")
-    log.info(f"  Nuevas guardadas : {guardadas}")
-    log.info(f"  Omitidas (ya BD) : {tot_omitidas}")
-    log.info(f"  Errores          : {errores}")
-
-    if todos_items:
-        df     = pd.DataFrame(todos_items)
-        campos = ["cargo_raw","empresa_raw","ubicacion_raw","jornada_raw",
-                  "contrato_raw","area_raw","vacantes_num","salario_min",
-                  "experiencia_anos","instruccion_raw","descripcion_raw"]
-        log.info("\n  Cobertura:")
-        for campo in campos:
-            if campo in df.columns:
-                llenos = df[campo].dropna().apply(
-                    lambda x: str(x).strip() not in ("","None","nan","0")
-                ).sum()
-                pct  = llenos / len(df) * 100 if len(df) else 0
-                barra= "█" * int(pct/5) + "░" * (20 - int(pct/5))
-                log.info(f"    {campo:<22} {barra} {pct:5.1f}%  ({llenos}/{len(df)})")
-
+    log.info(f"RESUMEN: {guardadas} nuevas | {tot_omitidas} omitidas | {errores} errores")
+    df = pd.DataFrame(todos)
+    campos = [
+        "cargo_raw","empresa_raw","ubicacion_raw","modalidad_raw",
+        "jornada_raw","contrato_raw","area_raw","vacantes_num",
+        "salario_min","experiencia_anos","instruccion_raw",
+        "descripcion_raw","requisitos_raw",
+    ]
+    for campo in campos:
+        if campo in df.columns:
+            n   = df[campo].dropna().apply(
+                lambda x: str(x).strip() not in ("","None","nan","0")
+            ).sum()
+            pct = n / len(df) * 100 if len(df) else 0
+            log.info(f"  {campo:<22} {'█'*int(pct/5)}{'░'*(20-int(pct/5))} {pct:5.1f}%")
     log.info("=" * 60)
-    return todos_items
+    return todos
 
 
 # ── PUNTO DE ENTRADA ─────────────────────────────────────────────────────────
 if __name__ == "__main__":
-    p = argparse.ArgumentParser(
+    ap = argparse.ArgumentParser(
         description="Computrabajo Ecuador — scraper incremental por ciudad"
     )
-    p.add_argument("--ciudad",      default=None,
-                   help=f"Slug de ciudad. Opciones: {', '.join(CIUDADES.keys())}")
-    p.add_argument("--paginas",     type=int, default=999,
-                   help="Máx páginas por ciudad (default=999=sin límite)")
-    p.add_argument("--visible",     action="store_true",
-                   help="Mostrar ventana del browser")
-    p.add_argument("--diagnostico", action="store_true",
-                   help="Modo diagnóstico: muestra selectores sin guardar en BD")
-    a = p.parse_args()
+    ap.add_argument("--ciudad",      default=None,
+                    help="Slug de ciudad: quito, guayaquil, loja, ...")
+    ap.add_argument("--paginas",     type=int, default=999)
+    ap.add_argument("--visible",     action="store_true")
+    ap.add_argument("--diagnostico", action="store_true",
+                    help="Muestra HTML real sin guardar en BD")
+    a = ap.parse_args()
 
     if a.diagnostico:
-        ciudad = a.ciudad or "quito"
-        diagnostico(ciudad, headless=not a.visible)
+        diagnostico(a.ciudad or "quito", headless=not a.visible)
     elif a.ciudad:
         if a.ciudad not in CIUDADES:
-            print(f"Ciudad desconocida: '{a.ciudad}'")
-            print(f"Opciones válidas: {', '.join(CIUDADES.keys())}")
+            print(f"Ciudad no válida. Opciones: {', '.join(CIUDADES.keys())}")
             sys.exit(1)
-        run(
-            ciudades_seleccionadas={a.ciudad: CIUDADES[a.ciudad]},
-            max_paginas=a.paginas,
-            headless=not a.visible,
-        )
+        run({a.ciudad: CIUDADES[a.ciudad]}, a.paginas, headless=not a.visible)
     else:
         run(max_paginas=a.paginas, headless=not a.visible)
