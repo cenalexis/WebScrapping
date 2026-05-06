@@ -310,6 +310,26 @@ def diagnostico(slug: str = "quito", headless: bool = False):
             print("\n── HTML primera tarjeta (completo) ──")
             print(tarjeta.prettify()[:2000])
 
+        # Todos los hrefs únicos — para ver el patrón real de URLs de oferta
+        print("\n── Todos los hrefs únicos de la página ──")
+        hrefs_uniq: set = set()
+        for a in soup.find_all("a", href=True):
+            h = a["href"]
+            if h and not h.startswith(("javascript", "#", "mailto", "tel")):
+                hrefs_uniq.add(h)
+        for h in sorted(hrefs_uniq)[:80]:
+            print(f"  {h}")
+
+        # Divs que contienen "Postular" — para ver la estructura de tarjeta
+        print("\n── HTML de la primera tarjeta con 'Postular' (hoja más pequeña) ──")
+        for div in soup.find_all(["div", "li", "article", "section"]):
+            if "Postular" in div.get_text():
+                # Queda con el nodo más pequeño (hoja hacia abajo)
+                if not div.find(["div", "li", "article", "section"],
+                                string=re.compile("Postular")):
+                    print(div.prettify()[:3000])
+                    break
+
         # Paginación
         print("\n── Paginación ──")
         for sel in ["a[href*='?p=']", "a[href*='page=']", ".pagination a",
@@ -318,11 +338,16 @@ def diagnostico(slug: str = "quito", headless: bool = False):
             if elems:
                 print(f"  ✅ '{sel}' → hrefs: {[e.get('href','') for e in elems[:3]]}")
 
-        # Primera URL de detalle
+        # Primera URL de detalle usando el regex actualizado
         det_url = None
-        for a in soup.find_all("a", href=True):
+        for a in soup.find_all("a", href=_RE_URL_DETALLE):
             h = a["href"]
-            if re.search(r'/(trabajo-de|oferta-de-trabajo|empleo-de)', h):
+            det_url = BASE_URL + h if not h.startswith("http") else h
+            break
+        # Fallback: cualquier link con empresa/ en la ruta
+        if not det_url:
+            for a in soup.find_all("a", href=re.compile(r'/empresa-[^/]+/oferta')):
+                h = a["href"]
                 det_url = BASE_URL + h if not h.startswith("http") else h
                 break
 
@@ -370,11 +395,22 @@ _SELS_TARJETA = [
     "div[class*='box_offer']",
     "li[class*='offer']",
     "[data-offerid]",
+    "[data-offer-id]",
+    "article",
+    "li[class*='job']",
+    "div[class*='job']",
 ]
 
-# Regex para detectar URLs de detalle de Computrabajo
+# URLs de detalle de Computrabajo:
+#   /empresa-{slug}/oferta-de-trabajo-{slug}          ← formato principal EC
+#   /trabajo-de-{cargo}-en-{empresa}-{id}             ← variante con ID largo
+#   /oferta-de-trabajo-{slug} | /empleo-de-{slug}     ← otros formatos
 _RE_URL_DETALLE = re.compile(
-    r'/(trabajo-de|oferta-de-trabajo|empleo-de)[^"\'>\s]*', re.IGNORECASE
+    r'/(?:'
+    r'empresa-[^/\s"\']+/oferta-de-trabajo[^"\'>\s]*'          # empresa/oferta
+    r'|(?:trabajo-de|oferta-de-trabajo|empleo-de)[^"\'>\s]+'   # directo
+    r')',
+    re.IGNORECASE,
 )
 
 
@@ -383,11 +419,29 @@ def _tarjetas(soup: BeautifulSoup) -> list:
         items = soup.select(sel)
         if items:
             return items
-    # Fallback: cualquier article que contenga un link de detalle
-    return [
-        art for art in soup.find_all("article")
-        if art.find("a", href=_RE_URL_DETALLE)
-    ]
+
+    # Link-first fallback: encontrar cada link de oferta y subir al contenedor de tarjeta
+    visto: set = set()
+    cards: list = []
+    for a in soup.find_all("a", href=_RE_URL_DETALLE):
+        href = a.get("href", "")
+        if not href or href in visto:
+            continue
+        visto.add(href)
+        node = a
+        best = a
+        for _ in range(7):
+            if not node.parent or node.parent.name in ("body", "html", "[document]"):
+                break
+            node = node.parent
+            txt_len = len(node.get_text(strip=True))
+            if 60 <= txt_len <= 900:
+                best = node
+            elif txt_len > 900:
+                break
+        if best is not a:
+            cards.append(best)
+    return cards
 
 
 def _parsear_tarjeta(t, ciudad_nombre: str) -> dict | None:
