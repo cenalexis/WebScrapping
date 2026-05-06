@@ -37,7 +37,7 @@ LOG_PATH    = os.environ.get("LOG_PATH", r"C:\Users\alexis\Documents\CISE_2026\s
 CHROME_VER  = int(os.environ.get("CHROME_VER", "147")) or None
 URL_BASE    = "https://www.multitrabajos.com"
 URL_LISTADO = "https://www.multitrabajos.com/empleos.html"
-MAX_PAGINAS = 30        # 30 pags × ~20 vacantes = ~600 vacantes
+MAX_PAGINAS = 999       # sin límite práctico — el scraper para por RACHA_STOP o fin de páginas
 RACHA_STOP  = 10        # vacantes consecutivas ya en BD → detener scroll incremental
 
 if os.path.dirname(DB_PATH):
