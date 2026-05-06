@@ -20,11 +20,10 @@ if exist "%PROYECTO%\cise_scraper\Scripts\activate.bat" (
     call "%PROYECTO%\cise_scraper\Scripts\activate.bat"
 )
 
-:: ── 1. Descargar BD maestra desde Google Drive ───────────────────────────
+:: ── 1. Descargar BD maestra desde GitHub Release ─────────────────────────
 echo.
-echo [1/5] Descargando BD maestra desde Google Drive...
-powershell -NoProfile -Command ^
-  "$cfg = try { Get-Content '%PROYECTO%\config.json' | ConvertFrom-Json } catch { $null }; $url = if ($cfg) { $cfg.gdrive_db_url } else { '' }; if ($url) { try { Invoke-WebRequest -Uri $url -OutFile '%DB%' -UseBasicParsing; Write-Host 'BD sincronizada desde Drive.' } catch { Write-Host 'No se pudo descargar — usando BD local.' } } else { Write-Host 'config.json sin gdrive_db_url — usando BD local (corre subir_drive.py primero).' }"
+echo [1/5] Descargando BD maestra desde GitHub Release...
+python "%PROYECTO%\sync_github.py" download
 
 :: ── 2. Multitrabajos ──────────────────────────────────────────────────────
 echo.
@@ -46,20 +45,7 @@ python "%PROYECTO%\exportar_excel.py"
 :: ── 5. Subir BD actualizada al release ───────────────────────────────────
 echo.
 echo [5/5] Subiendo BD actualizada a GitHub Release...
-where gh >nul 2>&1
-if %ERRORLEVEL% EQU 0 (
-    gh release upload latest-data "%DB%" --clobber --repo %REPO% 2>&1
-    echo Release actualizado.
-) else (
-    echo AVISO: gh CLI no encontrado — instala desde https://cli.github.com para sincronizar.
-)
-
-:: ── Google Drive (si hay credenciales) ───────────────────────────────────
-if exist "%PROYECTO%\credentials.json" (
-    echo.
-    echo Subiendo a Google Drive...
-    python "%PROYECTO%\subir_drive.py"
-)
+python "%PROYECTO%\sync_github.py" upload
 
 echo.
 echo ============================================================

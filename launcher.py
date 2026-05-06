@@ -5,17 +5,21 @@ Launcher GUI: sincroniza BD, lanza scrapers y abre el dashboard.
 
 import os
 import sys
+import json
 import subprocess
 import threading
 import webbrowser
 import tkinter as tk
-from tkinter import ttk, scrolledtext
+from tkinter import scrolledtext, simpledialog, messagebox
+from pathlib import Path
 
-PROYECTO = os.path.dirname(os.path.abspath(__file__))
-BAT      = os.path.join(PROYECTO, "sincronizar_y_scrapear.bat")
-DASH     = os.path.join(PROYECTO, "dashboard.py")
-VENV_PY  = os.path.join(PROYECTO, "cise_scraper", "Scripts", "python.exe")
-PYTHON   = VENV_PY if os.path.exists(VENV_PY) else sys.executable
+PROYECTO   = os.path.dirname(os.path.abspath(__file__))
+BAT        = os.path.join(PROYECTO, "sincronizar_y_scrapear.bat")
+DASH       = os.path.join(PROYECTO, "dashboard.py")
+VENV_PY    = os.path.join(PROYECTO, "cise_scraper", "Scripts", "python.exe")
+PYTHON     = VENV_PY if os.path.exists(VENV_PY) else sys.executable
+TOKEN_FILE = Path(PROYECTO) / "gh_token.txt"
+CONFIG_FILE = Path(PROYECTO) / "config.json"
 
 # ─── Colores ──────────────────────────────────────────────────────────────────
 BG        = "#1e1e2e"
@@ -100,7 +104,16 @@ class CISELauncher(tk.Tk):
             relief="flat", padx=20, pady=10, cursor="hand2",
             command=self._open_dashboard,
         )
-        self.btn_dash.pack(side="left")
+        self.btn_dash.pack(side="left", padx=(0, 10))
+
+        tk.Button(
+            btn_row,
+            text="⚙️",
+            font=FONT_BIG, bg=BG2, fg=TEXT_DIM,
+            activebackground="#3a3a5e", activeforeground=TEXT,
+            relief="flat", padx=12, pady=10, cursor="hand2",
+            command=self._open_settings,
+        ).pack(side="left")
 
         # Separador + Log
         tk.Frame(self, bg="#3a3a5e", height=1).pack(fill="x", pady=(8, 0))
@@ -195,6 +208,91 @@ class CISELauncher(tk.Tk):
 
     def _set_status(self, text: str):
         self.status_var.set(text)
+
+    def _open_settings(self):
+        win = tk.Toplevel(self)
+        win.title("⚙️ Configuración")
+        win.geometry("500x340")
+        win.configure(bg=BG)
+        win.resizable(False, False)
+
+        def label(parent, text, dim=False):
+            tk.Label(parent, text=text, bg=BG,
+                     fg=TEXT_DIM if dim else TEXT,
+                     font=FONT_MAIN, anchor="w").pack(fill="x", pady=(8, 0))
+
+        frame = tk.Frame(win, bg=BG, padx=20, pady=16)
+        frame.pack(fill="both", expand=True)
+
+        # ── GitHub Token ──────────────────────────────────────────────────────
+        tk.Label(frame, text="GitHub Personal Access Token",
+                 font=("Segoe UI", 10, "bold"), bg=BG, fg=TEXT, anchor="w").pack(fill="x")
+        label(frame,
+              "Permisos necesarios: repo → contents (write). "
+              "Genera uno en github.com/settings/tokens", dim=True)
+
+        token_var = tk.StringVar(
+            value=TOKEN_FILE.read_text().strip() if TOKEN_FILE.exists() else ""
+        )
+        tk.Entry(frame, textvariable=token_var, show="*",
+                 font=FONT_MAIN, bg=BG2, fg=TEXT,
+                 insertbackground=TEXT, relief="flat",
+                 width=55).pack(fill="x", pady=(4, 0))
+
+        # ── ntfy Topic ────────────────────────────────────────────────────────
+        tk.Label(frame, text="Topic de alertas (ntfy.sh)",
+                 font=("Segoe UI", 10, "bold"), bg=BG, fg=TEXT, anchor="w").pack(
+            fill="x", pady=(16, 0))
+        label(frame, "Genera uno con:  python alertas.py --configurar", dim=True)
+
+        def _read_ntfy():
+            if CONFIG_FILE.exists():
+                try:
+                    return json.loads(CONFIG_FILE.read_text()).\
+                           get("ntfy_topic", "")
+                except Exception:
+                    pass
+            return ""
+
+        ntfy_var = tk.StringVar(value=_read_ntfy())
+        tk.Entry(frame, textvariable=ntfy_var,
+                 font=FONT_MAIN, bg=BG2, fg=TEXT,
+                 insertbackground=TEXT, relief="flat",
+                 width=55).pack(fill="x", pady=(4, 0))
+
+        # ── Botones ───────────────────────────────────────────────────────────
+        def guardar():
+            tok = token_var.get().strip()
+            if tok:
+                TOKEN_FILE.write_text(tok, encoding="utf-8")
+            elif TOKEN_FILE.exists():
+                TOKEN_FILE.unlink()
+
+            ntfy = ntfy_var.get().strip()
+            try:
+                cfg = json.loads(CONFIG_FILE.read_text()) \
+                      if CONFIG_FILE.exists() else {}
+            except Exception:
+                cfg = {}
+            if ntfy:
+                cfg["ntfy_topic"] = ntfy
+            elif "ntfy_topic" in cfg:
+                del cfg["ntfy_topic"]
+            CONFIG_FILE.write_text(json.dumps(cfg, indent=2), encoding="utf-8")
+
+            messagebox.showinfo("Guardado", "Configuración guardada.", parent=win)
+            win.destroy()
+
+        btn_f = tk.Frame(frame, bg=BG)
+        btn_f.pack(fill="x", pady=(16, 0))
+        tk.Button(btn_f, text="Guardar", font=FONT_BIG,
+                  bg=ACCENT, fg=TEXT, relief="flat",
+                  padx=16, pady=8, cursor="hand2",
+                  command=guardar).pack(side="left")
+        tk.Button(btn_f, text="Cancelar", font=FONT_MAIN,
+                  bg=BG2, fg=TEXT_DIM, relief="flat",
+                  padx=16, pady=8, cursor="hand2",
+                  command=win.destroy).pack(side="left", padx=(8, 0))
 
     def on_close(self):
         if self._streamlit_proc and self._streamlit_proc.poll() is None:

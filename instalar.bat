@@ -15,7 +15,7 @@ echo  Carpeta: %PROYECTO%
 echo ============================================================
 echo.
 
-:: ── Verificar Python ─────────────────────────────────────────────────────────
+:: ── Verificar Python ──────────────────────────────────────────────────────────
 python --version >nul 2>&1
 if errorlevel 1 (
     echo ERROR: Python no encontrado.
@@ -28,7 +28,7 @@ for /f "tokens=*" %%v in ('python --version') do echo Python encontrado: %%v
 
 :: ── Crear entorno virtual ─────────────────────────────────────────────────────
 echo.
-echo [1/5] Creando entorno virtual...
+echo [1/6] Creando entorno virtual...
 if not exist "%PROYECTO%\cise_scraper\" (
     python -m venv "%PROYECTO%\cise_scraper"
     echo     Entorno creado.
@@ -39,27 +39,49 @@ call "%PROYECTO%\cise_scraper\Scripts\activate.bat"
 
 :: ── Instalar dependencias ─────────────────────────────────────────────────────
 echo.
-echo [2/5] Instalando dependencias Python...
+echo [2/6] Instalando dependencias Python...
 pip install -q --upgrade pip
 pip install -q -r "%PROYECTO%\requirements.txt"
 echo     Listo.
 
-:: ── Descargar base de datos más reciente ─────────────────────────────────────
+:: ── Descargar base de datos más reciente ──────────────────────────────────────
 echo.
-echo [3/5] Descargando base de datos desde GitHub...
+echo [3/6] Descargando base de datos desde GitHub Release...
 if exist "%PROYECTO%\vacantes_laborales.db" (
     echo     Ya existe una BD local. Conservando la local.
 ) else (
-    powershell -NoProfile -Command ^
-        "$url = 'https://github.com/cenalexis/WebScrapping/releases/download/latest-data/vacantes_laborales.db';" ^
-        "$dest = '%PROYECTO%\vacantes_laborales.db';" ^
-        "try { Invoke-WebRequest -Uri $url -OutFile $dest; Write-Host '    BD descargada.' }" ^
-        "catch { Write-Host '    No hay release aun. La BD se creara en el primer scrape.' }"
+    python "%PROYECTO%\sync_github.py" download
+)
+
+:: ── Configurar token de GitHub ────────────────────────────────────────────────
+echo.
+echo [4/6] Token de GitHub (para sincronizar la BD)...
+if exist "%PROYECTO%\gh_token.txt" (
+    echo     Ya existe gh_token.txt. Saltando.
+) else (
+    echo.
+    echo     Para sincronizar la BD con otros colaboradores necesitas un
+    echo     Personal Access Token de GitHub.
+    echo.
+    echo     Pasos:
+    echo       1. Ve a https://github.com/settings/tokens
+    echo       2. "Generate new token (classic)"
+    echo       3. Nombre: CISE2026  ^|  Expiracion: 1 year
+    echo       4. Marca: repo (solo "repo" alcanza)
+    echo       5. Copia el token generado
+    echo.
+    set /p GH_PAT="     Pega el token aqui (o presiona Enter para saltar): "
+    if not "!GH_PAT!"=="" (
+        echo !GH_PAT!> "%PROYECTO%\gh_token.txt"
+        echo     Token guardado en gh_token.txt
+    ) else (
+        echo     Saltado. Puedes configurarlo despues desde el boton Configuracion del exe.
+    )
 )
 
 :: ── Crear acceso directo de inicio automático ─────────────────────────────────
 echo.
-echo [4/5] Configurando inicio automatico...
+echo [5/6] Configurando inicio automatico...
 powershell -NoProfile -Command ^
     "$startup = [System.Environment]::GetFolderPath('Startup');" ^
     "$shortcut = Join-Path $startup 'CISE_scraper.lnk';" ^
@@ -74,7 +96,7 @@ powershell -NoProfile -Command ^
 
 :: ── Crear carpetas necesarias ─────────────────────────────────────────────────
 echo.
-echo [5/5] Creando carpetas de trabajo...
+echo [6/6] Creando carpetas de trabajo...
 if not exist "%PROYECTO%\exports\"  mkdir "%PROYECTO%\exports"
 if not exist "%PROYECTO%\backups\"  mkdir "%PROYECTO%\backups"
 echo     exports\  y  backups\  listas.
@@ -84,18 +106,19 @@ echo.
 echo ============================================================
 echo  Instalacion completa.
 echo.
-echo  El scraper correra automaticamente 15 min despues de
-echo  cada inicio de sesion (si no corrio en las ultimas 20 h).
+echo  USO DIARIO:
+echo    Doble clic en CISE2026.exe  (o dist\CISE2026.exe)
+echo    - Boton "Sincronizar y Scrapear" para recopilar datos
+echo    - Boton "Abrir Dashboard" para ver el dashboard
+echo    - Boton "Configuracion" para cambiar token o alertas
 echo.
-echo  Para correr manualmente ahora mismo:
-echo    python Notebooks\scraper_mt_v2.py
-echo    python Notebooks\scraper_computrabajo.py
+echo  AUTOMATICO:
+echo    El scraper corre solo 15 min despues de cada inicio
+echo    de sesion (si no corrio en las ultimas 20 h).
 echo.
-echo  Para exportar a Excel y CSV:
-echo    python exportar_excel.py
-echo.
-echo  Para configurar Google Drive (solo si tienes credentials.json):
-echo    python subir_drive.py --autorizar
+echo  ALERTAS (opcional):
+echo    python alertas.py --configurar
+echo    Instala la app ntfy en tu celular para recibir notif.
 echo ============================================================
 echo.
 pause
