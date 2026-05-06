@@ -32,5 +32,6 @@ token.json
 gh_token.txt
 ultima_ejecucion.txt
 
-# Documento interno de contexto — solo para sesiones locales
+# Documentos internos — solo para sesiones locales
 CONTEXTO_PROYECTO.md
+GUIA_TECNICA.md
