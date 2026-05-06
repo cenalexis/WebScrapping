@@ -46,64 +46,61 @@ logging.basicConfig(
 )
 log = logging.getLogger(__name__)
 
-# ── CIUDADES ──────────────────────────────────────────────────────────────────
-# Clave = slug usado en la URL: /empleos-en-{clave}
-# Formato: {provincia}-en-{ciudad}  (según estructura real del sitio)
+# ── PROVINCIAS ────────────────────────────────────────────────────────────────
+# Clave = slug de URL: /empleos-en-{clave}
+# Una URL por provincia cubre todas las ciudades; la ciudad se extrae de cada tarjeta.
 CIUDADES = {
-    "pichincha-en-quito"                              : "Quito (Pichincha)",
-    "guayas-en-guayaquil"                             : "Guayaquil (Guayas)",
-    "azuay-en-cuenca"                                 : "Cuenca (Azuay)",
-    "tungurahua-en-ambato"                            : "Ambato (Tungurahua)",
-    "loja-en-loja"                                    : "Loja (Loja)",
-    "chimborazo-en-riobamba"                          : "Riobamba (Chimborazo)",
-    "imbabura-en-ibarra"                              : "Ibarra (Imbabura)",
-    "cotopaxi-en-latacunga"                           : "Latacunga (Cotopaxi)",
-    "bolivar-en-guaranda"                             : "Guaranda (Bolívar)",
-    "canar-en-azogues"                                : "Azogues (Cañar)",
-    "carchi-en-tulcan"                                : "Tulcán (Carchi)",
-    "el-oro-en-machala"                               : "Machala (El Oro)",
-    "manabi-en-manta"                                 : "Manta (Manabí)",
-    "manabi-en-portoviejo"                            : "Portoviejo (Manabí)",
-    "esmeraldas-en-esmeraldas"                        : "Esmeraldas (Esmeraldas)",
-    "santo-domingo-de-los-tsachilas-en-santo-domingo" : "Santo Domingo (Tsáchilas)",
-    "los-rios-en-babahoyo"                            : "Babahoyo (Los Ríos)",
-    "guayas-en-milagro"                               : "Milagro (Guayas)",
-    "guayas-en-daule"                                 : "Daule (Guayas)",
-    "santa-elena-en-santa-elena"                      : "Santa Elena (Santa Elena)",
-    "sucumbios-en-nueva-loja"                         : "Nueva Loja / Lago Agrio (Sucumbíos)",
-    "napo-en-tena"                                    : "Tena (Napo)",
-    "pastaza-en-puyo"                                 : "Puyo (Pastaza)",
-    "morona-santiago-en-macas"                        : "Macas (Morona Santiago)",
-    "zamora-chinchipe-en-zamora"                      : "Zamora (Zamora Chinchipe)",
+    "pichincha"                      : "Pichincha",
+    "guayas"                         : "Guayas",
+    "azuay"                          : "Azuay",
+    "tungurahua"                     : "Tungurahua",
+    "loja"                           : "Loja",
+    "chimborazo"                     : "Chimborazo",
+    "imbabura"                       : "Imbabura",
+    "cotopaxi"                       : "Cotopaxi",
+    "bolivar"                        : "Bolívar",
+    "canar"                          : "Cañar",
+    "carchi"                         : "Carchi",
+    "el-oro"                         : "El Oro",
+    "manabi"                         : "Manabí",
+    "esmeraldas"                     : "Esmeraldas",
+    "santo-domingo-de-los-tsachilas" : "Santo Domingo de los Tsáchilas",
+    "los-rios"                       : "Los Ríos",
+    "santa-elena"                    : "Santa Elena",
+    "sucumbios"                      : "Sucumbíos",
+    "napo"                           : "Napo",
+    "pastaza"                        : "Pastaza",
+    "morona-santiago"                : "Morona Santiago",
+    "zamora-chinchipe"               : "Zamora Chinchipe",
+    "galapagos"                      : "Galápagos",
+    "orellana"                       : "Orellana",
 }
 
-# Atajos para --ciudad desde la línea de comandos (nombre corto → clave CIUDADES)
+# Atajos CLI para --ciudad o --provincia (ciudad/nombre corto → slug provincia)
 ALIAS_CIUDAD = {
-    "quito"        : "pichincha-en-quito",
-    "guayaquil"    : "guayas-en-guayaquil",
-    "cuenca"       : "azuay-en-cuenca",
-    "ambato"       : "tungurahua-en-ambato",
-    "loja"         : "loja-en-loja",
-    "riobamba"     : "chimborazo-en-riobamba",
-    "ibarra"       : "imbabura-en-ibarra",
-    "latacunga"    : "cotopaxi-en-latacunga",
-    "guaranda"     : "bolivar-en-guaranda",
-    "azogues"      : "canar-en-azogues",
-    "tulcan"       : "carchi-en-tulcan",
-    "machala"      : "el-oro-en-machala",
-    "manta"        : "manabi-en-manta",
-    "portoviejo"   : "manabi-en-portoviejo",
-    "esmeraldas"   : "esmeraldas-en-esmeraldas",
-    "santo-domingo": "santo-domingo-de-los-tsachilas-en-santo-domingo",
-    "babahoyo"     : "los-rios-en-babahoyo",
-    "milagro"      : "guayas-en-milagro",
-    "daule"        : "guayas-en-daule",
-    "santa-elena"  : "santa-elena-en-santa-elena",
-    "nueva-loja"   : "sucumbios-en-nueva-loja",
-    "tena"         : "napo-en-tena",
-    "puyo"         : "pastaza-en-puyo",
-    "macas"        : "morona-santiago-en-macas",
-    "zamora"       : "zamora-chinchipe-en-zamora",
+    "quito"        : "pichincha",
+    "guayaquil"    : "guayas",
+    "cuenca"       : "azuay",
+    "ambato"       : "tungurahua",
+    "loja"         : "loja",
+    "riobamba"     : "chimborazo",
+    "ibarra"       : "imbabura",
+    "latacunga"    : "cotopaxi",
+    "guaranda"     : "bolivar",
+    "azogues"      : "canar",
+    "tulcan"       : "carchi",
+    "machala"      : "el-oro",
+    "manta"        : "manabi",
+    "portoviejo"   : "manabi",
+    "esmeraldas"   : "esmeraldas",
+    "santo-domingo": "santo-domingo-de-los-tsachilas",
+    "babahoyo"     : "los-rios",
+    "santa-elena"  : "santa-elena",
+    "nueva-loja"   : "sucumbios",
+    "tena"         : "napo",
+    "puyo"         : "pastaza",
+    "macas"        : "morona-santiago",
+    "zamora"       : "zamora-chinchipe",
 }
 
 
@@ -432,15 +429,11 @@ _SELS_TARJETA = [
     "div[class*='job']",
 ]
 
-# URLs de detalle de Computrabajo:
-#   /empresa-{slug}/oferta-de-trabajo-{slug}          ← formato principal EC
-#   /trabajo-de-{cargo}-en-{empresa}-{id}             ← variante con ID largo
-#   /oferta-de-trabajo-{slug} | /empleo-de-{slug}     ← otros formatos
+# URLs de detalle de Computrabajo Ecuador (confirmado por diagnóstico):
+#   /ofertas-de-trabajo/oferta-de-trabajo-de-{slug}-{ID32chars}
+# El fragmento #lc=ListOffers-Score-N se elimina al parsear la tarjeta.
 _RE_URL_DETALLE = re.compile(
-    r'/(?:'
-    r'empresa-[^/\s"\']+/oferta-de-trabajo[^"\'>\s]*'          # empresa/oferta
-    r'|(?:trabajo-de|oferta-de-trabajo|empleo-de)[^"\'>\s]+'   # directo
-    r')',
+    r'/ofertas-de-trabajo/oferta-de-trabajo-de-[^"\'>\s]+',
     re.IGNORECASE,
 )
 
@@ -475,76 +468,43 @@ def _tarjetas(soup: BeautifulSoup) -> list:
     return cards
 
 
-def _parsear_tarjeta(t, ciudad_nombre: str) -> dict | None:
-    # URL de detalle — buscar link con patrón de Computrabajo
-    link = t.find("a", href=_RE_URL_DETALLE)
-    if not link:
-        # Fallback: cualquier link que lleve a computrabajo
-        link = t.find("a", href=re.compile(r'computrabajo\.com'))
-    if not link:
-        link = t.find("a", href=True)
-    if not link:
+def _parsear_tarjeta(t, provincia_nombre: str) -> dict | None:
+    # Cargo + URL: h2 > a.js-o-link (selector confirmado por diagnóstico)
+    h2_a = t.select_one("h2 a.js-o-link") or t.select_one("h2 a")
+    if not h2_a:
         return None
-
-    href    = link.get("href", "")
+    href = h2_a.get("href", "").split("#")[0]  # quitar fragmento #lc=...
+    if not href:
+        return None
     url_det = BASE_URL + href if not href.startswith("http") else href
-    if "computrabajo" not in url_det:
-        return None
-
-    # Cargo — h2 tiene preferencia, luego el title= del link, luego texto del link
-    h2    = t.find("h2")
-    cargo = (
-        h2.get_text(strip=True) if h2
-        else link.get("title", "").strip() or link.get_text(strip=True)
-    )
+    cargo   = h2_a.get_text(strip=True)
     if not cargo:
         return None
 
-    # Empresa — buscar por clases conocidas de Computrabajo, luego fallback
-    empresa = ""
-    for cand in t.find_all(["a", "p", "span"]):
-        cl  = " ".join(cand.get("class", []))
-        txt = cand.get_text(strip=True)
-        if not txt or txt == cargo or len(txt) > 100:
-            continue
-        if any(k in cl for k in ["company", "empresa", "fc_base", "t_bold",
-                                   "brand", "employer"]):
-            empresa = txt
-            break
-    # Fallback: segundo <a> de la tarjeta
-    if not empresa:
-        for a in t.find_all("a", href=True)[1:]:
-            txt = a.get_text(strip=True)
-            if txt and txt != cargo and len(txt) < 100:
-                empresa = txt
-                break
+    # Empresa: atributo offer-grid-article-company-url (confirmado por diagnóstico)
+    emp_tag = t.find("a", attrs={"offer-grid-article-company-url": True})
+    if not emp_tag:
+        emp_tag = t.select_one("p.dFlex a.fc_base")
+    empresa = emp_tag.get_text(strip=True) if emp_tag else ""
 
-    # Fecha de publicación
-    fecha_pub = ""
-    for tag in t.find_all(["span", "p", "time", "div"]):
-        txt = tag.get_text(strip=True)
-        if len(txt) < 40 and any(
-            k in txt.lower()
-            for k in ["hace ", "ayer", "hoy", "hora", "día", "días", "semana"]
-        ):
-            fecha_pub = txt
+    # Ubicación: span.mr10 que contenga ", " (= "Ciudad, Provincia")
+    # La ciudad es la parte izquierda de la coma.
+    ciudad = provincia_nombre
+    for span in t.find_all("span", class_="mr10"):
+        txt = span.get_text(strip=True)
+        if txt and "," in txt and len(txt) < 80:
+            ciudad = txt.split(",")[0].strip()
             break
 
-    # Ubicación de la tarjeta (puede ser más específica que la ciudad)
-    ubicacion = ciudad_nombre
-    for tag in t.find_all(["span", "p"]):
-        cl  = " ".join(tag.get("class", []))
-        txt = tag.get_text(strip=True)
-        if any(k in cl for k in ["location", "ubicacion", "city", "lugar"]):
-            if txt:
-                ubicacion = txt
-                break
+    # Fecha de publicación: p.fs13.fc_aux
+    date_tag  = t.select_one("p.fs13.fc_aux")
+    fecha_pub = date_tag.get_text(strip=True) if date_tag else ""
 
     return {
         "url_detalle"      : url_det,
         "cargo_raw"        : cargo,
         "empresa_raw"      : empresa,
-        "ubicacion_raw"    : ubicacion,
+        "ubicacion_raw"    : ciudad,
         "fecha_publicacion": fecha_pub,
         "fecha_extraccion" : datetime.now().isoformat(),
     }
@@ -771,8 +731,35 @@ def _extraer_instruccion(texto: str) -> str:
     return ""
 
 
+def _extraer_metadata_raw(texto: str) -> dict:
+    """
+    Extrae jornada/contrato/modalidad del texto completo cuando _info_lista falla.
+    CT los pone como texto suelto en la sección de descripción.
+    """
+    t = texto.lower()
+    jornada   = ""
+    contrato  = ""
+    modalidad = ""
+
+    if "tiempo completo"    in t: jornada  = "Tiempo Completo"
+    elif "medio tiempo"     in t: jornada  = "Medio Tiempo"
+    elif "por horas"        in t: jornada  = "Por Horas"
+
+    if "tiempo indefinido"  in t: contrato = "Contrato por tiempo indefinido"
+    elif "tiempo determinado" in t: contrato = "Contrato por tiempo determinado"
+    elif "obra o labor"     in t: contrato = "Contrato de obra o labor"
+    elif "aprendizaje"      in t: contrato = "Contrato de Aprendizaje"
+
+    if   "presencial y remoto" in t: modalidad = "Presencial y remoto"
+    elif "híbrido"  in t or "hibrido" in t: modalidad = "Híbrido"
+    elif "remoto"   in t[:1000]:  modalidad = "Remoto"
+    elif "presencial" in t[:1000]: modalidad = "Presencial"
+
+    return {"jornada_raw": jornada, "contrato_raw": contrato, "modalidad_raw": modalidad}
+
+
 def scrape_detalle_ct(driver, url: str) -> dict:
-    if not _cargar(driver, url, "h1,h2,#desc_offer,div.fs16,article"):
+    if not _cargar(driver, url, "h1,h2,div.bContent,article"):
         return {}
     _espera(1.5, 3.0)
     soup = BeautifulSoup(driver.page_source, "html.parser")
@@ -783,63 +770,62 @@ def scrape_detalle_ct(driver, url: str) -> dict:
     texto_raw = soup.get_text(separator="\n", strip=True)
 
     # ── Metadatos de la oferta ────────────────────────────────────────────────
-    jornada   = (_info_lista(soup, "Jornada")        or
-                 _info_lista(soup, "Tipo de jornada") or
-                 _info_lista(soup, "Full-time")       or "")
-    contrato  = (_info_lista(soup, "Contrato")        or
+    # _info_lista para structured lists; fallback a texto si no encuentra
+    jornada   = (_info_lista(soup, "Jornada")         or
+                 _info_lista(soup, "Tipo de jornada") or "")
+    contrato  = (_info_lista(soup, "Contrato")         or
                  _info_lista(soup, "Tipo de contrato") or "")
-    modalidad = (_info_lista(soup, "Modalidad")       or
-                 _info_lista(soup, "Presencial")       or
-                 _info_lista(soup, "Remoto")           or "")
-    area      = (_info_lista(soup, "Área")            or
-                 _info_lista(soup, "Sector")           or
-                 _info_lista(soup, "Categoría")        or "")
+    modalidad =  _info_lista(soup, "Modalidad")        or ""
+    area      = (_info_lista(soup, "Área")             or
+                 _info_lista(soup, "Sector")            or
+                 _info_lista(soup, "Categoría")         or "")
     subarea   =  _info_lista(soup, "Sub")              or ""
     industria = (_info_lista(soup, "Industria")        or
                  _info_lista(soup, "Empresa del sector") or "")
     idioma    =  _info_lista(soup, "Idioma")           or ""
     licencia  =  _info_lista(soup, "Licencia")         or ""
 
-    # Si jornada lleva la coma (ej "Full-time, Indefinido"), separar
-    if "," in jornada and not contrato:
-        partes   = [x.strip() for x in jornada.split(",")]
-        jornada  = partes[0]
-        contrato = partes[1] if len(partes) > 1 else ""
+    # Fallback desde texto completo para los campos más importantes
+    if not jornada or not contrato or not modalidad:
+        meta = _extraer_metadata_raw(texto_raw)
+        jornada   = jornada   or meta["jornada_raw"]
+        contrato  = contrato  or meta["contrato_raw"]
+        modalidad = modalidad or meta["modalidad_raw"]
 
     # ── Vacantes ──────────────────────────────────────────────────────────────
     vac_num = None
-    # Patrón "X vacante(s) disponible(s)" en texto completo
     m = re.search(r'(\d+)\s+vacantes?\s+disponibles?', texto_raw, re.IGNORECASE)
     if m:
         vac_num = int(m.group(1))
-    else:
-        # Buscar en elementos cortos del DOM
-        for tag in soup.find_all(["p","span","li","div"]):
-            txt = tag.get_text(strip=True)
-            if len(txt) < 60:
-                m2 = re.search(r'(\d+)\s+vacantes?\s+disponibles?', txt, re.IGNORECASE)
-                if m2:
-                    vac_num = int(m2.group(1)); break
-                if re.search(r'múltiples?\s+vacantes?', txt, re.IGNORECASE):
-                    vac_num = None; break
 
     # ── Secciones de contenido ────────────────────────────────────────────────
+    # "Descripción de la oferta" es el título real que usa Computrabajo Ecuador
     descripcion = _seccion_detalle(soup, [
-        "Descripción del empleo", "Descripción", "Funciones", "Acerca del puesto"
+        "Descripción de la oferta", "Descripción del empleo",
+        "Descripción", "Funciones", "Acerca del puesto",
     ])
     requisitos  = _seccion_detalle(soup, [
-        "Requisitos", "Perfil requerido", "Se requiere", "Buscamos"
+        "Requerimientos", "Requisitos", "Perfil requerido",
+        "Se requiere", "Buscamos",
     ])
     beneficios  = _seccion_detalle(soup, [
-        "Beneficios", "Ofrecemos", "Te ofrecemos", "Qué ofrecemos"
+        "Beneficios", "Ofrecemos", "Te ofrecemos", "Qué ofrecemos",
     ])
 
-    # Texto de extracción numérica: secciones primero, texto_raw como fallback
+    # Texto para extracción numérica
     txt_ext     = f"{descripcion}\n{requisitos}".strip() or texto_raw
 
     sal         = _extraer_salario(txt_ext)
     exp_anos    = _extraer_experiencia(txt_ext)
     instruccion = _extraer_instruccion(txt_ext)
+
+    # Fallback instruccion/experiencia desde sección Requerimientos si no encontró
+    if not instruccion or exp_anos is None:
+        req_txt = _seccion_detalle(soup, ["Requerimientos"])
+        if req_txt:
+            instruccion = instruccion or _extraer_instruccion(req_txt)
+            if exp_anos is None:
+                exp_anos = _extraer_experiencia(req_txt)
 
     return {
         "modalidad_raw"    : modalidad,
