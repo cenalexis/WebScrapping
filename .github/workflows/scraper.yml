@@ -103,13 +103,12 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Restaurar credenciales Google Drive
-        if: ${{ secrets.GDRIVE_TOKEN != '' }}
         run: |
           echo '${{ secrets.GDRIVE_CREDENTIALS }}' > credentials.json
           echo '${{ secrets.GDRIVE_TOKEN }}'       > token.json
+        continue-on-error: true
 
       - name: Subir a Google Drive
-        if: ${{ secrets.GDRIVE_TOKEN != '' }}
         run: python subir_drive.py
         continue-on-error: true
 
