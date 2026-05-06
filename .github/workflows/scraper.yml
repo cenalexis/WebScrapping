@@ -1,0 +1,103 @@
+name: CISE 2026 — Scraper automático
+
+on:
+  schedule:
+    # 11:00 UTC = 06:00 Ecuador (UTC-5). Corre cada día.
+    - cron: '0 11 * * *'
+  workflow_dispatch:   # también se puede lanzar manualmente desde GitHub
+
+permissions:
+  contents: write      # necesario para crear/actualizar el release
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150   # 2.5 horas máximo
+
+    env:
+      CHROME_VER: "0"      # 0 = auto-detectar versión instalada
+      DB_PATH: vacantes_laborales.db
+      EXPORTS_DIR: exports
+
+    steps:
+      # ── 1. Código ────────────────────────────────────────────────────────────
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      # ── 2. Python ────────────────────────────────────────────────────────────
+      - name: Configurar Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Instalar dependencias Python
+        run: pip install -r requirements.txt
+
+      # ── 3. Chrome ────────────────────────────────────────────────────────────
+      - name: Instalar Chrome estable
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Verificar Chrome
+        run: google-chrome --version
+
+      # ── 4. Recuperar BD anterior ─────────────────────────────────────────────
+      - name: Descargar BD del release anterior
+        run: |
+          gh release download latest-data \
+            --pattern "vacantes_laborales.db" \
+            --dir . --clobber 2>/dev/null \
+            && echo "BD descargada." \
+            || echo "Primera ejecución — se crea una BD nueva."
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # ── 5. Scrapers ──────────────────────────────────────────────────────────
+      - name: Scraper Multitrabajos
+        run: |
+          python Notebooks/scraper_mt_v2.py
+        continue-on-error: true   # si falla uno, el otro sigue igual
+
+      - name: Pausa entre portales (60 s)
+        run: sleep 60
+
+      - name: Scraper Computrabajo
+        run: |
+          python Notebooks/scraper_computrabajo.py
+        continue-on-error: true
+
+      # ── 6. Exportar ──────────────────────────────────────────────────────────
+      - name: Exportar Excel + CSV
+        run: python exportar_excel.py
+
+      # ── 7. Subir datos al release ────────────────────────────────────────────
+      - name: Publicar datos en release latest-data
+        run: |
+          # Crear el release si no existe
+          gh release view latest-data 2>/dev/null || \
+            gh release create latest-data \
+              --title "Datos CISE 2026 — última actualización" \
+              --notes "Actualización automática. Descarga el .db, .xlsx o .csv." \
+              --prerelease
+
+          # Subir los 3 archivos (sobreescribe los anteriores)
+          gh release upload latest-data \
+            vacantes_laborales.db \
+            exports/vacantes_*.xlsx \
+            exports/vacantes_*.csv \
+            --clobber
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # ── 8. Resumen en el log de Actions ──────────────────────────────────────
+      - name: Resumen
+        run: |
+          echo "### Datos publicados en release latest-data" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Archivo | Tamaño |" >> $GITHUB_STEP_SUMMARY
+          echo "|---------|--------|" >> $GITHUB_STEP_SUMMARY
+          for f in vacantes_laborales.db exports/vacantes_*; do
+            echo "| $f | $(du -sh $f | cut -f1) |" >> $GITHUB_STEP_SUMMARY
+          done

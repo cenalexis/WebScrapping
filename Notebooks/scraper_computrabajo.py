@@ -28,13 +28,15 @@ from bs4 import BeautifulSoup
 import pandas as pd
 
 # ── CONFIGURACIÓN ─────────────────────────────────────────────────────────────
-DB_PATH    = r"C:\Users\alexis\Documents\CISE_2026\vacantes_laborales.db"
-LOG_PATH   = r"C:\Users\alexis\Documents\CISE_2026\scraper.log"
-CHROME_VER = 147
+DB_PATH    = os.environ.get("DB_PATH",  r"C:\Users\alexis\Documents\CISE_2026\vacantes_laborales.db")
+LOG_PATH   = os.environ.get("LOG_PATH", r"C:\Users\alexis\Documents\CISE_2026\scraper.log")
+# 0 = auto-detectar (usado en GitHub Actions); >0 fija la versión
+CHROME_VER = int(os.environ.get("CHROME_VER", "147")) or None
 BASE_URL   = "https://ec.computrabajo.com"
 RACHA_STOP = 8
 
-os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
+if os.path.dirname(DB_PATH):
+    os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
 
 logging.basicConfig(
     level=logging.INFO,
@@ -257,10 +259,11 @@ def crear_driver(headless: bool = True) -> uc.Chrome:
     opts.add_argument("--window-size=1920,1080")
     opts.add_argument("--lang=es-EC")
     opts.add_argument("--disable-blink-features=AutomationControlled")
+    _ver = CHROME_VER or 130
     opts.add_argument(
         "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
         "AppleWebKit/537.36 (KHTML, like Gecko) "
-        f"Chrome/{CHROME_VER}.0.0.0 Safari/537.36"
+        f"Chrome/{_ver}.0.0.0 Safari/537.36"
     )
     d = uc.Chrome(options=opts, version_main=CHROME_VER)
     d.execute_script(
