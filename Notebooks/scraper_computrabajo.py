@@ -934,6 +934,7 @@ def run(
     # Reporte de cobertura
     log.info("=" * 60)
     log.info(f"RESUMEN: {guardadas} nuevas | {tot_omitidas} omitidas | {errores} errores")
+    cobertura_dict = {}
     df = pd.DataFrame(todos)
     campos = [
         "cargo_raw","empresa_raw","ubicacion_raw","modalidad_raw",
@@ -947,8 +948,19 @@ def run(
                 lambda x: str(x).strip() not in ("","None","nan","0")
             ).sum()
             pct = n / len(df) * 100 if len(df) else 0
+            cobertura_dict[campo] = pct
             log.info(f"  {campo:<22} {'█'*int(pct/5)}{'░'*(20-int(pct/5))} {pct:5.1f}%")
     log.info("=" * 60)
+
+    # ── Verificación de salud ─────────────────────────────────────────────────
+    try:
+        import sys as _sys, os as _os
+        _sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
+        from alertas import verificar_salud
+        verificar_salud("Computrabajo", guardadas, errores, cobertura_dict)
+    except Exception:
+        pass
+
     return todos
 
 

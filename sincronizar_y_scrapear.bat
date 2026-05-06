@@ -20,11 +20,11 @@ if exist "%PROYECTO%\cise_scraper\Scripts\activate.bat" (
     call "%PROYECTO%\cise_scraper\Scripts\activate.bat"
 )
 
-:: ── 1. Descargar BD maestra desde GitHub Release ─────────────────────────
+:: ── 1. Descargar BD maestra desde Google Drive ───────────────────────────
 echo.
-echo [1/5] Descargando BD maestra desde GitHub Release...
+echo [1/5] Descargando BD maestra desde Google Drive...
 powershell -NoProfile -Command ^
-  "try { Invoke-WebRequest -Uri 'https://github.com/%REPO%/releases/download/latest-data/vacantes_laborales.db' -OutFile '%DB%' -UseBasicParsing; Write-Host 'BD sincronizada.' } catch { Write-Host 'No se pudo descargar — usando BD local.' }"
+  "$cfg = try { Get-Content '%PROYECTO%\config.json' | ConvertFrom-Json } catch { $null }; $url = if ($cfg) { $cfg.gdrive_db_url } else { '' }; if ($url) { try { Invoke-WebRequest -Uri $url -OutFile '%DB%' -UseBasicParsing; Write-Host 'BD sincronizada desde Drive.' } catch { Write-Host 'No se pudo descargar — usando BD local.' } } else { Write-Host 'config.json sin gdrive_db_url — usando BD local (corre subir_drive.py primero).' }"
 
 :: ── 2. Multitrabajos ──────────────────────────────────────────────────────
 echo.

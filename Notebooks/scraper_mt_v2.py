@@ -780,6 +780,7 @@ def run(max_paginas: int = MAX_PAGINAS, headless: bool = True):
     log.info(f"  Omitidas (ya BD) : {tot_omitidas}")
     log.info(f"  Errores          : {errores}")
 
+    cobertura_dict = {}
     if todos_items:
         df = pd.DataFrame(todos_items)
         campos = [
@@ -795,10 +796,21 @@ def run(max_paginas: int = MAX_PAGINAS, headless: bool = True):
                     lambda x: str(x).strip() not in ("", "None", "nan", "0")
                 ).sum()
                 pct = llenos / len(df) * 100 if len(df) > 0 else 0
+                cobertura_dict[campo] = pct
                 barra = "█" * int(pct / 5) + "░" * (20 - int(pct / 5))
                 log.info(f"    {campo:<22} {barra} {pct:5.1f}%  ({llenos}/{len(df)})")
 
     log.info("=" * 60)
+
+    # ── Verificación de salud ─────────────────────────────────────────────────
+    try:
+        import sys, os
+        sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        from alertas import verificar_salud
+        verificar_salud("Multitrabajos", guardadas, errores, cobertura_dict)
+    except Exception:
+        pass
+
     return todos_items
 
 
