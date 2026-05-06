@@ -60,7 +60,8 @@ log = logging.getLogger(__name__)
 # ══════════════════════════════════════════════════════════════════════════════
 
 def conectar() -> sqlite3.Connection:
-    conn = sqlite3.connect(DB_PATH)
+    # timeout=15: espera hasta 15 s si la BD está bloqueada (ej. antivirus, backup)
+    conn = sqlite3.connect(DB_PATH, timeout=15)
     conn.execute("PRAGMA journal_mode=WAL")
     return conn
 
@@ -226,8 +227,10 @@ def guardar_vacante(item: dict, portal: str, eid: int) -> bool:
         )
         inserted = cur.rowcount > 0
         conn.commit()
+    except sqlite3.IntegrityError:
+        inserted = False   # duplicado legítimo (UNIQUE constraint)
     except Exception as exc:
-        log.error(f"DB error guardando {url}: {exc}")
+        log.error(f"DB ERROR (dato perdido) guardando {url}: {exc}")
         inserted = False
     finally:
         conn.close()
@@ -593,8 +596,8 @@ def scrape_detalle_mt(driver, url: str) -> dict:
             EC.presence_of_element_located((By.CSS_SELECTOR, "h1, h2"))
         )
     except TimeoutException:
-        log.warning(f"Timeout en detalle: {url}")
-        time.sleep(10)
+        log.warning(f"Timeout en detalle (página descartada): {url}")
+        return {}   # no guardar basura en BD
 
     espera_humana(1.5, 3.0)
     soup = BeautifulSoup(driver.page_source, "html.parser")
@@ -765,8 +768,10 @@ def run(max_paginas: int = MAX_PAGINAS, headless: bool = True):
             espera_humana(2.0, 4.5)
     finally:
         driver.quit()
-
-    cerrar_ejecucion(eid, guardadas, tot_omitidas, errores)
+        try:
+            cerrar_ejecucion(eid, guardadas, tot_omitidas, errores)
+        except Exception as e:
+            log.error(f"No se pudo cerrar la ejecucion {eid}: {e}")
 
     # ── REPORTE ───────────────────────────────────────────────────────────────
     log.info("=" * 60)

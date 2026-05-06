@@ -111,7 +111,7 @@ ALIAS_CIUDAD = {
 # ══════════════════════════════════════════════════════════════════════════════
 
 def conectar() -> sqlite3.Connection:
-    c = sqlite3.connect(DB_PATH)
+    c = sqlite3.connect(DB_PATH, timeout=15)
     c.execute("PRAGMA journal_mode=WAL")
     return c
 
@@ -240,8 +240,10 @@ def guardar_vacante(item: dict, eid: int) -> bool:
         )
         inserted = cur.rowcount > 0
         c.commit()
+    except sqlite3.IntegrityError:
+        inserted = False   # duplicado legítimo
     except Exception as e:
-        log.error(f"DB error guardando {url}: {e}")
+        log.error(f"DB ERROR (dato perdido) guardando {url}: {e}")
         inserted = False
     finally:
         c.close()
@@ -924,8 +926,10 @@ def run(
             _espera(2, 4.5)
     finally:
         driver.quit()
-
-    cerrar_ejecucion(eid, guardadas, tot_omitidas, errores)
+        try:
+            cerrar_ejecucion(eid, guardadas, tot_omitidas, errores)
+        except Exception as e:
+            log.error(f"No se pudo cerrar la ejecucion {eid}: {e}")
 
     # Reporte de cobertura
     log.info("=" * 60)
