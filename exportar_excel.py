@@ -23,8 +23,8 @@ import pandas as pd
 from openpyxl.styles import Font, PatternFill, Alignment
 from openpyxl.utils import get_column_letter
 
-DB_PATH    = r"C:\Users\alexis\Documents\CISE_2026\vacantes_laborales.db"
-SALIDA_DIR = r"C:\Users\alexis\Documents\CISE_2026\exports"
+DB_PATH    = os.environ.get("DB_PATH",    r"C:\Users\alexis\Documents\CISE_2026\vacantes_laborales.db")
+SALIDA_DIR = os.environ.get("EXPORTS_DIR", r"C:\Users\alexis\Documents\CISE_2026\exports")
 
 
 def conectar():
@@ -146,7 +146,13 @@ def exportar(salida: str = "", desde: str | None = None, solo_portal: str | None
             _estilizar(wb[nombre], color)
     wb.save(salida)
 
-    print(f"\nArchivo listo:\n  {salida}")
+    # CSV de vacantes (para análisis rápido y compatibilidad universal)
+    csv_salida = salida.replace(".xlsx", ".csv")
+    df[cols_orden].to_csv(csv_salida, index=False, encoding="utf-8-sig")
+
+    print(f"\nArchivos listos:")
+    print(f"  Excel : {salida}")
+    print(f"  CSV   : {csv_salida}")
 
 
 if __name__ == "__main__":
