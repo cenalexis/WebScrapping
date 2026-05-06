@@ -30,3 +30,6 @@ desktop.ini
 credentials.json
 token.json
 ultima_ejecucion.txt
+
+# Documento interno de contexto — solo para sesiones locales
+CONTEXTO_PROYECTO.md
