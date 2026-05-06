@@ -24,8 +24,9 @@ USO normal (lo llama lanzar_scrapers.bat automáticamente):
     python subir_drive.py --autorizar # solo para autorizar la primera vez
 """
 
-import os, sys, glob, argparse
+import os, sys, glob, json, argparse
 from datetime import datetime
+from pathlib import Path
 
 import subprocess
 for _pkg in ["google-api-python-client", "google-auth-httplib2", "google-auth-oauthlib"]:
@@ -38,7 +39,7 @@ from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 
 # ── CONFIGURACIÓN ─────────────────────────────────────────────────────────────
-PROYECTO        = r"C:\Users\alexis\Documents\CISE_2026"
+PROYECTO        = str(Path(__file__).parent)
 CREDENTIALS     = os.environ.get("GDRIVE_CREDENTIALS_PATH",
                                   os.path.join(PROYECTO, "credentials.json"))
 TOKEN           = os.environ.get("GDRIVE_TOKEN_PATH",
@@ -47,7 +48,10 @@ EXPORTS_DIR     = os.environ.get("EXPORTS_DIR",
                                   os.path.join(PROYECTO, "exports"))
 BACKUPS_DIR     = os.environ.get("BACKUPS_DIR",
                                   os.path.join(PROYECTO, "backups"))
+DB_PATH         = os.environ.get("DB_PATH",
+                                  os.path.join(PROYECTO, "vacantes_laborales.db"))
 CARPETA_DRIVE   = os.environ.get("GDRIVE_FOLDER", "CISE_2026")
+CONFIG_PATH     = os.path.join(PROYECTO, "config.json")
 
 SCOPES = ["https://www.googleapis.com/auth/drive.file"]
 
@@ -149,6 +153,33 @@ def subir_archivo(ruta_local: str, carpeta_drive_id: str, service=None) -> str:
     return file_id
 
 
+def hacer_publico(file_id: str, service=None):
+    """Otorga permiso de lectura a cualquiera con el link."""
+    if service is None:
+        service = _servicio()
+    try:
+        service.permissions().create(
+            fileId=file_id,
+            body={"type": "anyone", "role": "reader"},
+        ).execute()
+    except Exception:
+        pass  # puede que ya sea público
+
+
+def _leer_config() -> dict:
+    if os.path.exists(CONFIG_PATH):
+        try:
+            return json.loads(open(CONFIG_PATH, encoding="utf-8").read())
+        except Exception:
+            pass
+    return {}
+
+
+def _guardar_config(cfg: dict):
+    with open(CONFIG_PATH, "w", encoding="utf-8") as f:
+        json.dump(cfg, f, indent=2, ensure_ascii=False)
+
+
 # ══════════════════════════════════════════════════════════════════════════════
 # FUNCIÓN PRINCIPAL
 # ══════════════════════════════════════════════════════════════════════════════
@@ -162,27 +193,40 @@ def run():
     carpeta_id = _obtener_o_crear_carpeta(service, CARPETA_DRIVE)
     print(f"Carpeta Drive: '{CARPETA_DRIVE}' (id={carpeta_id})")
 
+    cfg     = _leer_config()
     subidos = 0
+
+    # ── BD maestra (vacantes_laborales.db) ───────────────────────────────────
+    if os.path.exists(DB_PATH):
+        print(f"\nBD maestra: {os.path.basename(DB_PATH)}")
+        db_id = subir_archivo(DB_PATH, carpeta_id, service)
+        hacer_publico(db_id, service)
+        url_descarga = f"https://drive.google.com/uc?export=download&id={db_id}&confirm=t"
+        if cfg.get("gdrive_db_id") != db_id:
+            cfg["gdrive_db_id"] = db_id
+            cfg["gdrive_db_url"] = url_descarga
+            _guardar_config(cfg)
+            print(f"  ID guardado en config.json: {db_id}")
+        print(f"  URL de descarga: {url_descarga}")
+        subidos += 1
+    else:
+        print(f"\nNo se encontró BD en: {DB_PATH}")
 
     # ── Excel más reciente ────────────────────────────────────────────────────
     excels = sorted(glob.glob(os.path.join(EXPORTS_DIR, "vacantes_*.xlsx")))
     if excels:
-        ultimo_excel = excels[-1]
-        print(f"\nExcel más reciente: {os.path.basename(ultimo_excel)}")
-        subir_archivo(ultimo_excel, carpeta_id, service)
+        print(f"\nExcel más reciente: {os.path.basename(excels[-1])}")
+        subir_archivo(excels[-1], carpeta_id, service)
         subidos += 1
     else:
         print("\nNo hay Excel para subir (corre exportar_excel.py primero)")
 
-    # ── Backup de BD más reciente ─────────────────────────────────────────────
-    backups = sorted(glob.glob(os.path.join(BACKUPS_DIR, "vacantes_*.db")))
-    if backups:
-        ultimo_backup = backups[-1]
-        print(f"\nBackup BD más reciente: {os.path.basename(ultimo_backup)}")
-        subir_archivo(ultimo_backup, carpeta_id, service)
+    # ── CSV más reciente ──────────────────────────────────────────────────────
+    csvs = sorted(glob.glob(os.path.join(EXPORTS_DIR, "vacantes_*.csv")))
+    if csvs:
+        print(f"\nCSV más reciente: {os.path.basename(csvs[-1])}")
+        subir_archivo(csvs[-1], carpeta_id, service)
         subidos += 1
-    else:
-        print("\nNo hay backup de BD (corre backup_db.py primero)")
 
     print(f"\n✅ {subidos} archivo(s) sincronizados con Drive")
     print(f"   Carpeta en Drive: '{CARPETA_DRIVE}'")

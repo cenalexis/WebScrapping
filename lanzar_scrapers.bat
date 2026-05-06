@@ -26,10 +26,10 @@ if exist "%MARCA%" (
 :: ── Registrar inicio ─────────────────────────────────────────────────────
 echo %date% %time% > "%MARCA%"
 
-:: ── Descargar BD maestra desde GitHub Release ────────────────────────────
-echo Sincronizando BD maestra... >> "%LOG%"
+:: ── Descargar BD maestra desde Google Drive ──────────────────────────────
+echo Sincronizando BD maestra desde Drive... >> "%LOG%"
 powershell -NoProfile -Command ^
-  "try { Invoke-WebRequest -Uri 'https://github.com/cenalexis/WebScrapping/releases/download/latest-data/vacantes_laborales.db' -OutFile '%PROYECTO%\vacantes_laborales.db' -UseBasicParsing; Write-Host 'OK' } catch { Write-Host 'Sin red, usando BD local.' }" >> "%LOG%" 2>&1
+  "$cfg = try { Get-Content '%PROYECTO%\config.json' | ConvertFrom-Json } catch { $null }; $url = if ($cfg) { $cfg.gdrive_db_url } else { '' }; if ($url) { try { Invoke-WebRequest -Uri $url -OutFile '%PROYECTO%\vacantes_laborales.db' -UseBasicParsing; Write-Host 'BD sincronizada.' } catch { Write-Host 'Error de red, usando BD local.' } } else { Write-Host 'Sin config.json, usando BD local.' }" >> "%LOG%" 2>&1
 echo. >> "%LOG%"
 echo ============================================================ >> "%LOG%"
 echo INICIO AUTOMATICO: %date% %time% >> "%LOG%"
