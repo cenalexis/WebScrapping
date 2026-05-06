@@ -26,10 +26,9 @@ if exist "%MARCA%" (
 :: ── Registrar inicio ─────────────────────────────────────────────────────
 echo %date% %time% > "%MARCA%"
 
-:: ── Descargar BD maestra desde Google Drive ──────────────────────────────
-echo Sincronizando BD maestra desde Drive... >> "%LOG%"
-powershell -NoProfile -Command ^
-  "$cfg = try { Get-Content '%PROYECTO%\config.json' | ConvertFrom-Json } catch { $null }; $url = if ($cfg) { $cfg.gdrive_db_url } else { '' }; if ($url) { try { Invoke-WebRequest -Uri $url -OutFile '%PROYECTO%\vacantes_laborales.db' -UseBasicParsing; Write-Host 'BD sincronizada.' } catch { Write-Host 'Error de red, usando BD local.' } } else { Write-Host 'Sin config.json, usando BD local.' }" >> "%LOG%" 2>&1
+:: ── Descargar BD maestra desde GitHub Release ────────────────────────────
+echo Sincronizando BD maestra... >> "%LOG%"
+python "%PROYECTO%\sync_github.py" download >> "%LOG%" 2>&1
 echo. >> "%LOG%"
 echo ============================================================ >> "%LOG%"
 echo INICIO AUTOMATICO: %date% %time% >> "%LOG%"
@@ -75,12 +74,7 @@ python "%PROYECTO%\backup_db.py" >> "%LOG%" 2>&1
 :: ── Subir BD actualizada al release ──────────────────────────────────────
 echo. >> "%LOG%"
 echo --- Subiendo BD a GitHub Release --- >> "%LOG%"
-where gh >nul 2>&1
-if %ERRORLEVEL% EQU 0 (
-    gh release upload latest-data "%PROYECTO%\vacantes_laborales.db" --clobber --repo cenalexis/WebScrapping >> "%LOG%" 2>&1
-) else (
-    echo gh CLI no encontrado, saltando upload. >> "%LOG%"
-)
+python "%PROYECTO%\sync_github.py" upload >> "%LOG%" 2>&1
 
 echo. >> "%LOG%"
 echo FIN: %date% %time% >> "%LOG%"

@@ -26,6 +26,17 @@ jobs:
       - name: Checkout código
         uses: actions/checkout@v4
 
+      # ── Notificar inicio ──────────────────────────────────────────────────────
+      - name: Notificar inicio
+        if: ${{ secrets.NTFY_TOPIC != '' }}
+        run: |
+          curl -s -X POST \
+            -H "Title: CISE 2026 — Scraping iniciado" \
+            -H "Priority: low" -H "Tags: robot" \
+            -d "Scraping diario iniciado: $(date '+%Y-%m-%d %H:%M UTC')" \
+            https://ntfy.sh/${{ secrets.NTFY_TOPIC }} || true
+        continue-on-error: true
+
       # ── 2. Python ────────────────────────────────────────────────────────────
       - name: Configurar Python 3.11
         uses: actions/setup-python@v5
@@ -110,6 +121,30 @@ jobs:
 
       - name: Subir a Google Drive
         run: python subir_drive.py
+        continue-on-error: true
+
+      # ── Notificaciones finales ────────────────────────────────────────────────
+      - name: Notificar éxito
+        if: ${{ success() && secrets.NTFY_TOPIC != '' }}
+        run: |
+          TOTAL=$(python -c "import sqlite3; c=sqlite3.connect('vacantes_laborales.db'); print(c.execute('SELECT COUNT(*) FROM vacantes').fetchone()[0])" 2>/dev/null || echo "?")
+          NUEVAS_MT=$(python -c "import sqlite3; c=sqlite3.connect('vacantes_laborales.db'); print(c.execute(\"SELECT total_nuevas FROM ejecuciones WHERE portal_id='multitrabajos' ORDER BY id DESC LIMIT 1\").fetchone()[0])" 2>/dev/null || echo "?")
+          NUEVAS_CT=$(python -c "import sqlite3; c=sqlite3.connect('vacantes_laborales.db'); print(c.execute(\"SELECT total_nuevas FROM ejecuciones WHERE portal_id='computrabajo' ORDER BY id DESC LIMIT 1\").fetchone()[0])" 2>/dev/null || echo "?")
+          curl -s -X POST \
+            -H "Title: CISE 2026 — Scraping completado ✅" \
+            -H "Priority: default" -H "Tags: white_check_mark,chart_with_upwards_trend" \
+            -d "$(date '+%Y-%m-%d') | Total BD: $TOTAL vacantes | Nuevas hoy: MT=$NUEVAS_MT CT=$NUEVAS_CT" \
+            https://ntfy.sh/${{ secrets.NTFY_TOPIC }} || true
+        continue-on-error: true
+
+      - name: Notificar fallo
+        if: ${{ failure() && secrets.NTFY_TOPIC != '' }}
+        run: |
+          curl -s -X POST \
+            -H "Title: CISE 2026 — ⚠️ Error en scraping" \
+            -H "Priority: high" -H "Tags: warning,rotating_light" \
+            -d "El workflow falló el $(date '+%Y-%m-%d'). Revisa: https://github.com/${{ github.repository }}/actions" \
+            https://ntfy.sh/${{ secrets.NTFY_TOPIC }} || true
         continue-on-error: true
 
       # ── Resumen visible en la pestaña Actions ─────────────────────────────────
