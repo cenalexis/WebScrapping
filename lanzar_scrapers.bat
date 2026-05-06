@@ -25,6 +25,11 @@ if exist "%MARCA%" (
 
 :: ── Registrar inicio ─────────────────────────────────────────────────────
 echo %date% %time% > "%MARCA%"
+
+:: ── Descargar BD maestra desde GitHub Release ────────────────────────────
+echo Sincronizando BD maestra... >> "%LOG%"
+powershell -NoProfile -Command ^
+  "try { Invoke-WebRequest -Uri 'https://github.com/cenalexis/WebScrapping/releases/download/latest-data/vacantes_laborales.db' -OutFile '%PROYECTO%\vacantes_laborales.db' -UseBasicParsing; Write-Host 'OK' } catch { Write-Host 'Sin red, usando BD local.' }" >> "%LOG%" 2>&1
 echo. >> "%LOG%"
 echo ============================================================ >> "%LOG%"
 echo INICIO AUTOMATICO: %date% %time% >> "%LOG%"
@@ -66,6 +71,16 @@ if exist "%PROYECTO%\credentials.json" (
 echo. >> "%LOG%"
 echo --- Backup BD --- >> "%LOG%"
 python "%PROYECTO%\backup_db.py" >> "%LOG%" 2>&1
+
+:: ── Subir BD actualizada al release ──────────────────────────────────────
+echo. >> "%LOG%"
+echo --- Subiendo BD a GitHub Release --- >> "%LOG%"
+where gh >nul 2>&1
+if %ERRORLEVEL% EQU 0 (
+    gh release upload latest-data "%PROYECTO%\vacantes_laborales.db" --clobber --repo cenalexis/WebScrapping >> "%LOG%" 2>&1
+) else (
+    echo gh CLI no encontrado, saltando upload. >> "%LOG%"
+)
 
 echo. >> "%LOG%"
 echo FIN: %date% %time% >> "%LOG%"
