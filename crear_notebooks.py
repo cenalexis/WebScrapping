@@ -72,48 +72,77 @@ MT_CONFIG = [
     "# ╔══════════════════════════════════════════════════════════════╗\n",
     "# ║  CELDA 1 — CONFIGURACIÓN  (solo cambiar aquí)               ║\n",
     "# ╚══════════════════════════════════════════════════════════════╝\n",
+    "import os\n",
     "\n",
-    "DB_PATH     = r'C:\\Users\\alexis\\Documents\\CISE_2026\\vacantes_laborales.db'\n",
-    "LOG_PATH    = r'C:\\Users\\alexis\\Documents\\CISE_2026\\scraper.log'\n",
-    "EXPORTS_DIR = r'C:\\Users\\alexis\\Documents\\CISE_2026\\exports'\n",
+    "PROYECTO    = r'" + BASE_DIR + "'\n",
+    "DB_PATH     = os.path.join(PROYECTO, 'vacantes_laborales.db')\n",
+    "LOG_PATH    = os.path.join(PROYECTO, 'scraper.log')\n",
+    "EXPORTS_DIR = os.path.join(PROYECTO, 'exports')\n",
     "\n",
-    "CHROME_VER  = 147      # ajustar a tu version de Chrome\n",
-    "MAX_PAGINAS = 30       # 30 paginas aprox 600 vacantes\n",
-    "HEADLESS    = True     # False abre ventana del browser\n",
+    "CHROME_VER  = 0        # 0 = auto-detectar (recomendado)\n",
+    "MAX_PAGINAS = 999      # sin limite — para cuando llega al fin de lo nuevo\n",
+    "HEADLESS    = True     # False abre ventana del browser (util para debug)\n",
     "RACHA_STOP  = 10       # vacantes consecutivas ya en BD para el scroll\n",
     "\n",
     "print('Configuracion lista')\n",
     "print(f'  BD      : {DB_PATH}')\n",
-    "print(f'  Chrome  : {CHROME_VER}')\n",
-    "print(f'  Paginas : {MAX_PAGINAS}')\n",
+    "print(f'  Paginas : hasta {MAX_PAGINAS} (para por RACHA_STOP={RACHA_STOP})')\n",
+]
+
+MT_SYNC_BEFORE = [
+    "# ╔══════════════════════════════════════════════════════════════╗\n",
+    "# ║  CELDA 2 — SINCRONIZAR BD MAESTRA (descargar de GitHub)      ║\n",
+    "# ╚══════════════════════════════════════════════════════════════╝\n",
+    "import sys\n",
+    "sys.path.insert(0, PROYECTO)\n",
+    "import sync_github\n",
+    "sync_github.DB_PATH = __import__('pathlib').Path(DB_PATH)\n",
+    "sync_github.download(dest=__import__('pathlib').Path(DB_PATH))\n",
+    "print('BD lista para scraping incremental')\n",
 ]
 
 MT_RUN = [
     "# ╔══════════════════════════════════════════════════════════════╗\n",
-    "# ║  CELDA 2 — EJECUTAR SCRAPER                                  ║\n",
+    "# ║  CELDA 3 — EJECUTAR SCRAPER                                  ║\n",
     "# ╚══════════════════════════════════════════════════════════════╝\n",
-    "import sys, os, importlib\n",
+    "import sys, os, importlib, sqlite3\n",
     "sys.path.insert(0, r'" + NB_DIR + "')\n",
     "\n",
     "import scraper_mt_v2 as mt\n",
     "importlib.reload(mt)\n",
     "\n",
-    "# Pasar la configuracion de la Celda 1 al modulo\n",
     "mt.DB_PATH    = DB_PATH\n",
     "mt.LOG_PATH   = LOG_PATH\n",
     "mt.CHROME_VER = CHROME_VER\n",
     "mt.RACHA_STOP = RACHA_STOP\n",
     "\n",
-    "# Lanzar\n",
     "vacantes_mt = mt.run(max_paginas=MAX_PAGINAS, headless=HEADLESS)\n",
-    "print(f'\\nTotal en esta sesion: {len(vacantes_mt)} vacantes procesadas')\n",
+    "\n",
+    "# Mostrar total real en la BD (no solo lo de esta sesion)\n",
+    "conn = sqlite3.connect(DB_PATH)\n",
+    "total_bd = conn.execute(\"SELECT COUNT(*) FROM vacantes\").fetchone()[0]\n",
+    "total_mt = conn.execute(\"SELECT COUNT(*) FROM vacantes WHERE portal_id=1\").fetchone()[0]\n",
+    "conn.close()\n",
+    "print(f'\\nNuevas esta sesion : {len(vacantes_mt)}')\n",
+    "print(f'Total Multitrabajos: {total_mt:,}')\n",
+    "print(f'Total BD completa  : {total_bd:,}')\n",
+]
+
+MT_SYNC_AFTER = [
+    "# ╔══════════════════════════════════════════════════════════════╗\n",
+    "# ║  CELDA 5 — SUBIR BD ACTUALIZADA A GITHUB                     ║\n",
+    "# ╚══════════════════════════════════════════════════════════════╝\n",
+    "import sync_github\n",
+    "sync_github.upload(src=__import__('pathlib').Path(DB_PATH))\n",
 ]
 
 celdas_mt = [
     celda_md(MT_MD),
     celda_codigo(MT_CONFIG),
+    celda_codigo(MT_SYNC_BEFORE),
     celda_codigo(MT_RUN),
     celda_codigo(CELDA_EXPORT),
+    celda_codigo(MT_SYNC_AFTER),
 ]
 
 
@@ -138,13 +167,15 @@ CT_CONFIG = [
     "# ╔══════════════════════════════════════════════════════════════╗\n",
     "# ║  CELDA 1 — CONFIGURACIÓN  (solo cambiar aquí)               ║\n",
     "# ╚══════════════════════════════════════════════════════════════╝\n",
+    "import os\n",
     "\n",
-    "DB_PATH     = r'C:\\Users\\alexis\\Documents\\CISE_2026\\vacantes_laborales.db'\n",
-    "LOG_PATH    = r'C:\\Users\\alexis\\Documents\\CISE_2026\\scraper.log'\n",
-    "EXPORTS_DIR = r'C:\\Users\\alexis\\Documents\\CISE_2026\\exports'\n",
+    "PROYECTO    = r'" + BASE_DIR + "'\n",
+    "DB_PATH     = os.path.join(PROYECTO, 'vacantes_laborales.db')\n",
+    "LOG_PATH    = os.path.join(PROYECTO, 'scraper.log')\n",
+    "EXPORTS_DIR = os.path.join(PROYECTO, 'exports')\n",
     "\n",
-    "CHROME_VER  = 147\n",
-    "MAX_PAGINAS = 999    # sin limite por ciudad\n",
+    "CHROME_VER  = 0      # 0 = auto-detectar\n",
+    "MAX_PAGINAS = 999    # sin limite por provincia\n",
     "HEADLESS    = True\n",
     "RACHA_STOP  = 8\n",
     "\n",
@@ -180,11 +211,22 @@ CT_CONFIG = [
     "print(f'Configuracion lista — {len(CIUDADES)} ciudades')\n",
 ]
 
+CT_SYNC_BEFORE = [
+    "# ╔══════════════════════════════════════════════════════════════╗\n",
+    "# ║  CELDA 2 — SINCRONIZAR BD MAESTRA (descargar de GitHub)      ║\n",
+    "# ╚══════════════════════════════════════════════════════════════╝\n",
+    "import sys\n",
+    "sys.path.insert(0, PROYECTO)\n",
+    "import sync_github\n",
+    "sync_github.download(dest=__import__('pathlib').Path(DB_PATH))\n",
+    "print('BD lista para scraping incremental')\n",
+]
+
 CT_RUN = [
     "# ╔══════════════════════════════════════════════════════════════╗\n",
-    "# ║  CELDA 2 — EJECUTAR SCRAPER                                  ║\n",
+    "# ║  CELDA 3 — EJECUTAR SCRAPER                                  ║\n",
     "# ╚══════════════════════════════════════════════════════════════╝\n",
-    "import sys, os, importlib\n",
+    "import sys, os, importlib, sqlite3\n",
     "sys.path.insert(0, r'" + NB_DIR + "')\n",
     "\n",
     "import scraper_computrabajo as ct\n",
@@ -200,14 +242,31 @@ CT_RUN = [
     "    max_paginas=MAX_PAGINAS,\n",
     "    headless=HEADLESS,\n",
     ")\n",
-    "print(f'\\nTotal en esta sesion: {len(vacantes_ct)} vacantes procesadas')\n",
+    "\n",
+    "conn = sqlite3.connect(DB_PATH)\n",
+    "total_bd = conn.execute(\"SELECT COUNT(*) FROM vacantes\").fetchone()[0]\n",
+    "total_ct = conn.execute(\"SELECT COUNT(*) FROM vacantes WHERE portal_id=2\").fetchone()[0]\n",
+    "conn.close()\n",
+    "print(f'\\nNuevas esta sesion  : {len(vacantes_ct)}')\n",
+    "print(f'Total Computrabajo  : {total_ct:,}')\n",
+    "print(f'Total BD completa   : {total_bd:,}')\n",
+]
+
+CT_SYNC_AFTER = [
+    "# ╔══════════════════════════════════════════════════════════════╗\n",
+    "# ║  CELDA 5 — SUBIR BD ACTUALIZADA A GITHUB                     ║\n",
+    "# ╚══════════════════════════════════════════════════════════════╝\n",
+    "import sync_github\n",
+    "sync_github.upload(src=__import__('pathlib').Path(DB_PATH))\n",
 ]
 
 celdas_ct = [
     celda_md(CT_MD),
     celda_codigo(CT_CONFIG),
+    celda_codigo(CT_SYNC_BEFORE),
     celda_codigo(CT_RUN),
     celda_codigo(CELDA_EXPORT),
+    celda_codigo(CT_SYNC_AFTER),
 ]
 
 

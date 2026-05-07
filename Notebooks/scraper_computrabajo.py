@@ -261,6 +261,11 @@ def crear_driver(headless: bool = True) -> uc.Chrome:
     opts.add_argument("--window-size=1920,1080")
     opts.add_argument("--lang=es-EC")
     opts.add_argument("--disable-blink-features=AutomationControlled")
+    # Requerido en GitHub Actions / Docker
+    if os.environ.get("CI") or os.environ.get("GITHUB_ACTIONS"):
+        opts.add_argument("--no-sandbox")
+        opts.add_argument("--disable-dev-shm-usage")
+        opts.add_argument("--disable-gpu")
     _ver = CHROME_VER or 130
     opts.add_argument(
         "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
