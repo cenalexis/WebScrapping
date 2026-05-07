@@ -17,7 +17,11 @@ from datetime import datetime
 
 import subprocess
 for _pkg in ["undetected-chromedriver", "selenium", "beautifulsoup4", "pandas"]:
-    subprocess.run([sys.executable, "-m", "pip", "install", "-q", _pkg], check=False)
+    subprocess.run(
+        [sys.executable, "-m", "pip", "install", "-q",
+         "--disable-pip-version-check", "--quiet", _pkg],
+        check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+    )
 
 import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
