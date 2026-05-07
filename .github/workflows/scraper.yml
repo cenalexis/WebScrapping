@@ -120,9 +120,13 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Restaurar credenciales Google Drive
+        env:
+          GDRIVE_CREDENTIALS: ${{ secrets.GDRIVE_CREDENTIALS }}
+          GDRIVE_TOKEN: ${{ secrets.GDRIVE_TOKEN }}
         run: |
-          echo '${{ secrets.GDRIVE_CREDENTIALS }}' > credentials.json
-          echo '${{ secrets.GDRIVE_TOKEN }}'       > token.json
+          # printf preserva JSON multilinea correctamente (echo puede romperlo)
+          printf '%s' "$GDRIVE_CREDENTIALS" > credentials.json
+          printf '%s' "$GDRIVE_TOKEN"       > token.json
         continue-on-error: true
 
       - name: Subir a Google Drive
@@ -134,8 +138,8 @@ jobs:
         if: ${{ success() && secrets.NTFY_TOPIC != '' }}
         run: |
           TOTAL=$(python -c "import sqlite3; c=sqlite3.connect('vacantes_laborales.db'); print(c.execute('SELECT COUNT(*) FROM vacantes').fetchone()[0])" 2>/dev/null || echo "?")
-          NUEVAS_MT=$(python -c "import sqlite3; c=sqlite3.connect('vacantes_laborales.db'); print(c.execute(\"SELECT total_nuevas FROM ejecuciones WHERE portal_id='multitrabajos' ORDER BY id DESC LIMIT 1\").fetchone()[0])" 2>/dev/null || echo "?")
-          NUEVAS_CT=$(python -c "import sqlite3; c=sqlite3.connect('vacantes_laborales.db'); print(c.execute(\"SELECT total_nuevas FROM ejecuciones WHERE portal_id='computrabajo' ORDER BY id DESC LIMIT 1\").fetchone()[0])" 2>/dev/null || echo "?")
+          NUEVAS_MT=$(python -c "import sqlite3; c=sqlite3.connect('vacantes_laborales.db'); print(c.execute('SELECT COALESCE(total_nuevas,0) FROM ejecuciones WHERE portal_id=(SELECT id FROM portales WHERE nombre=\"multitrabajos\") ORDER BY id DESC LIMIT 1').fetchone()[0])" 2>/dev/null || echo "?")
+          NUEVAS_CT=$(python -c "import sqlite3; c=sqlite3.connect('vacantes_laborales.db'); print(c.execute('SELECT COALESCE(total_nuevas,0) FROM ejecuciones WHERE portal_id=(SELECT id FROM portales WHERE nombre=\"computrabajo\") ORDER BY id DESC LIMIT 1').fetchone()[0])" 2>/dev/null || echo "?")
           curl -s -X POST \
             -H "Title: CISE 2026 — Scraping completado ✅" \
             -H "Priority: default" -H "Tags: white_check_mark,chart_with_upwards_trend" \

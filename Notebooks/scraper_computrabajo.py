@@ -265,18 +265,25 @@ def crear_driver(headless: bool = True) -> uc.Chrome:
     opts.add_argument("--window-size=1920,1080")
     opts.add_argument("--lang=es-EC")
     opts.add_argument("--disable-blink-features=AutomationControlled")
-    # Requerido en GitHub Actions / Docker
-    if os.environ.get("CI") or os.environ.get("GITHUB_ACTIONS"):
-        opts.add_argument("--no-sandbox")
-        opts.add_argument("--disable-dev-shm-usage")
-        opts.add_argument("--disable-gpu")
     _ver = CHROME_VER or 130
     opts.add_argument(
         "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
         "AppleWebKit/537.36 (KHTML, like Gecko) "
         f"Chrome/{_ver}.0.0.0 Safari/537.36"
     )
-    d = uc.Chrome(options=opts, version_main=CHROME_VER)
+    if os.environ.get("GITHUB_ACTIONS"):
+        opts.add_argument("--no-sandbox")
+        opts.add_argument("--disable-dev-shm-usage")
+        opts.add_argument("--disable-gpu")
+        import shutil
+        sys_cd = shutil.which("chromedriver")
+        d = uc.Chrome(
+            options=opts,
+            driver_executable_path=sys_cd if sys_cd else None,
+            version_main=CHROME_VER,
+        )
+    else:
+        d = uc.Chrome(options=opts, version_main=CHROME_VER)
     d.execute_script(
         "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
     )
