@@ -275,11 +275,11 @@ def crear_driver(headless: bool = True) -> uc.Chrome:
         opts.add_argument("--no-sandbox")
         opts.add_argument("--disable-dev-shm-usage")
         opts.add_argument("--disable-gpu")
-        import shutil
-        sys_cd = shutil.which("chromedriver")
+        from webdriver_manager.chrome import ChromeDriverManager
+        cd_path = ChromeDriverManager().install()
         d = uc.Chrome(
             options=opts,
-            driver_executable_path=sys_cd if sys_cd else None,
+            driver_executable_path=cd_path,
             version_main=CHROME_VER,
         )
     else:

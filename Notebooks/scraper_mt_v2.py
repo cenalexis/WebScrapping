@@ -260,15 +260,16 @@ def crear_driver(headless: bool = True) -> uc.Chrome:
         f"Chrome/{_ver}.0.0.0 Safari/537.36"
     )
     if os.environ.get("GITHUB_ACTIONS"):
-        # En CI usar el chromedriver del sistema (versión siempre coincide con Chrome)
+        # En CI: webdriver_manager descarga el ChromeDriver exacto para la versión
+        # de Chrome instalada — elimina el mismatch de versiones definitivamente
         opts.add_argument("--no-sandbox")
         opts.add_argument("--disable-dev-shm-usage")
         opts.add_argument("--disable-gpu")
-        import shutil
-        sys_cd = shutil.which("chromedriver")
+        from webdriver_manager.chrome import ChromeDriverManager
+        cd_path = ChromeDriverManager().install()
         driver = uc.Chrome(
             options=opts,
-            driver_executable_path=sys_cd if sys_cd else None,
+            driver_executable_path=cd_path,
             version_main=CHROME_VER,
         )
     else:
