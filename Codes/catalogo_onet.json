@@ -1,0 +1,3578 @@
+[
+  {
+    "codigo": "11-1011.00",
+    "descripcion": "Chief Executives"
+  },
+  {
+    "codigo": "11-1011.03",
+    "descripcion": "Chief Sustainability Officers"
+  },
+  {
+    "codigo": "11-1021.00",
+    "descripcion": "General and Operations Managers"
+  },
+  {
+    "codigo": "11-2011.00",
+    "descripcion": "Advertising and Promotions Managers"
+  },
+  {
+    "codigo": "11-2021.00",
+    "descripcion": "Marketing Managers"
+  },
+  {
+    "codigo": "11-2022.00",
+    "descripcion": "Sales Managers"
+  },
+  {
+    "codigo": "11-2033.00",
+    "descripcion": "Fundraising Managers"
+  },
+  {
+    "codigo": "11-3012.00",
+    "descripcion": "Administrative Services Managers"
+  },
+  {
+    "codigo": "11-3013.00",
+    "descripcion": "Facilities Managers"
+  },
+  {
+    "codigo": "11-3013.01",
+    "descripcion": "Security Managers"
+  },
+  {
+    "codigo": "11-3021.00",
+    "descripcion": "Computer and Information Systems Managers"
+  },
+  {
+    "codigo": "11-3031.00",
+    "descripcion": "Financial Managers"
+  },
+  {
+    "codigo": "11-3031.01",
+    "descripcion": "Treasurers and Controllers"
+  },
+  {
+    "codigo": "11-3031.03",
+    "descripcion": "Investment Fund Managers"
+  },
+  {
+    "codigo": "11-3051.00",
+    "descripcion": "Industrial Production Managers"
+  },
+  {
+    "codigo": "11-3051.01",
+    "descripcion": "Quality Control Systems Managers"
+  },
+  {
+    "codigo": "11-3051.02",
+    "descripcion": "Geothermal Production Managers"
+  },
+  {
+    "codigo": "11-3051.03",
+    "descripcion": "Biofuels Production Managers"
+  },
+  {
+    "codigo": "11-3051.04",
+    "descripcion": "Biomass Power Plant Managers"
+  },
+  {
+    "codigo": "11-3051.06",
+    "descripcion": "Hydroelectric Production Managers"
+  },
+  {
+    "codigo": "11-3061.00",
+    "descripcion": "Purchasing Managers"
+  },
+  {
+    "codigo": "11-3071.00",
+    "descripcion": "Transportation, Storage, and Distribution Managers"
+  },
+  {
+    "codigo": "11-3071.04",
+    "descripcion": "Supply Chain Managers"
+  },
+  {
+    "codigo": "11-3111.00",
+    "descripcion": "Compensation and Benefits Managers"
+  },
+  {
+    "codigo": "11-3121.00",
+    "descripcion": "Human Resources Managers"
+  },
+  {
+    "codigo": "11-3131.00",
+    "descripcion": "Training and Development Managers"
+  },
+  {
+    "codigo": "11-9013.00",
+    "descripcion": "Farmers, Ranchers, and Other Agricultural Managers"
+  },
+  {
+    "codigo": "11-9021.00",
+    "descripcion": "Construction Managers"
+  },
+  {
+    "codigo": "11-9031.00",
+    "descripcion": "Education and Childcare Administrators, Preschool and Daycare"
+  },
+  {
+    "codigo": "11-9032.00",
+    "descripcion": "Education Administrators, Kindergarten through Secondary"
+  },
+  {
+    "codigo": "11-9033.00",
+    "descripcion": "Education Administrators, Postsecondary"
+  },
+  {
+    "codigo": "11-9041.00",
+    "descripcion": "Architectural and Engineering Managers"
+  },
+  {
+    "codigo": "11-9041.01",
+    "descripcion": "Biofuels/Biodiesel Technology and Product Development Managers"
+  },
+  {
+    "codigo": "11-9051.00",
+    "descripcion": "Food Service Managers"
+  },
+  {
+    "codigo": "11-9071.00",
+    "descripcion": "Gambling Managers"
+  },
+  {
+    "codigo": "11-9072.00",
+    "descripcion": "Entertainment and Recreation Managers, Except Gambling"
+  },
+  {
+    "codigo": "11-9081.00",
+    "descripcion": "Lodging Managers"
+  },
+  {
+    "codigo": "11-9111.00",
+    "descripcion": "Medical and Health Services Managers"
+  },
+  {
+    "codigo": "11-9121.00",
+    "descripcion": "Natural Sciences Managers"
+  },
+  {
+    "codigo": "11-9121.01",
+    "descripcion": "Clinical Research Coordinators"
+  },
+  {
+    "codigo": "11-9121.02",
+    "descripcion": "Water Resource Specialists"
+  },
+  {
+    "codigo": "11-9131.00",
+    "descripcion": "Postmasters and Mail Superintendents"
+  },
+  {
+    "codigo": "11-9141.00",
+    "descripcion": "Property, Real Estate, and Community Association Managers"
+  },
+  {
+    "codigo": "11-9151.00",
+    "descripcion": "Social and Community Service Managers"
+  },
+  {
+    "codigo": "11-9161.00",
+    "descripcion": "Emergency Management Directors"
+  },
+  {
+    "codigo": "11-9171.00",
+    "descripcion": "Funeral Home Managers"
+  },
+  {
+    "codigo": "11-9179.01",
+    "descripcion": "Fitness and Wellness Coordinators"
+  },
+  {
+    "codigo": "11-9179.02",
+    "descripcion": "Spa Managers"
+  },
+  {
+    "codigo": "11-9199.01",
+    "descripcion": "Regulatory Affairs Managers"
+  },
+  {
+    "codigo": "11-9199.02",
+    "descripcion": "Compliance Managers"
+  },
+  {
+    "codigo": "11-9199.08",
+    "descripcion": "Loss Prevention Managers"
+  },
+  {
+    "codigo": "11-9199.09",
+    "descripcion": "Wind Energy Operations Managers"
+  },
+  {
+    "codigo": "11-9199.10",
+    "descripcion": "Wind Energy Development Managers"
+  },
+  {
+    "codigo": "11-9199.11",
+    "descripcion": "Brownfield Redevelopment Specialists and Site Managers"
+  },
+  {
+    "codigo": "13-1011.00",
+    "descripcion": "Agents and Business Managers of Artists, Performers, and Athletes"
+  },
+  {
+    "codigo": "13-1021.00",
+    "descripcion": "Buyers and Purchasing Agents, Farm Products"
+  },
+  {
+    "codigo": "13-1022.00",
+    "descripcion": "Wholesale and Retail Buyers, Except Farm Products"
+  },
+  {
+    "codigo": "13-1023.00",
+    "descripcion": "Purchasing Agents, Except Wholesale, Retail, and Farm Products"
+  },
+  {
+    "codigo": "13-1031.00",
+    "descripcion": "Claims Adjusters, Examiners, and Investigators"
+  },
+  {
+    "codigo": "13-1032.00",
+    "descripcion": "Insurance Appraisers, Auto Damage"
+  },
+  {
+    "codigo": "13-1041.00",
+    "descripcion": "Compliance Officers"
+  },
+  {
+    "codigo": "13-1041.01",
+    "descripcion": "Environmental Compliance Inspectors"
+  },
+  {
+    "codigo": "13-1041.03",
+    "descripcion": "Equal Opportunity Representatives and Officers"
+  },
+  {
+    "codigo": "13-1041.04",
+    "descripcion": "Government Property Inspectors and Investigators"
+  },
+  {
+    "codigo": "13-1041.06",
+    "descripcion": "Coroners"
+  },
+  {
+    "codigo": "13-1041.07",
+    "descripcion": "Regulatory Affairs Specialists"
+  },
+  {
+    "codigo": "13-1041.08",
+    "descripcion": "Customs Brokers"
+  },
+  {
+    "codigo": "13-1051.00",
+    "descripcion": "Cost Estimators"
+  },
+  {
+    "codigo": "13-1071.00",
+    "descripcion": "Human Resources Specialists"
+  },
+  {
+    "codigo": "13-1074.00",
+    "descripcion": "Farm Labor Contractors"
+  },
+  {
+    "codigo": "13-1075.00",
+    "descripcion": "Labor Relations Specialists"
+  },
+  {
+    "codigo": "13-1081.00",
+    "descripcion": "Logisticians"
+  },
+  {
+    "codigo": "13-1081.01",
+    "descripcion": "Logistics Engineers"
+  },
+  {
+    "codigo": "13-1081.02",
+    "descripcion": "Logistics Analysts"
+  },
+  {
+    "codigo": "13-1111.00",
+    "descripcion": "Management Analysts"
+  },
+  {
+    "codigo": "13-1121.00",
+    "descripcion": "Meeting, Convention, and Event Planners"
+  },
+  {
+    "codigo": "13-1131.00",
+    "descripcion": "Fundraisers"
+  },
+  {
+    "codigo": "13-1141.00",
+    "descripcion": "Compensation, Benefits, and Job Analysis Specialists"
+  },
+  {
+    "codigo": "13-1151.00",
+    "descripcion": "Training and Development Specialists"
+  },
+  {
+    "codigo": "13-1161.00",
+    "descripcion": "Market Research Analysts and Marketing Specialists"
+  },
+  {
+    "codigo": "13-1161.01",
+    "descripcion": "Search Marketing Strategists"
+  },
+  {
+    "codigo": "13-1199.04",
+    "descripcion": "Business Continuity Planners"
+  },
+  {
+    "codigo": "13-1199.05",
+    "descripcion": "Sustainability Specialists"
+  },
+  {
+    "codigo": "13-1199.06",
+    "descripcion": "Online Merchants"
+  },
+  {
+    "codigo": "13-1199.07",
+    "descripcion": "Security Management Specialists"
+  },
+  {
+    "codigo": "13-2011.00",
+    "descripcion": "Accountants and Auditors"
+  },
+  {
+    "codigo": "13-2022.00",
+    "descripcion": "Appraisers of Personal and Business Property"
+  },
+  {
+    "codigo": "13-2023.00",
+    "descripcion": "Appraisers and Assessors of Real Estate"
+  },
+  {
+    "codigo": "13-2031.00",
+    "descripcion": "Budget Analysts"
+  },
+  {
+    "codigo": "13-2041.00",
+    "descripcion": "Credit Analysts"
+  },
+  {
+    "codigo": "13-2052.00",
+    "descripcion": "Personal Financial Advisors"
+  },
+  {
+    "codigo": "13-2053.00",
+    "descripcion": "Insurance Underwriters"
+  },
+  {
+    "codigo": "13-2061.00",
+    "descripcion": "Financial Examiners"
+  },
+  {
+    "codigo": "13-2071.00",
+    "descripcion": "Credit Counselors"
+  },
+  {
+    "codigo": "13-2072.00",
+    "descripcion": "Loan Officers"
+  },
+  {
+    "codigo": "13-2081.00",
+    "descripcion": "Tax Examiners and Collectors, and Revenue Agents"
+  },
+  {
+    "codigo": "13-2082.00",
+    "descripcion": "Tax Preparers"
+  },
+  {
+    "codigo": "13-2099.01",
+    "descripcion": "Financial Quantitative Analysts"
+  },
+  {
+    "codigo": "13-2099.04",
+    "descripcion": "Fraud Examiners, Investigators and Analysts"
+  },
+  {
+    "codigo": "15-1211.00",
+    "descripcion": "Computer Systems Analysts"
+  },
+  {
+    "codigo": "15-1211.01",
+    "descripcion": "Health Informatics Specialists"
+  },
+  {
+    "codigo": "15-1212.00",
+    "descripcion": "Information Security Analysts"
+  },
+  {
+    "codigo": "15-1221.00",
+    "descripcion": "Computer and Information Research Scientists"
+  },
+  {
+    "codigo": "15-1231.00",
+    "descripcion": "Computer Network Support Specialists"
+  },
+  {
+    "codigo": "15-1232.00",
+    "descripcion": "Computer User Support Specialists"
+  },
+  {
+    "codigo": "15-1241.00",
+    "descripcion": "Computer Network Architects"
+  },
+  {
+    "codigo": "15-1241.01",
+    "descripcion": "Telecommunications Engineering Specialists"
+  },
+  {
+    "codigo": "15-1242.00",
+    "descripcion": "Database Administrators"
+  },
+  {
+    "codigo": "15-1243.00",
+    "descripcion": "Database Architects"
+  },
+  {
+    "codigo": "15-1243.01",
+    "descripcion": "Data Warehousing Specialists"
+  },
+  {
+    "codigo": "15-1244.00",
+    "descripcion": "Network and Computer Systems Administrators"
+  },
+  {
+    "codigo": "15-1251.00",
+    "descripcion": "Computer Programmers"
+  },
+  {
+    "codigo": "15-1252.00",
+    "descripcion": "Software Developers"
+  },
+  {
+    "codigo": "15-1253.00",
+    "descripcion": "Software Quality Assurance Analysts and Testers"
+  },
+  {
+    "codigo": "15-1254.00",
+    "descripcion": "Web Developers"
+  },
+  {
+    "codigo": "15-1255.01",
+    "descripcion": "Video Game Designers"
+  },
+  {
+    "codigo": "15-1299.01",
+    "descripcion": "Web Administrators"
+  },
+  {
+    "codigo": "15-1299.02",
+    "descripcion": "Geographic Information Systems Technologists and Technicians"
+  },
+  {
+    "codigo": "15-1299.03",
+    "descripcion": "Document Management Specialists"
+  },
+  {
+    "codigo": "15-1299.05",
+    "descripcion": "Information Security Engineers"
+  },
+  {
+    "codigo": "15-1299.08",
+    "descripcion": "Computer Systems Engineers/Architects"
+  },
+  {
+    "codigo": "15-1299.09",
+    "descripcion": "Information Technology Project Managers"
+  },
+  {
+    "codigo": "15-2011.00",
+    "descripcion": "Actuaries"
+  },
+  {
+    "codigo": "15-2021.00",
+    "descripcion": "Mathematicians"
+  },
+  {
+    "codigo": "15-2031.00",
+    "descripcion": "Operations Research Analysts"
+  },
+  {
+    "codigo": "15-2041.00",
+    "descripcion": "Statisticians"
+  },
+  {
+    "codigo": "15-2041.01",
+    "descripcion": "Biostatisticians"
+  },
+  {
+    "codigo": "15-2051.01",
+    "descripcion": "Business Intelligence Analysts"
+  },
+  {
+    "codigo": "15-2051.02",
+    "descripcion": "Clinical Data Managers"
+  },
+  {
+    "codigo": "15-2099.01",
+    "descripcion": "Bioinformatics Technicians"
+  },
+  {
+    "codigo": "17-1011.00",
+    "descripcion": "Architects, Except Landscape and Naval"
+  },
+  {
+    "codigo": "17-1012.00",
+    "descripcion": "Landscape Architects"
+  },
+  {
+    "codigo": "17-1021.00",
+    "descripcion": "Cartographers and Photogrammetrists"
+  },
+  {
+    "codigo": "17-1022.00",
+    "descripcion": "Surveyors"
+  },
+  {
+    "codigo": "17-1022.01",
+    "descripcion": "Geodetic Surveyors"
+  },
+  {
+    "codigo": "17-2011.00",
+    "descripcion": "Aerospace Engineers"
+  },
+  {
+    "codigo": "17-2021.00",
+    "descripcion": "Agricultural Engineers"
+  },
+  {
+    "codigo": "17-2031.00",
+    "descripcion": "Bioengineers and Biomedical Engineers"
+  },
+  {
+    "codigo": "17-2041.00",
+    "descripcion": "Chemical Engineers"
+  },
+  {
+    "codigo": "17-2051.00",
+    "descripcion": "Civil Engineers"
+  },
+  {
+    "codigo": "17-2051.01",
+    "descripcion": "Transportation Engineers"
+  },
+  {
+    "codigo": "17-2051.02",
+    "descripcion": "Water/Wastewater Engineers"
+  },
+  {
+    "codigo": "17-2061.00",
+    "descripcion": "Computer Hardware Engineers"
+  },
+  {
+    "codigo": "17-2071.00",
+    "descripcion": "Electrical Engineers"
+  },
+  {
+    "codigo": "17-2072.00",
+    "descripcion": "Electronics Engineers, Except Computer"
+  },
+  {
+    "codigo": "17-2072.01",
+    "descripcion": "Radio Frequency Identification Device Specialists"
+  },
+  {
+    "codigo": "17-2081.00",
+    "descripcion": "Environmental Engineers"
+  },
+  {
+    "codigo": "17-2111.00",
+    "descripcion": "Health and Safety Engineers, Except Mining Safety Engineers and Inspectors"
+  },
+  {
+    "codigo": "17-2111.02",
+    "descripcion": "Fire-Prevention and Protection Engineers"
+  },
+  {
+    "codigo": "17-2112.00",
+    "descripcion": "Industrial Engineers"
+  },
+  {
+    "codigo": "17-2112.01",
+    "descripcion": "Human Factors Engineers and Ergonomists"
+  },
+  {
+    "codigo": "17-2112.02",
+    "descripcion": "Validation Engineers"
+  },
+  {
+    "codigo": "17-2112.03",
+    "descripcion": "Manufacturing Engineers"
+  },
+  {
+    "codigo": "17-2121.00",
+    "descripcion": "Marine Engineers and Naval Architects"
+  },
+  {
+    "codigo": "17-2131.00",
+    "descripcion": "Materials Engineers"
+  },
+  {
+    "codigo": "17-2141.00",
+    "descripcion": "Mechanical Engineers"
+  },
+  {
+    "codigo": "17-2141.01",
+    "descripcion": "Fuel Cell Engineers"
+  },
+  {
+    "codigo": "17-2141.02",
+    "descripcion": "Automotive Engineers"
+  },
+  {
+    "codigo": "17-2151.00",
+    "descripcion": "Mining and Geological Engineers, Including Mining Safety Engineers"
+  },
+  {
+    "codigo": "17-2161.00",
+    "descripcion": "Nuclear Engineers"
+  },
+  {
+    "codigo": "17-2171.00",
+    "descripcion": "Petroleum Engineers"
+  },
+  {
+    "codigo": "17-2199.03",
+    "descripcion": "Energy Engineers, Except Wind and Solar"
+  },
+  {
+    "codigo": "17-2199.05",
+    "descripcion": "Mechatronics Engineers"
+  },
+  {
+    "codigo": "17-2199.06",
+    "descripcion": "Microsystems Engineers"
+  },
+  {
+    "codigo": "17-2199.07",
+    "descripcion": "Photonics Engineers"
+  },
+  {
+    "codigo": "17-2199.08",
+    "descripcion": "Robotics Engineers"
+  },
+  {
+    "codigo": "17-2199.09",
+    "descripcion": "Nanosystems Engineers"
+  },
+  {
+    "codigo": "17-2199.10",
+    "descripcion": "Wind Energy Engineers"
+  },
+  {
+    "codigo": "17-2199.11",
+    "descripcion": "Solar Energy Systems Engineers"
+  },
+  {
+    "codigo": "17-3011.00",
+    "descripcion": "Architectural and Civil Drafters"
+  },
+  {
+    "codigo": "17-3012.00",
+    "descripcion": "Electrical and Electronics Drafters"
+  },
+  {
+    "codigo": "17-3013.00",
+    "descripcion": "Mechanical Drafters"
+  },
+  {
+    "codigo": "17-3021.00",
+    "descripcion": "Aerospace Engineering and Operations Technologists and Technicians"
+  },
+  {
+    "codigo": "17-3022.00",
+    "descripcion": "Civil Engineering Technologists and Technicians"
+  },
+  {
+    "codigo": "17-3023.00",
+    "descripcion": "Electrical and Electronic Engineering Technologists and Technicians"
+  },
+  {
+    "codigo": "17-3024.00",
+    "descripcion": "Electro-Mechanical and Mechatronics Technologists and Technicians"
+  },
+  {
+    "codigo": "17-3024.01",
+    "descripcion": "Robotics Technicians"
+  },
+  {
+    "codigo": "17-3025.00",
+    "descripcion": "Environmental Engineering Technologists and Technicians"
+  },
+  {
+    "codigo": "17-3026.00",
+    "descripcion": "Industrial Engineering Technologists and Technicians"
+  },
+  {
+    "codigo": "17-3026.01",
+    "descripcion": "Nanotechnology Engineering Technologists and Technicians"
+  },
+  {
+    "codigo": "17-3027.00",
+    "descripcion": "Mechanical Engineering Technologists and Technicians"
+  },
+  {
+    "codigo": "17-3027.01",
+    "descripcion": "Automotive Engineering Technicians"
+  },
+  {
+    "codigo": "17-3029.01",
+    "descripcion": "Non-Destructive Testing Specialists"
+  },
+  {
+    "codigo": "17-3029.08",
+    "descripcion": "Photonics Technicians"
+  },
+  {
+    "codigo": "17-3031.00",
+    "descripcion": "Surveying and Mapping Technicians"
+  },
+  {
+    "codigo": "19-1011.00",
+    "descripcion": "Animal Scientists"
+  },
+  {
+    "codigo": "19-1012.00",
+    "descripcion": "Food Scientists and Technologists"
+  },
+  {
+    "codigo": "19-1013.00",
+    "descripcion": "Soil and Plant Scientists"
+  },
+  {
+    "codigo": "19-1021.00",
+    "descripcion": "Biochemists and Biophysicists"
+  },
+  {
+    "codigo": "19-1022.00",
+    "descripcion": "Microbiologists"
+  },
+  {
+    "codigo": "19-1023.00",
+    "descripcion": "Zoologists and Wildlife Biologists"
+  },
+  {
+    "codigo": "19-1029.01",
+    "descripcion": "Bioinformatics Scientists"
+  },
+  {
+    "codigo": "19-1029.02",
+    "descripcion": "Molecular and Cellular Biologists"
+  },
+  {
+    "codigo": "19-1029.03",
+    "descripcion": "Geneticists"
+  },
+  {
+    "codigo": "19-1029.04",
+    "descripcion": "Biologists"
+  },
+  {
+    "codigo": "19-1031.00",
+    "descripcion": "Conservation Scientists"
+  },
+  {
+    "codigo": "19-1031.02",
+    "descripcion": "Range Managers"
+  },
+  {
+    "codigo": "19-1031.03",
+    "descripcion": "Park Naturalists"
+  },
+  {
+    "codigo": "19-1032.00",
+    "descripcion": "Foresters"
+  },
+  {
+    "codigo": "19-1041.00",
+    "descripcion": "Epidemiologists"
+  },
+  {
+    "codigo": "19-1042.00",
+    "descripcion": "Medical Scientists, Except Epidemiologists"
+  },
+  {
+    "codigo": "19-2011.00",
+    "descripcion": "Astronomers"
+  },
+  {
+    "codigo": "19-2012.00",
+    "descripcion": "Physicists"
+  },
+  {
+    "codigo": "19-2021.00",
+    "descripcion": "Atmospheric and Space Scientists"
+  },
+  {
+    "codigo": "19-2031.00",
+    "descripcion": "Chemists"
+  },
+  {
+    "codigo": "19-2032.00",
+    "descripcion": "Materials Scientists"
+  },
+  {
+    "codigo": "19-2041.00",
+    "descripcion": "Environmental Scientists and Specialists, Including Health"
+  },
+  {
+    "codigo": "19-2041.01",
+    "descripcion": "Climate Change Policy Analysts"
+  },
+  {
+    "codigo": "19-2041.02",
+    "descripcion": "Environmental Restoration Planners"
+  },
+  {
+    "codigo": "19-2041.03",
+    "descripcion": "Industrial Ecologists"
+  },
+  {
+    "codigo": "19-2042.00",
+    "descripcion": "Geoscientists, Except Hydrologists and Geographers"
+  },
+  {
+    "codigo": "19-2043.00",
+    "descripcion": "Hydrologists"
+  },
+  {
+    "codigo": "19-2099.01",
+    "descripcion": "Remote Sensing Scientists and Technologists"
+  },
+  {
+    "codigo": "19-3011.00",
+    "descripcion": "Economists"
+  },
+  {
+    "codigo": "19-3011.01",
+    "descripcion": "Environmental Economists"
+  },
+  {
+    "codigo": "19-3022.00",
+    "descripcion": "Survey Researchers"
+  },
+  {
+    "codigo": "19-3032.00",
+    "descripcion": "Industrial-Organizational Psychologists"
+  },
+  {
+    "codigo": "19-3033.00",
+    "descripcion": "Clinical and Counseling Psychologists"
+  },
+  {
+    "codigo": "19-3034.00",
+    "descripcion": "School Psychologists"
+  },
+  {
+    "codigo": "19-3039.02",
+    "descripcion": "Neuropsychologists"
+  },
+  {
+    "codigo": "19-3039.03",
+    "descripcion": "Clinical Neuropsychologists"
+  },
+  {
+    "codigo": "19-3041.00",
+    "descripcion": "Sociologists"
+  },
+  {
+    "codigo": "19-3051.00",
+    "descripcion": "Urban and Regional Planners"
+  },
+  {
+    "codigo": "19-3091.00",
+    "descripcion": "Anthropologists and Archeologists"
+  },
+  {
+    "codigo": "19-3092.00",
+    "descripcion": "Geographers"
+  },
+  {
+    "codigo": "19-3093.00",
+    "descripcion": "Historians"
+  },
+  {
+    "codigo": "19-3094.00",
+    "descripcion": "Political Scientists"
+  },
+  {
+    "codigo": "19-3099.01",
+    "descripcion": "Transportation Planners"
+  },
+  {
+    "codigo": "19-4012.00",
+    "descripcion": "Agricultural Technicians"
+  },
+  {
+    "codigo": "19-4012.01",
+    "descripcion": "Precision Agriculture Technicians"
+  },
+  {
+    "codigo": "19-4013.00",
+    "descripcion": "Food Science Technicians"
+  },
+  {
+    "codigo": "19-4021.00",
+    "descripcion": "Biological Technicians"
+  },
+  {
+    "codigo": "19-4031.00",
+    "descripcion": "Chemical Technicians"
+  },
+  {
+    "codigo": "19-4042.00",
+    "descripcion": "Environmental Science and Protection Technicians, Including Health"
+  },
+  {
+    "codigo": "19-4043.00",
+    "descripcion": "Geological Technicians, Except Hydrologic Technicians"
+  },
+  {
+    "codigo": "19-4051.00",
+    "descripcion": "Nuclear Technicians"
+  },
+  {
+    "codigo": "19-4051.02",
+    "descripcion": "Nuclear Monitoring Technicians"
+  },
+  {
+    "codigo": "19-4061.00",
+    "descripcion": "Social Science Research Assistants"
+  },
+  {
+    "codigo": "19-4071.00",
+    "descripcion": "Forest and Conservation Technicians"
+  },
+  {
+    "codigo": "19-4092.00",
+    "descripcion": "Forensic Science Technicians"
+  },
+  {
+    "codigo": "19-4099.01",
+    "descripcion": "Quality Control Analysts"
+  },
+  {
+    "codigo": "19-4099.03",
+    "descripcion": "Remote Sensing Technicians"
+  },
+  {
+    "codigo": "19-5011.00",
+    "descripcion": "Occupational Health and Safety Specialists"
+  },
+  {
+    "codigo": "19-5012.00",
+    "descripcion": "Occupational Health and Safety Technicians"
+  },
+  {
+    "codigo": "21-1011.00",
+    "descripcion": "Substance Abuse and Behavioral Disorder Counselors"
+  },
+  {
+    "codigo": "21-1012.00",
+    "descripcion": "Educational, Guidance, and Career Counselors and Advisors"
+  },
+  {
+    "codigo": "21-1013.00",
+    "descripcion": "Marriage and Family Therapists"
+  },
+  {
+    "codigo": "21-1014.00",
+    "descripcion": "Mental Health Counselors"
+  },
+  {
+    "codigo": "21-1015.00",
+    "descripcion": "Rehabilitation Counselors"
+  },
+  {
+    "codigo": "21-1021.00",
+    "descripcion": "Child, Family, and School Social Workers"
+  },
+  {
+    "codigo": "21-1022.00",
+    "descripcion": "Healthcare Social Workers"
+  },
+  {
+    "codigo": "21-1023.00",
+    "descripcion": "Mental Health and Substance Abuse Social Workers"
+  },
+  {
+    "codigo": "21-1091.00",
+    "descripcion": "Health Education Specialists"
+  },
+  {
+    "codigo": "21-1092.00",
+    "descripcion": "Probation Officers and Correctional Treatment Specialists"
+  },
+  {
+    "codigo": "21-1093.00",
+    "descripcion": "Social and Human Service Assistants"
+  },
+  {
+    "codigo": "21-1094.00",
+    "descripcion": "Community Health Workers"
+  },
+  {
+    "codigo": "21-2011.00",
+    "descripcion": "Clergy"
+  },
+  {
+    "codigo": "21-2021.00",
+    "descripcion": "Directors, Religious Activities and Education"
+  },
+  {
+    "codigo": "23-1011.00",
+    "descripcion": "Lawyers"
+  },
+  {
+    "codigo": "23-1012.00",
+    "descripcion": "Judicial Law Clerks"
+  },
+  {
+    "codigo": "23-1021.00",
+    "descripcion": "Administrative Law Judges, Adjudicators, and Hearing Officers"
+  },
+  {
+    "codigo": "23-1022.00",
+    "descripcion": "Arbitrators, Mediators, and Conciliators"
+  },
+  {
+    "codigo": "23-1023.00",
+    "descripcion": "Judges, Magistrate Judges, and Magistrates"
+  },
+  {
+    "codigo": "23-2011.00",
+    "descripcion": "Paralegals and Legal Assistants"
+  },
+  {
+    "codigo": "23-2093.00",
+    "descripcion": "Title Examiners, Abstractors, and Searchers"
+  },
+  {
+    "codigo": "25-1011.00",
+    "descripcion": "Business Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1021.00",
+    "descripcion": "Computer Science Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1022.00",
+    "descripcion": "Mathematical Science Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1031.00",
+    "descripcion": "Architecture Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1032.00",
+    "descripcion": "Engineering Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1041.00",
+    "descripcion": "Agricultural Sciences Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1042.00",
+    "descripcion": "Biological Science Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1043.00",
+    "descripcion": "Forestry and Conservation Science Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1051.00",
+    "descripcion": "Atmospheric, Earth, Marine, and Space Sciences Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1052.00",
+    "descripcion": "Chemistry Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1053.00",
+    "descripcion": "Environmental Science Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1054.00",
+    "descripcion": "Physics Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1061.00",
+    "descripcion": "Anthropology and Archeology Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1062.00",
+    "descripcion": "Area, Ethnic, and Cultural Studies Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1063.00",
+    "descripcion": "Economics Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1064.00",
+    "descripcion": "Geography Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1065.00",
+    "descripcion": "Political Science Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1066.00",
+    "descripcion": "Psychology Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1067.00",
+    "descripcion": "Sociology Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1071.00",
+    "descripcion": "Health Specialties Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1072.00",
+    "descripcion": "Nursing Instructors and Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1081.00",
+    "descripcion": "Education Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1082.00",
+    "descripcion": "Library Science Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1111.00",
+    "descripcion": "Criminal Justice and Law Enforcement Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1112.00",
+    "descripcion": "Law Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1113.00",
+    "descripcion": "Social Work Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1121.00",
+    "descripcion": "Art, Drama, and Music Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1122.00",
+    "descripcion": "Communications Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1123.00",
+    "descripcion": "English Language and Literature Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1124.00",
+    "descripcion": "Foreign Language and Literature Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1125.00",
+    "descripcion": "History Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1126.00",
+    "descripcion": "Philosophy and Religion Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1192.00",
+    "descripcion": "Family and Consumer Sciences Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1193.00",
+    "descripcion": "Recreation and Fitness Studies Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-1194.00",
+    "descripcion": "Career/Technical Education Teachers, Postsecondary"
+  },
+  {
+    "codigo": "25-2011.00",
+    "descripcion": "Preschool Teachers, Except Special Education"
+  },
+  {
+    "codigo": "25-2012.00",
+    "descripcion": "Kindergarten Teachers, Except Special Education"
+  },
+  {
+    "codigo": "25-2021.00",
+    "descripcion": "Elementary School Teachers, Except Special Education"
+  },
+  {
+    "codigo": "25-2022.00",
+    "descripcion": "Middle School Teachers, Except Special and Career/Technical Education"
+  },
+  {
+    "codigo": "25-2023.00",
+    "descripcion": "Career/Technical Education Teachers, Middle School"
+  },
+  {
+    "codigo": "25-2031.00",
+    "descripcion": "Secondary School Teachers, Except Special and Career/Technical Education"
+  },
+  {
+    "codigo": "25-2032.00",
+    "descripcion": "Career/Technical Education Teachers, Secondary School"
+  },
+  {
+    "codigo": "25-2051.00",
+    "descripcion": "Special Education Teachers, Preschool"
+  },
+  {
+    "codigo": "25-2056.00",
+    "descripcion": "Special Education Teachers, Elementary School"
+  },
+  {
+    "codigo": "25-2057.00",
+    "descripcion": "Special Education Teachers, Middle School"
+  },
+  {
+    "codigo": "25-2058.00",
+    "descripcion": "Special Education Teachers, Secondary School"
+  },
+  {
+    "codigo": "25-2059.01",
+    "descripcion": "Adapted Physical Education Specialists"
+  },
+  {
+    "codigo": "25-3011.00",
+    "descripcion": "Adult Basic Education, Adult Secondary Education, and English as a Second Language Instructors"
+  },
+  {
+    "codigo": "25-3021.00",
+    "descripcion": "Self-Enrichment Teachers"
+  },
+  {
+    "codigo": "25-3031.00",
+    "descripcion": "Substitute Teachers, Short-Term"
+  },
+  {
+    "codigo": "25-3041.00",
+    "descripcion": "Tutors"
+  },
+  {
+    "codigo": "25-4011.00",
+    "descripcion": "Archivists"
+  },
+  {
+    "codigo": "25-4012.00",
+    "descripcion": "Curators"
+  },
+  {
+    "codigo": "25-4013.00",
+    "descripcion": "Museum Technicians and Conservators"
+  },
+  {
+    "codigo": "25-4022.00",
+    "descripcion": "Librarians and Media Collections Specialists"
+  },
+  {
+    "codigo": "25-4031.00",
+    "descripcion": "Library Technicians"
+  },
+  {
+    "codigo": "25-9021.00",
+    "descripcion": "Farm and Home Management Educators"
+  },
+  {
+    "codigo": "25-9031.00",
+    "descripcion": "Instructional Coordinators"
+  },
+  {
+    "codigo": "25-9042.00",
+    "descripcion": "Teaching Assistants, Preschool, Elementary, Middle, and Secondary School, Except Special Education"
+  },
+  {
+    "codigo": "25-9043.00",
+    "descripcion": "Teaching Assistants, Special Education"
+  },
+  {
+    "codigo": "25-9044.00",
+    "descripcion": "Teaching Assistants, Postsecondary"
+  },
+  {
+    "codigo": "27-1011.00",
+    "descripcion": "Art Directors"
+  },
+  {
+    "codigo": "27-1012.00",
+    "descripcion": "Craft Artists"
+  },
+  {
+    "codigo": "27-1013.00",
+    "descripcion": "Fine Artists, Including Painters, Sculptors, and Illustrators"
+  },
+  {
+    "codigo": "27-1014.00",
+    "descripcion": "Special Effects Artists and Animators"
+  },
+  {
+    "codigo": "27-1021.00",
+    "descripcion": "Commercial and Industrial Designers"
+  },
+  {
+    "codigo": "27-1022.00",
+    "descripcion": "Fashion Designers"
+  },
+  {
+    "codigo": "27-1023.00",
+    "descripcion": "Floral Designers"
+  },
+  {
+    "codigo": "27-1024.00",
+    "descripcion": "Graphic Designers"
+  },
+  {
+    "codigo": "27-1025.00",
+    "descripcion": "Interior Designers"
+  },
+  {
+    "codigo": "27-1026.00",
+    "descripcion": "Merchandise Displayers and Window Trimmers"
+  },
+  {
+    "codigo": "27-1027.00",
+    "descripcion": "Set and Exhibit Designers"
+  },
+  {
+    "codigo": "27-2011.00",
+    "descripcion": "Actors"
+  },
+  {
+    "codigo": "27-2012.00",
+    "descripcion": "Producers and Directors"
+  },
+  {
+    "codigo": "27-2012.03",
+    "descripcion": "Media Programming Directors"
+  },
+  {
+    "codigo": "27-2012.04",
+    "descripcion": "Talent Directors"
+  },
+  {
+    "codigo": "27-2012.05",
+    "descripcion": "Media Technical Directors/Managers"
+  },
+  {
+    "codigo": "27-2021.00",
+    "descripcion": "Athletes and Sports Competitors"
+  },
+  {
+    "codigo": "27-2022.00",
+    "descripcion": "Coaches and Scouts"
+  },
+  {
+    "codigo": "27-2023.00",
+    "descripcion": "Umpires, Referees, and Other Sports Officials"
+  },
+  {
+    "codigo": "27-2031.00",
+    "descripcion": "Dancers"
+  },
+  {
+    "codigo": "27-2032.00",
+    "descripcion": "Choreographers"
+  },
+  {
+    "codigo": "27-2041.00",
+    "descripcion": "Music Directors and Composers"
+  },
+  {
+    "codigo": "27-2042.00",
+    "descripcion": "Musicians and Singers"
+  },
+  {
+    "codigo": "27-3011.00",
+    "descripcion": "Broadcast Announcers and Radio Disc Jockeys"
+  },
+  {
+    "codigo": "27-3023.00",
+    "descripcion": "News Analysts, Reporters, and Journalists"
+  },
+  {
+    "codigo": "27-3031.00",
+    "descripcion": "Public Relations Specialists"
+  },
+  {
+    "codigo": "27-3041.00",
+    "descripcion": "Editors"
+  },
+  {
+    "codigo": "27-3042.00",
+    "descripcion": "Technical Writers"
+  },
+  {
+    "codigo": "27-3043.00",
+    "descripcion": "Writers and Authors"
+  },
+  {
+    "codigo": "27-3043.05",
+    "descripcion": "Poets, Lyricists and Creative Writers"
+  },
+  {
+    "codigo": "27-3091.00",
+    "descripcion": "Interpreters and Translators"
+  },
+  {
+    "codigo": "27-3092.00",
+    "descripcion": "Court Reporters and Simultaneous Captioners"
+  },
+  {
+    "codigo": "27-4011.00",
+    "descripcion": "Audio and Video Technicians"
+  },
+  {
+    "codigo": "27-4012.00",
+    "descripcion": "Broadcast Technicians"
+  },
+  {
+    "codigo": "27-4014.00",
+    "descripcion": "Sound Engineering Technicians"
+  },
+  {
+    "codigo": "27-4021.00",
+    "descripcion": "Photographers"
+  },
+  {
+    "codigo": "27-4031.00",
+    "descripcion": "Camera Operators, Television, Video, and Film"
+  },
+  {
+    "codigo": "27-4032.00",
+    "descripcion": "Film and Video Editors"
+  },
+  {
+    "codigo": "29-1011.00",
+    "descripcion": "Chiropractors"
+  },
+  {
+    "codigo": "29-1021.00",
+    "descripcion": "Dentists, General"
+  },
+  {
+    "codigo": "29-1022.00",
+    "descripcion": "Oral and Maxillofacial Surgeons"
+  },
+  {
+    "codigo": "29-1023.00",
+    "descripcion": "Orthodontists"
+  },
+  {
+    "codigo": "29-1024.00",
+    "descripcion": "Prosthodontists"
+  },
+  {
+    "codigo": "29-1031.00",
+    "descripcion": "Dietitians and Nutritionists"
+  },
+  {
+    "codigo": "29-1041.00",
+    "descripcion": "Optometrists"
+  },
+  {
+    "codigo": "29-1051.00",
+    "descripcion": "Pharmacists"
+  },
+  {
+    "codigo": "29-1071.00",
+    "descripcion": "Physician Assistants"
+  },
+  {
+    "codigo": "29-1071.01",
+    "descripcion": "Anesthesiologist Assistants"
+  },
+  {
+    "codigo": "29-1081.00",
+    "descripcion": "Podiatrists"
+  },
+  {
+    "codigo": "29-1122.00",
+    "descripcion": "Occupational Therapists"
+  },
+  {
+    "codigo": "29-1122.01",
+    "descripcion": "Low Vision Therapists, Orientation and Mobility Specialists, and Vision Rehabilitation Therapists"
+  },
+  {
+    "codigo": "29-1123.00",
+    "descripcion": "Physical Therapists"
+  },
+  {
+    "codigo": "29-1124.00",
+    "descripcion": "Radiation Therapists"
+  },
+  {
+    "codigo": "29-1125.00",
+    "descripcion": "Recreational Therapists"
+  },
+  {
+    "codigo": "29-1126.00",
+    "descripcion": "Respiratory Therapists"
+  },
+  {
+    "codigo": "29-1127.00",
+    "descripcion": "Speech-Language Pathologists"
+  },
+  {
+    "codigo": "29-1128.00",
+    "descripcion": "Exercise Physiologists"
+  },
+  {
+    "codigo": "29-1129.01",
+    "descripcion": "Art Therapists"
+  },
+  {
+    "codigo": "29-1129.02",
+    "descripcion": "Music Therapists"
+  },
+  {
+    "codigo": "29-1131.00",
+    "descripcion": "Veterinarians"
+  },
+  {
+    "codigo": "29-1141.00",
+    "descripcion": "Registered Nurses"
+  },
+  {
+    "codigo": "29-1141.01",
+    "descripcion": "Acute Care Nurses"
+  },
+  {
+    "codigo": "29-1141.02",
+    "descripcion": "Advanced Practice Psychiatric Nurses"
+  },
+  {
+    "codigo": "29-1141.03",
+    "descripcion": "Critical Care Nurses"
+  },
+  {
+    "codigo": "29-1141.04",
+    "descripcion": "Clinical Nurse Specialists"
+  },
+  {
+    "codigo": "29-1151.00",
+    "descripcion": "Nurse Anesthetists"
+  },
+  {
+    "codigo": "29-1161.00",
+    "descripcion": "Nurse Midwives"
+  },
+  {
+    "codigo": "29-1171.00",
+    "descripcion": "Nurse Practitioners"
+  },
+  {
+    "codigo": "29-1181.00",
+    "descripcion": "Audiologists"
+  },
+  {
+    "codigo": "29-1211.00",
+    "descripcion": "Anesthesiologists"
+  },
+  {
+    "codigo": "29-1213.00",
+    "descripcion": "Dermatologists"
+  },
+  {
+    "codigo": "29-1214.00",
+    "descripcion": "Emergency Medicine Physicians"
+  },
+  {
+    "codigo": "29-1215.00",
+    "descripcion": "Family Medicine Physicians"
+  },
+  {
+    "codigo": "29-1216.00",
+    "descripcion": "General Internal Medicine Physicians"
+  },
+  {
+    "codigo": "29-1217.00",
+    "descripcion": "Neurologists"
+  },
+  {
+    "codigo": "29-1218.00",
+    "descripcion": "Obstetricians and Gynecologists"
+  },
+  {
+    "codigo": "29-1221.00",
+    "descripcion": "Pediatricians, General"
+  },
+  {
+    "codigo": "29-1222.00",
+    "descripcion": "Physicians, Pathologists"
+  },
+  {
+    "codigo": "29-1223.00",
+    "descripcion": "Psychiatrists"
+  },
+  {
+    "codigo": "29-1224.00",
+    "descripcion": "Radiologists"
+  },
+  {
+    "codigo": "29-1229.01",
+    "descripcion": "Allergists and Immunologists"
+  },
+  {
+    "codigo": "29-1229.02",
+    "descripcion": "Hospitalists"
+  },
+  {
+    "codigo": "29-1229.03",
+    "descripcion": "Urologists"
+  },
+  {
+    "codigo": "29-1229.04",
+    "descripcion": "Physical Medicine and Rehabilitation Physicians"
+  },
+  {
+    "codigo": "29-1229.05",
+    "descripcion": "Preventive Medicine Physicians"
+  },
+  {
+    "codigo": "29-1229.06",
+    "descripcion": "Sports Medicine Physicians"
+  },
+  {
+    "codigo": "29-1241.00",
+    "descripcion": "Ophthalmologists, Except Pediatric"
+  },
+  {
+    "codigo": "29-1291.00",
+    "descripcion": "Acupuncturists"
+  },
+  {
+    "codigo": "29-1292.00",
+    "descripcion": "Dental Hygienists"
+  },
+  {
+    "codigo": "29-1299.01",
+    "descripcion": "Naturopathic Physicians"
+  },
+  {
+    "codigo": "29-1299.02",
+    "descripcion": "Orthoptists"
+  },
+  {
+    "codigo": "29-2011.00",
+    "descripcion": "Medical and Clinical Laboratory Technologists"
+  },
+  {
+    "codigo": "29-2011.01",
+    "descripcion": "Cytogenetic Technologists"
+  },
+  {
+    "codigo": "29-2011.02",
+    "descripcion": "Cytotechnologists"
+  },
+  {
+    "codigo": "29-2011.04",
+    "descripcion": "Histotechnologists"
+  },
+  {
+    "codigo": "29-2012.00",
+    "descripcion": "Medical and Clinical Laboratory Technicians"
+  },
+  {
+    "codigo": "29-2012.01",
+    "descripcion": "Histology Technicians"
+  },
+  {
+    "codigo": "29-2031.00",
+    "descripcion": "Cardiovascular Technologists and Technicians"
+  },
+  {
+    "codigo": "29-2032.00",
+    "descripcion": "Diagnostic Medical Sonographers"
+  },
+  {
+    "codigo": "29-2033.00",
+    "descripcion": "Nuclear Medicine Technologists"
+  },
+  {
+    "codigo": "29-2034.00",
+    "descripcion": "Radiologic Technologists and Technicians"
+  },
+  {
+    "codigo": "29-2035.00",
+    "descripcion": "Magnetic Resonance Imaging Technologists"
+  },
+  {
+    "codigo": "29-2036.00",
+    "descripcion": "Medical Dosimetrists"
+  },
+  {
+    "codigo": "29-2051.00",
+    "descripcion": "Dietetic Technicians"
+  },
+  {
+    "codigo": "29-2052.00",
+    "descripcion": "Pharmacy Technicians"
+  },
+  {
+    "codigo": "29-2053.00",
+    "descripcion": "Psychiatric Technicians"
+  },
+  {
+    "codigo": "29-2055.00",
+    "descripcion": "Surgical Technologists"
+  },
+  {
+    "codigo": "29-2056.00",
+    "descripcion": "Veterinary Technologists and Technicians"
+  },
+  {
+    "codigo": "29-2057.00",
+    "descripcion": "Ophthalmic Medical Technicians"
+  },
+  {
+    "codigo": "29-2061.00",
+    "descripcion": "Licensed Practical and Licensed Vocational Nurses"
+  },
+  {
+    "codigo": "29-2081.00",
+    "descripcion": "Opticians, Dispensing"
+  },
+  {
+    "codigo": "29-2091.00",
+    "descripcion": "Orthotists and Prosthetists"
+  },
+  {
+    "codigo": "29-2092.00",
+    "descripcion": "Hearing Aid Specialists"
+  },
+  {
+    "codigo": "29-2099.01",
+    "descripcion": "Neurodiagnostic Technologists"
+  },
+  {
+    "codigo": "29-2099.05",
+    "descripcion": "Ophthalmic Medical Technologists"
+  },
+  {
+    "codigo": "29-2099.08",
+    "descripcion": "Patient Representatives"
+  },
+  {
+    "codigo": "29-9091.00",
+    "descripcion": "Athletic Trainers"
+  },
+  {
+    "codigo": "29-9092.00",
+    "descripcion": "Genetic Counselors"
+  },
+  {
+    "codigo": "29-9093.00",
+    "descripcion": "Surgical Assistants"
+  },
+  {
+    "codigo": "29-9099.01",
+    "descripcion": "Midwives"
+  },
+  {
+    "codigo": "31-1121.00",
+    "descripcion": "Home Health Aides"
+  },
+  {
+    "codigo": "31-1122.00",
+    "descripcion": "Personal Care Aides"
+  },
+  {
+    "codigo": "31-1131.00",
+    "descripcion": "Nursing Assistants"
+  },
+  {
+    "codigo": "31-1132.00",
+    "descripcion": "Orderlies"
+  },
+  {
+    "codigo": "31-1133.00",
+    "descripcion": "Psychiatric Aides"
+  },
+  {
+    "codigo": "31-2011.00",
+    "descripcion": "Occupational Therapy Assistants"
+  },
+  {
+    "codigo": "31-2012.00",
+    "descripcion": "Occupational Therapy Aides"
+  },
+  {
+    "codigo": "31-2021.00",
+    "descripcion": "Physical Therapist Assistants"
+  },
+  {
+    "codigo": "31-2022.00",
+    "descripcion": "Physical Therapist Aides"
+  },
+  {
+    "codigo": "31-9011.00",
+    "descripcion": "Massage Therapists"
+  },
+  {
+    "codigo": "31-9091.00",
+    "descripcion": "Dental Assistants"
+  },
+  {
+    "codigo": "31-9092.00",
+    "descripcion": "Medical Assistants"
+  },
+  {
+    "codigo": "31-9093.00",
+    "descripcion": "Medical Equipment Preparers"
+  },
+  {
+    "codigo": "31-9094.00",
+    "descripcion": "Medical Transcriptionists"
+  },
+  {
+    "codigo": "31-9095.00",
+    "descripcion": "Pharmacy Aides"
+  },
+  {
+    "codigo": "31-9096.00",
+    "descripcion": "Veterinary Assistants and Laboratory Animal Caretakers"
+  },
+  {
+    "codigo": "31-9097.00",
+    "descripcion": "Phlebotomists"
+  },
+  {
+    "codigo": "31-9099.01",
+    "descripcion": "Speech-Language Pathology Assistants"
+  },
+  {
+    "codigo": "31-9099.02",
+    "descripcion": "Endoscopy Technicians"
+  },
+  {
+    "codigo": "33-1011.00",
+    "descripcion": "First-Line Supervisors of Correctional Officers"
+  },
+  {
+    "codigo": "33-1012.00",
+    "descripcion": "First-Line Supervisors of Police and Detectives"
+  },
+  {
+    "codigo": "33-1021.00",
+    "descripcion": "First-Line Supervisors of Firefighting and Prevention Workers"
+  },
+  {
+    "codigo": "33-1091.00",
+    "descripcion": "First-Line Supervisors of Security Workers"
+  },
+  {
+    "codigo": "33-2011.00",
+    "descripcion": "Firefighters"
+  },
+  {
+    "codigo": "33-2021.00",
+    "descripcion": "Fire Inspectors and Investigators"
+  },
+  {
+    "codigo": "33-2022.00",
+    "descripcion": "Forest Fire Inspectors and Prevention Specialists"
+  },
+  {
+    "codigo": "33-3011.00",
+    "descripcion": "Bailiffs"
+  },
+  {
+    "codigo": "33-3012.00",
+    "descripcion": "Correctional Officers and Jailers"
+  },
+  {
+    "codigo": "33-3021.00",
+    "descripcion": "Detectives and Criminal Investigators"
+  },
+  {
+    "codigo": "33-3021.02",
+    "descripcion": "Police Identification and Records Officers"
+  },
+  {
+    "codigo": "33-3021.06",
+    "descripcion": "Intelligence Analysts"
+  },
+  {
+    "codigo": "33-3031.00",
+    "descripcion": "Fish and Game Wardens"
+  },
+  {
+    "codigo": "33-3041.00",
+    "descripcion": "Parking Enforcement Workers"
+  },
+  {
+    "codigo": "33-3051.00",
+    "descripcion": "Police and Sheriff's Patrol Officers"
+  },
+  {
+    "codigo": "33-3051.04",
+    "descripcion": "Customs and Border Protection Officers"
+  },
+  {
+    "codigo": "33-3052.00",
+    "descripcion": "Transit and Railroad Police"
+  },
+  {
+    "codigo": "33-9011.00",
+    "descripcion": "Animal Control Workers"
+  },
+  {
+    "codigo": "33-9021.00",
+    "descripcion": "Private Detectives and Investigators"
+  },
+  {
+    "codigo": "33-9031.00",
+    "descripcion": "Gambling Surveillance Officers and Gambling Investigators"
+  },
+  {
+    "codigo": "33-9032.00",
+    "descripcion": "Security Guards"
+  },
+  {
+    "codigo": "33-9091.00",
+    "descripcion": "Crossing Guards and Flaggers"
+  },
+  {
+    "codigo": "33-9092.00",
+    "descripcion": "Lifeguards, Ski Patrol, and Other Recreational Protective Service Workers"
+  },
+  {
+    "codigo": "33-9093.00",
+    "descripcion": "Transportation Security Screeners"
+  },
+  {
+    "codigo": "33-9099.02",
+    "descripcion": "Retail Loss Prevention Specialists"
+  },
+  {
+    "codigo": "35-1011.00",
+    "descripcion": "Chefs and Head Cooks"
+  },
+  {
+    "codigo": "35-1012.00",
+    "descripcion": "First-Line Supervisors of Food Preparation and Serving Workers"
+  },
+  {
+    "codigo": "35-2011.00",
+    "descripcion": "Cooks, Fast Food"
+  },
+  {
+    "codigo": "35-2012.00",
+    "descripcion": "Cooks, Institution and Cafeteria"
+  },
+  {
+    "codigo": "35-2013.00",
+    "descripcion": "Cooks, Private Household"
+  },
+  {
+    "codigo": "35-2014.00",
+    "descripcion": "Cooks, Restaurant"
+  },
+  {
+    "codigo": "35-2015.00",
+    "descripcion": "Cooks, Short Order"
+  },
+  {
+    "codigo": "35-2021.00",
+    "descripcion": "Food Preparation Workers"
+  },
+  {
+    "codigo": "35-3011.00",
+    "descripcion": "Bartenders"
+  },
+  {
+    "codigo": "35-3023.00",
+    "descripcion": "Fast Food and Counter Workers"
+  },
+  {
+    "codigo": "35-3023.01",
+    "descripcion": "Baristas"
+  },
+  {
+    "codigo": "35-3031.00",
+    "descripcion": "Waiters and Waitresses"
+  },
+  {
+    "codigo": "35-3041.00",
+    "descripcion": "Food Servers, Nonrestaurant"
+  },
+  {
+    "codigo": "35-9011.00",
+    "descripcion": "Dining Room and Cafeteria Attendants and Bartender Helpers"
+  },
+  {
+    "codigo": "35-9021.00",
+    "descripcion": "Dishwashers"
+  },
+  {
+    "codigo": "35-9031.00",
+    "descripcion": "Hosts and Hostesses, Restaurant, Lounge, and Coffee Shop"
+  },
+  {
+    "codigo": "37-1011.00",
+    "descripcion": "First-Line Supervisors of Housekeeping and Janitorial Workers"
+  },
+  {
+    "codigo": "37-1012.00",
+    "descripcion": "First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers"
+  },
+  {
+    "codigo": "37-2011.00",
+    "descripcion": "Janitors and Cleaners, Except Maids and Housekeeping Cleaners"
+  },
+  {
+    "codigo": "37-2012.00",
+    "descripcion": "Maids and Housekeeping Cleaners"
+  },
+  {
+    "codigo": "37-2021.00",
+    "descripcion": "Pest Control Workers"
+  },
+  {
+    "codigo": "37-3011.00",
+    "descripcion": "Landscaping and Groundskeeping Workers"
+  },
+  {
+    "codigo": "37-3012.00",
+    "descripcion": "Pesticide Handlers, Sprayers, and Applicators, Vegetation"
+  },
+  {
+    "codigo": "37-3013.00",
+    "descripcion": "Tree Trimmers and Pruners"
+  },
+  {
+    "codigo": "39-1013.00",
+    "descripcion": "First-Line Supervisors of Gambling Services Workers"
+  },
+  {
+    "codigo": "39-1022.00",
+    "descripcion": "First-Line Supervisors of Personal Service Workers"
+  },
+  {
+    "codigo": "39-2011.00",
+    "descripcion": "Animal Trainers"
+  },
+  {
+    "codigo": "39-2021.00",
+    "descripcion": "Animal Caretakers"
+  },
+  {
+    "codigo": "39-3011.00",
+    "descripcion": "Gambling Dealers"
+  },
+  {
+    "codigo": "39-3012.00",
+    "descripcion": "Gambling and Sports Book Writers and Runners"
+  },
+  {
+    "codigo": "39-3021.00",
+    "descripcion": "Motion Picture Projectionists"
+  },
+  {
+    "codigo": "39-3031.00",
+    "descripcion": "Ushers, Lobby Attendants, and Ticket Takers"
+  },
+  {
+    "codigo": "39-3091.00",
+    "descripcion": "Amusement and Recreation Attendants"
+  },
+  {
+    "codigo": "39-3092.00",
+    "descripcion": "Costume Attendants"
+  },
+  {
+    "codigo": "39-3093.00",
+    "descripcion": "Locker Room, Coatroom, and Dressing Room Attendants"
+  },
+  {
+    "codigo": "39-4011.00",
+    "descripcion": "Embalmers"
+  },
+  {
+    "codigo": "39-4021.00",
+    "descripcion": "Funeral Attendants"
+  },
+  {
+    "codigo": "39-4031.00",
+    "descripcion": "Morticians, Undertakers, and Funeral Arrangers"
+  },
+  {
+    "codigo": "39-5011.00",
+    "descripcion": "Barbers"
+  },
+  {
+    "codigo": "39-5012.00",
+    "descripcion": "Hairdressers, Hairstylists, and Cosmetologists"
+  },
+  {
+    "codigo": "39-5091.00",
+    "descripcion": "Makeup Artists, Theatrical and Performance"
+  },
+  {
+    "codigo": "39-5092.00",
+    "descripcion": "Manicurists and Pedicurists"
+  },
+  {
+    "codigo": "39-5093.00",
+    "descripcion": "Shampooers"
+  },
+  {
+    "codigo": "39-5094.00",
+    "descripcion": "Skincare Specialists"
+  },
+  {
+    "codigo": "39-6011.00",
+    "descripcion": "Baggage Porters and Bellhops"
+  },
+  {
+    "codigo": "39-6012.00",
+    "descripcion": "Concierges"
+  },
+  {
+    "codigo": "39-7011.00",
+    "descripcion": "Tour Guides and Escorts"
+  },
+  {
+    "codigo": "39-7012.00",
+    "descripcion": "Travel Guides"
+  },
+  {
+    "codigo": "39-9011.00",
+    "descripcion": "Childcare Workers"
+  },
+  {
+    "codigo": "39-9011.01",
+    "descripcion": "Nannies"
+  },
+  {
+    "codigo": "39-9031.00",
+    "descripcion": "Exercise Trainers and Group Fitness Instructors"
+  },
+  {
+    "codigo": "39-9032.00",
+    "descripcion": "Recreation Workers"
+  },
+  {
+    "codigo": "39-9041.00",
+    "descripcion": "Residential Advisors"
+  },
+  {
+    "codigo": "41-1011.00",
+    "descripcion": "First-Line Supervisors of Retail Sales Workers"
+  },
+  {
+    "codigo": "41-1012.00",
+    "descripcion": "First-Line Supervisors of Non-Retail Sales Workers"
+  },
+  {
+    "codigo": "41-2011.00",
+    "descripcion": "Cashiers"
+  },
+  {
+    "codigo": "41-2012.00",
+    "descripcion": "Gambling Change Persons and Booth Cashiers"
+  },
+  {
+    "codigo": "41-2021.00",
+    "descripcion": "Counter and Rental Clerks"
+  },
+  {
+    "codigo": "41-2022.00",
+    "descripcion": "Parts Salespersons"
+  },
+  {
+    "codigo": "41-2031.00",
+    "descripcion": "Retail Salespersons"
+  },
+  {
+    "codigo": "41-3011.00",
+    "descripcion": "Advertising Sales Agents"
+  },
+  {
+    "codigo": "41-3021.00",
+    "descripcion": "Insurance Sales Agents"
+  },
+  {
+    "codigo": "41-3031.00",
+    "descripcion": "Securities, Commodities, and Financial Services Sales Agents"
+  },
+  {
+    "codigo": "41-3041.00",
+    "descripcion": "Travel Agents"
+  },
+  {
+    "codigo": "41-4011.00",
+    "descripcion": "Sales Representatives, Wholesale and Manufacturing, Technical and Scientific Products"
+  },
+  {
+    "codigo": "41-4011.07",
+    "descripcion": "Solar Sales Representatives and Assessors"
+  },
+  {
+    "codigo": "41-4012.00",
+    "descripcion": "Sales Representatives, Wholesale and Manufacturing, Except Technical and Scientific Products"
+  },
+  {
+    "codigo": "41-9011.00",
+    "descripcion": "Demonstrators and Product Promoters"
+  },
+  {
+    "codigo": "41-9012.00",
+    "descripcion": "Models"
+  },
+  {
+    "codigo": "41-9021.00",
+    "descripcion": "Real Estate Brokers"
+  },
+  {
+    "codigo": "41-9022.00",
+    "descripcion": "Real Estate Sales Agents"
+  },
+  {
+    "codigo": "41-9031.00",
+    "descripcion": "Sales Engineers"
+  },
+  {
+    "codigo": "41-9041.00",
+    "descripcion": "Telemarketers"
+  },
+  {
+    "codigo": "41-9091.00",
+    "descripcion": "Door-to-Door Sales Workers, News and Street Vendors, and Related Workers"
+  },
+  {
+    "codigo": "43-1011.00",
+    "descripcion": "First-Line Supervisors of Office and Administrative Support Workers"
+  },
+  {
+    "codigo": "43-2011.00",
+    "descripcion": "Switchboard Operators, Including Answering Service"
+  },
+  {
+    "codigo": "43-2021.00",
+    "descripcion": "Telephone Operators"
+  },
+  {
+    "codigo": "43-3011.00",
+    "descripcion": "Bill and Account Collectors"
+  },
+  {
+    "codigo": "43-3021.00",
+    "descripcion": "Billing and Posting Clerks"
+  },
+  {
+    "codigo": "43-3031.00",
+    "descripcion": "Bookkeeping, Accounting, and Auditing Clerks"
+  },
+  {
+    "codigo": "43-3041.00",
+    "descripcion": "Gambling Cage Workers"
+  },
+  {
+    "codigo": "43-3051.00",
+    "descripcion": "Payroll and Timekeeping Clerks"
+  },
+  {
+    "codigo": "43-3061.00",
+    "descripcion": "Procurement Clerks"
+  },
+  {
+    "codigo": "43-3071.00",
+    "descripcion": "Tellers"
+  },
+  {
+    "codigo": "43-4011.00",
+    "descripcion": "Brokerage Clerks"
+  },
+  {
+    "codigo": "43-4021.00",
+    "descripcion": "Correspondence Clerks"
+  },
+  {
+    "codigo": "43-4031.00",
+    "descripcion": "Court, Municipal, and License Clerks"
+  },
+  {
+    "codigo": "43-4041.00",
+    "descripcion": "Credit Authorizers, Checkers, and Clerks"
+  },
+  {
+    "codigo": "43-4051.00",
+    "descripcion": "Customer Service Representatives"
+  },
+  {
+    "codigo": "43-4061.00",
+    "descripcion": "Eligibility Interviewers, Government Programs"
+  },
+  {
+    "codigo": "43-4071.00",
+    "descripcion": "File Clerks"
+  },
+  {
+    "codigo": "43-4081.00",
+    "descripcion": "Hotel, Motel, and Resort Desk Clerks"
+  },
+  {
+    "codigo": "43-4111.00",
+    "descripcion": "Interviewers, Except Eligibility and Loan"
+  },
+  {
+    "codigo": "43-4121.00",
+    "descripcion": "Library Assistants, Clerical"
+  },
+  {
+    "codigo": "43-4131.00",
+    "descripcion": "Loan Interviewers and Clerks"
+  },
+  {
+    "codigo": "43-4141.00",
+    "descripcion": "New Accounts Clerks"
+  },
+  {
+    "codigo": "43-4151.00",
+    "descripcion": "Order Clerks"
+  },
+  {
+    "codigo": "43-4161.00",
+    "descripcion": "Human Resources Assistants, Except Payroll and Timekeeping"
+  },
+  {
+    "codigo": "43-4171.00",
+    "descripcion": "Receptionists and Information Clerks"
+  },
+  {
+    "codigo": "43-4181.00",
+    "descripcion": "Reservation and Transportation Ticket Agents and Travel Clerks"
+  },
+  {
+    "codigo": "43-5011.00",
+    "descripcion": "Cargo and Freight Agents"
+  },
+  {
+    "codigo": "43-5011.01",
+    "descripcion": "Freight Forwarders"
+  },
+  {
+    "codigo": "43-5021.00",
+    "descripcion": "Couriers and Messengers"
+  },
+  {
+    "codigo": "43-5031.00",
+    "descripcion": "Public Safety Telecommunicators"
+  },
+  {
+    "codigo": "43-5032.00",
+    "descripcion": "Dispatchers, Except Police, Fire, and Ambulance"
+  },
+  {
+    "codigo": "43-5041.00",
+    "descripcion": "Meter Readers, Utilities"
+  },
+  {
+    "codigo": "43-5051.00",
+    "descripcion": "Postal Service Clerks"
+  },
+  {
+    "codigo": "43-5052.00",
+    "descripcion": "Postal Service Mail Carriers"
+  },
+  {
+    "codigo": "43-5053.00",
+    "descripcion": "Postal Service Mail Sorters, Processors, and Processing Machine Operators"
+  },
+  {
+    "codigo": "43-5061.00",
+    "descripcion": "Production, Planning, and Expediting Clerks"
+  },
+  {
+    "codigo": "43-5071.00",
+    "descripcion": "Shipping, Receiving, and Inventory Clerks"
+  },
+  {
+    "codigo": "43-5111.00",
+    "descripcion": "Weighers, Measurers, Checkers, and Samplers, Recordkeeping"
+  },
+  {
+    "codigo": "43-6011.00",
+    "descripcion": "Executive Secretaries and Executive Administrative Assistants"
+  },
+  {
+    "codigo": "43-6012.00",
+    "descripcion": "Legal Secretaries and Administrative Assistants"
+  },
+  {
+    "codigo": "43-6013.00",
+    "descripcion": "Medical Secretaries and Administrative Assistants"
+  },
+  {
+    "codigo": "43-6014.00",
+    "descripcion": "Secretaries and Administrative Assistants, Except Legal, Medical, and Executive"
+  },
+  {
+    "codigo": "43-9021.00",
+    "descripcion": "Data Entry Keyers"
+  },
+  {
+    "codigo": "43-9022.00",
+    "descripcion": "Word Processors and Typists"
+  },
+  {
+    "codigo": "43-9031.00",
+    "descripcion": "Desktop Publishers"
+  },
+  {
+    "codigo": "43-9041.00",
+    "descripcion": "Insurance Claims and Policy Processing Clerks"
+  },
+  {
+    "codigo": "43-9051.00",
+    "descripcion": "Mail Clerks and Mail Machine Operators, Except Postal Service"
+  },
+  {
+    "codigo": "43-9061.00",
+    "descripcion": "Office Clerks, General"
+  },
+  {
+    "codigo": "43-9071.00",
+    "descripcion": "Office Machine Operators, Except Computer"
+  },
+  {
+    "codigo": "43-9081.00",
+    "descripcion": "Proofreaders and Copy Markers"
+  },
+  {
+    "codigo": "43-9111.00",
+    "descripcion": "Statistical Assistants"
+  },
+  {
+    "codigo": "45-1011.00",
+    "descripcion": "First-Line Supervisors of Farming, Fishing, and Forestry Workers"
+  },
+  {
+    "codigo": "45-2011.00",
+    "descripcion": "Agricultural Inspectors"
+  },
+  {
+    "codigo": "45-2021.00",
+    "descripcion": "Animal Breeders"
+  },
+  {
+    "codigo": "45-2041.00",
+    "descripcion": "Graders and Sorters, Agricultural Products"
+  },
+  {
+    "codigo": "45-2091.00",
+    "descripcion": "Agricultural Equipment Operators"
+  },
+  {
+    "codigo": "45-2092.00",
+    "descripcion": "Farmworkers and Laborers, Crop, Nursery, and Greenhouse"
+  },
+  {
+    "codigo": "45-2093.00",
+    "descripcion": "Farmworkers, Farm, Ranch, and Aquacultural Animals"
+  },
+  {
+    "codigo": "45-3031.00",
+    "descripcion": "Fishing and Hunting Workers"
+  },
+  {
+    "codigo": "45-4011.00",
+    "descripcion": "Forest and Conservation Workers"
+  },
+  {
+    "codigo": "45-4021.00",
+    "descripcion": "Fallers"
+  },
+  {
+    "codigo": "45-4022.00",
+    "descripcion": "Logging Equipment Operators"
+  },
+  {
+    "codigo": "45-4023.00",
+    "descripcion": "Log Graders and Scalers"
+  },
+  {
+    "codigo": "47-1011.00",
+    "descripcion": "First-Line Supervisors of Construction Trades and Extraction Workers"
+  },
+  {
+    "codigo": "47-1011.03",
+    "descripcion": "Solar Energy Installation Managers"
+  },
+  {
+    "codigo": "47-2011.00",
+    "descripcion": "Boilermakers"
+  },
+  {
+    "codigo": "47-2021.00",
+    "descripcion": "Brickmasons and Blockmasons"
+  },
+  {
+    "codigo": "47-2022.00",
+    "descripcion": "Stonemasons"
+  },
+  {
+    "codigo": "47-2031.00",
+    "descripcion": "Carpenters"
+  },
+  {
+    "codigo": "47-2041.00",
+    "descripcion": "Carpet Installers"
+  },
+  {
+    "codigo": "47-2042.00",
+    "descripcion": "Floor Layers, Except Carpet, Wood, and Hard Tiles"
+  },
+  {
+    "codigo": "47-2043.00",
+    "descripcion": "Floor Sanders and Finishers"
+  },
+  {
+    "codigo": "47-2044.00",
+    "descripcion": "Tile and Stone Setters"
+  },
+  {
+    "codigo": "47-2051.00",
+    "descripcion": "Cement Masons and Concrete Finishers"
+  },
+  {
+    "codigo": "47-2053.00",
+    "descripcion": "Terrazzo Workers and Finishers"
+  },
+  {
+    "codigo": "47-2061.00",
+    "descripcion": "Construction Laborers"
+  },
+  {
+    "codigo": "47-2071.00",
+    "descripcion": "Paving, Surfacing, and Tamping Equipment Operators"
+  },
+  {
+    "codigo": "47-2072.00",
+    "descripcion": "Pile Driver Operators"
+  },
+  {
+    "codigo": "47-2073.00",
+    "descripcion": "Operating Engineers and Other Construction Equipment Operators"
+  },
+  {
+    "codigo": "47-2081.00",
+    "descripcion": "Drywall and Ceiling Tile Installers"
+  },
+  {
+    "codigo": "47-2082.00",
+    "descripcion": "Tapers"
+  },
+  {
+    "codigo": "47-2111.00",
+    "descripcion": "Electricians"
+  },
+  {
+    "codigo": "47-2121.00",
+    "descripcion": "Glaziers"
+  },
+  {
+    "codigo": "47-2131.00",
+    "descripcion": "Insulation Workers, Floor, Ceiling, and Wall"
+  },
+  {
+    "codigo": "47-2132.00",
+    "descripcion": "Insulation Workers, Mechanical"
+  },
+  {
+    "codigo": "47-2141.00",
+    "descripcion": "Painters, Construction and Maintenance"
+  },
+  {
+    "codigo": "47-2142.00",
+    "descripcion": "Paperhangers"
+  },
+  {
+    "codigo": "47-2151.00",
+    "descripcion": "Pipelayers"
+  },
+  {
+    "codigo": "47-2152.00",
+    "descripcion": "Plumbers, Pipefitters, and Steamfitters"
+  },
+  {
+    "codigo": "47-2152.04",
+    "descripcion": "Solar Thermal Installers and Technicians"
+  },
+  {
+    "codigo": "47-2161.00",
+    "descripcion": "Plasterers and Stucco Masons"
+  },
+  {
+    "codigo": "47-2171.00",
+    "descripcion": "Reinforcing Iron and Rebar Workers"
+  },
+  {
+    "codigo": "47-2181.00",
+    "descripcion": "Roofers"
+  },
+  {
+    "codigo": "47-2211.00",
+    "descripcion": "Sheet Metal Workers"
+  },
+  {
+    "codigo": "47-2221.00",
+    "descripcion": "Structural Iron and Steel Workers"
+  },
+  {
+    "codigo": "47-2231.00",
+    "descripcion": "Solar Photovoltaic Installers"
+  },
+  {
+    "codigo": "47-3011.00",
+    "descripcion": "Helpers--Brickmasons, Blockmasons, Stonemasons, and Tile and Marble Setters"
+  },
+  {
+    "codigo": "47-3012.00",
+    "descripcion": "Helpers--Carpenters"
+  },
+  {
+    "codigo": "47-3013.00",
+    "descripcion": "Helpers--Electricians"
+  },
+  {
+    "codigo": "47-3014.00",
+    "descripcion": "Helpers--Painters, Paperhangers, Plasterers, and Stucco Masons"
+  },
+  {
+    "codigo": "47-3015.00",
+    "descripcion": "Helpers--Pipelayers, Plumbers, Pipefitters, and Steamfitters"
+  },
+  {
+    "codigo": "47-3016.00",
+    "descripcion": "Helpers--Roofers"
+  },
+  {
+    "codigo": "47-4011.00",
+    "descripcion": "Construction and Building Inspectors"
+  },
+  {
+    "codigo": "47-4011.01",
+    "descripcion": "Energy Auditors"
+  },
+  {
+    "codigo": "47-4021.00",
+    "descripcion": "Elevator and Escalator Installers and Repairers"
+  },
+  {
+    "codigo": "47-4031.00",
+    "descripcion": "Fence Erectors"
+  },
+  {
+    "codigo": "47-4041.00",
+    "descripcion": "Hazardous Materials Removal Workers"
+  },
+  {
+    "codigo": "47-4051.00",
+    "descripcion": "Highway Maintenance Workers"
+  },
+  {
+    "codigo": "47-4061.00",
+    "descripcion": "Rail-Track Laying and Maintenance Equipment Operators"
+  },
+  {
+    "codigo": "47-4071.00",
+    "descripcion": "Septic Tank Servicers and Sewer Pipe Cleaners"
+  },
+  {
+    "codigo": "47-4091.00",
+    "descripcion": "Segmental Pavers"
+  },
+  {
+    "codigo": "47-4099.03",
+    "descripcion": "Weatherization Installers and Technicians"
+  },
+  {
+    "codigo": "47-5011.00",
+    "descripcion": "Derrick Operators, Oil and Gas"
+  },
+  {
+    "codigo": "47-5012.00",
+    "descripcion": "Rotary Drill Operators, Oil and Gas"
+  },
+  {
+    "codigo": "47-5013.00",
+    "descripcion": "Service Unit Operators, Oil and Gas"
+  },
+  {
+    "codigo": "47-5022.00",
+    "descripcion": "Excavating and Loading Machine and Dragline Operators, Surface Mining"
+  },
+  {
+    "codigo": "47-5023.00",
+    "descripcion": "Earth Drillers, Except Oil and Gas"
+  },
+  {
+    "codigo": "47-5032.00",
+    "descripcion": "Explosives Workers, Ordnance Handling Experts, and Blasters"
+  },
+  {
+    "codigo": "47-5041.00",
+    "descripcion": "Continuous Mining Machine Operators"
+  },
+  {
+    "codigo": "47-5043.00",
+    "descripcion": "Roof Bolters, Mining"
+  },
+  {
+    "codigo": "47-5044.00",
+    "descripcion": "Loading and Moving Machine Operators, Underground Mining"
+  },
+  {
+    "codigo": "47-5051.00",
+    "descripcion": "Rock Splitters, Quarry"
+  },
+  {
+    "codigo": "47-5071.00",
+    "descripcion": "Roustabouts, Oil and Gas"
+  },
+  {
+    "codigo": "47-5081.00",
+    "descripcion": "Helpers--Extraction Workers"
+  },
+  {
+    "codigo": "49-1011.00",
+    "descripcion": "First-Line Supervisors of Mechanics, Installers, and Repairers"
+  },
+  {
+    "codigo": "49-2011.00",
+    "descripcion": "Computer, Automated Teller, and Office Machine Repairers"
+  },
+  {
+    "codigo": "49-2021.00",
+    "descripcion": "Radio, Cellular, and Tower Equipment Installers and Repairers"
+  },
+  {
+    "codigo": "49-2022.00",
+    "descripcion": "Telecommunications Equipment Installers and Repairers, Except Line Installers"
+  },
+  {
+    "codigo": "49-2091.00",
+    "descripcion": "Avionics Technicians"
+  },
+  {
+    "codigo": "49-2092.00",
+    "descripcion": "Electric Motor, Power Tool, and Related Repairers"
+  },
+  {
+    "codigo": "49-2093.00",
+    "descripcion": "Electrical and Electronics Installers and Repairers, Transportation Equipment"
+  },
+  {
+    "codigo": "49-2094.00",
+    "descripcion": "Electrical and Electronics Repairers, Commercial and Industrial Equipment"
+  },
+  {
+    "codigo": "49-2095.00",
+    "descripcion": "Electrical and Electronics Repairers, Powerhouse, Substation, and Relay"
+  },
+  {
+    "codigo": "49-2096.00",
+    "descripcion": "Electronic Equipment Installers and Repairers, Motor Vehicles"
+  },
+  {
+    "codigo": "49-2097.00",
+    "descripcion": "Audiovisual Equipment Installers and Repairers"
+  },
+  {
+    "codigo": "49-2098.00",
+    "descripcion": "Security and Fire Alarm Systems Installers"
+  },
+  {
+    "codigo": "49-3011.00",
+    "descripcion": "Aircraft Mechanics and Service Technicians"
+  },
+  {
+    "codigo": "49-3021.00",
+    "descripcion": "Automotive Body and Related Repairers"
+  },
+  {
+    "codigo": "49-3022.00",
+    "descripcion": "Automotive Glass Installers and Repairers"
+  },
+  {
+    "codigo": "49-3023.00",
+    "descripcion": "Automotive Service Technicians and Mechanics"
+  },
+  {
+    "codigo": "49-3031.00",
+    "descripcion": "Bus and Truck Mechanics and Diesel Engine Specialists"
+  },
+  {
+    "codigo": "49-3041.00",
+    "descripcion": "Farm Equipment Mechanics and Service Technicians"
+  },
+  {
+    "codigo": "49-3042.00",
+    "descripcion": "Mobile Heavy Equipment Mechanics, Except Engines"
+  },
+  {
+    "codigo": "49-3043.00",
+    "descripcion": "Rail Car Repairers"
+  },
+  {
+    "codigo": "49-3051.00",
+    "descripcion": "Motorboat Mechanics and Service Technicians"
+  },
+  {
+    "codigo": "49-3052.00",
+    "descripcion": "Motorcycle Mechanics"
+  },
+  {
+    "codigo": "49-3053.00",
+    "descripcion": "Outdoor Power Equipment and Other Small Engine Mechanics"
+  },
+  {
+    "codigo": "49-3091.00",
+    "descripcion": "Bicycle Repairers"
+  },
+  {
+    "codigo": "49-3092.00",
+    "descripcion": "Recreational Vehicle Service Technicians"
+  },
+  {
+    "codigo": "49-3093.00",
+    "descripcion": "Tire Repairers and Changers"
+  },
+  {
+    "codigo": "49-9011.00",
+    "descripcion": "Mechanical Door Repairers"
+  },
+  {
+    "codigo": "49-9012.00",
+    "descripcion": "Control and Valve Installers and Repairers, Except Mechanical Door"
+  },
+  {
+    "codigo": "49-9021.00",
+    "descripcion": "Heating, Air Conditioning, and Refrigeration Mechanics and Installers"
+  },
+  {
+    "codigo": "49-9031.00",
+    "descripcion": "Home Appliance Repairers"
+  },
+  {
+    "codigo": "49-9041.00",
+    "descripcion": "Industrial Machinery Mechanics"
+  },
+  {
+    "codigo": "49-9043.00",
+    "descripcion": "Maintenance Workers, Machinery"
+  },
+  {
+    "codigo": "49-9044.00",
+    "descripcion": "Millwrights"
+  },
+  {
+    "codigo": "49-9045.00",
+    "descripcion": "Refractory Materials Repairers, Except Brickmasons"
+  },
+  {
+    "codigo": "49-9051.00",
+    "descripcion": "Electrical Power-Line Installers and Repairers"
+  },
+  {
+    "codigo": "49-9052.00",
+    "descripcion": "Telecommunications Line Installers and Repairers"
+  },
+  {
+    "codigo": "49-9061.00",
+    "descripcion": "Camera and Photographic Equipment Repairers"
+  },
+  {
+    "codigo": "49-9062.00",
+    "descripcion": "Medical Equipment Repairers"
+  },
+  {
+    "codigo": "49-9063.00",
+    "descripcion": "Musical Instrument Repairers and Tuners"
+  },
+  {
+    "codigo": "49-9064.00",
+    "descripcion": "Watch and Clock Repairers"
+  },
+  {
+    "codigo": "49-9071.00",
+    "descripcion": "Maintenance and Repair Workers, General"
+  },
+  {
+    "codigo": "49-9081.00",
+    "descripcion": "Wind Turbine Service Technicians"
+  },
+  {
+    "codigo": "49-9091.00",
+    "descripcion": "Coin, Vending, and Amusement Machine Servicers and Repairers"
+  },
+  {
+    "codigo": "49-9092.00",
+    "descripcion": "Commercial Divers"
+  },
+  {
+    "codigo": "49-9094.00",
+    "descripcion": "Locksmiths and Safe Repairers"
+  },
+  {
+    "codigo": "49-9095.00",
+    "descripcion": "Manufactured Building and Mobile Home Installers"
+  },
+  {
+    "codigo": "49-9096.00",
+    "descripcion": "Riggers"
+  },
+  {
+    "codigo": "49-9097.00",
+    "descripcion": "Signal and Track Switch Repairers"
+  },
+  {
+    "codigo": "49-9098.00",
+    "descripcion": "Helpers--Installation, Maintenance, and Repair Workers"
+  },
+  {
+    "codigo": "49-9099.01",
+    "descripcion": "Geothermal Technicians"
+  },
+  {
+    "codigo": "51-1011.00",
+    "descripcion": "First-Line Supervisors of Production and Operating Workers"
+  },
+  {
+    "codigo": "51-2011.00",
+    "descripcion": "Aircraft Structure, Surfaces, Rigging, and Systems Assemblers"
+  },
+  {
+    "codigo": "51-2021.00",
+    "descripcion": "Coil Winders, Tapers, and Finishers"
+  },
+  {
+    "codigo": "51-2022.00",
+    "descripcion": "Electrical and Electronic Equipment Assemblers"
+  },
+  {
+    "codigo": "51-2023.00",
+    "descripcion": "Electromechanical Equipment Assemblers"
+  },
+  {
+    "codigo": "51-2031.00",
+    "descripcion": "Engine and Other Machine Assemblers"
+  },
+  {
+    "codigo": "51-2041.00",
+    "descripcion": "Structural Metal Fabricators and Fitters"
+  },
+  {
+    "codigo": "51-2051.00",
+    "descripcion": "Fiberglass Laminators and Fabricators"
+  },
+  {
+    "codigo": "51-2061.00",
+    "descripcion": "Timing Device Assemblers and Adjusters"
+  },
+  {
+    "codigo": "51-2092.00",
+    "descripcion": "Team Assemblers"
+  },
+  {
+    "codigo": "51-3011.00",
+    "descripcion": "Bakers"
+  },
+  {
+    "codigo": "51-3021.00",
+    "descripcion": "Butchers and Meat Cutters"
+  },
+  {
+    "codigo": "51-3022.00",
+    "descripcion": "Meat, Poultry, and Fish Cutters and Trimmers"
+  },
+  {
+    "codigo": "51-3023.00",
+    "descripcion": "Slaughterers and Meat Packers"
+  },
+  {
+    "codigo": "51-3091.00",
+    "descripcion": "Food and Tobacco Roasting, Baking, and Drying Machine Operators and Tenders"
+  },
+  {
+    "codigo": "51-3092.00",
+    "descripcion": "Food Batchmakers"
+  },
+  {
+    "codigo": "51-3093.00",
+    "descripcion": "Food Cooking Machine Operators and Tenders"
+  },
+  {
+    "codigo": "51-4021.00",
+    "descripcion": "Extruding and Drawing Machine Setters, Operators, and Tenders, Metal and Plastic"
+  },
+  {
+    "codigo": "51-4022.00",
+    "descripcion": "Forging Machine Setters, Operators, and Tenders, Metal and Plastic"
+  },
+  {
+    "codigo": "51-4023.00",
+    "descripcion": "Rolling Machine Setters, Operators, and Tenders, Metal and Plastic"
+  },
+  {
+    "codigo": "51-4031.00",
+    "descripcion": "Cutting, Punching, and Press Machine Setters, Operators, and Tenders, Metal and Plastic"
+  },
+  {
+    "codigo": "51-4032.00",
+    "descripcion": "Drilling and Boring Machine Tool Setters, Operators, and Tenders, Metal and Plastic"
+  },
+  {
+    "codigo": "51-4033.00",
+    "descripcion": "Grinding, Lapping, Polishing, and Buffing Machine Tool Setters, Operators, and Tenders, Metal and Plastic"
+  },
+  {
+    "codigo": "51-4034.00",
+    "descripcion": "Lathe and Turning Machine Tool Setters, Operators, and Tenders, Metal and Plastic"
+  },
+  {
+    "codigo": "51-4035.00",
+    "descripcion": "Milling and Planing Machine Setters, Operators, and Tenders, Metal and Plastic"
+  },
+  {
+    "codigo": "51-4041.00",
+    "descripcion": "Machinists"
+  },
+  {
+    "codigo": "51-4051.00",
+    "descripcion": "Metal-Refining Furnace Operators and Tenders"
+  },
+  {
+    "codigo": "51-4052.00",
+    "descripcion": "Pourers and Casters, Metal"
+  },
+  {
+    "codigo": "51-4061.00",
+    "descripcion": "Model Makers, Metal and Plastic"
+  },
+  {
+    "codigo": "51-4062.00",
+    "descripcion": "Patternmakers, Metal and Plastic"
+  },
+  {
+    "codigo": "51-4071.00",
+    "descripcion": "Foundry Mold and Coremakers"
+  },
+  {
+    "codigo": "51-4072.00",
+    "descripcion": "Molding, Coremaking, and Casting Machine Setters, Operators, and Tenders, Metal and Plastic"
+  },
+  {
+    "codigo": "51-4081.00",
+    "descripcion": "Multiple Machine Tool Setters, Operators, and Tenders, Metal and Plastic"
+  },
+  {
+    "codigo": "51-4111.00",
+    "descripcion": "Tool and Die Makers"
+  },
+  {
+    "codigo": "51-4121.00",
+    "descripcion": "Welders, Cutters, Solderers, and Brazers"
+  },
+  {
+    "codigo": "51-4122.00",
+    "descripcion": "Welding, Soldering, and Brazing Machine Setters, Operators, and Tenders"
+  },
+  {
+    "codigo": "51-4191.00",
+    "descripcion": "Heat Treating Equipment Setters, Operators, and Tenders, Metal and Plastic"
+  },
+  {
+    "codigo": "51-4192.00",
+    "descripcion": "Layout Workers, Metal and Plastic"
+  },
+  {
+    "codigo": "51-4193.00",
+    "descripcion": "Plating Machine Setters, Operators, and Tenders, Metal and Plastic"
+  },
+  {
+    "codigo": "51-4194.00",
+    "descripcion": "Tool Grinders, Filers, and Sharpeners"
+  },
+  {
+    "codigo": "51-5111.00",
+    "descripcion": "Prepress Technicians and Workers"
+  },
+  {
+    "codigo": "51-5112.00",
+    "descripcion": "Printing Press Operators"
+  },
+  {
+    "codigo": "51-5113.00",
+    "descripcion": "Print Binding and Finishing Workers"
+  },
+  {
+    "codigo": "51-6011.00",
+    "descripcion": "Laundry and Dry-Cleaning Workers"
+  },
+  {
+    "codigo": "51-6021.00",
+    "descripcion": "Pressers, Textile, Garment, and Related Materials"
+  },
+  {
+    "codigo": "51-6031.00",
+    "descripcion": "Sewing Machine Operators"
+  },
+  {
+    "codigo": "51-6041.00",
+    "descripcion": "Shoe and Leather Workers and Repairers"
+  },
+  {
+    "codigo": "51-6042.00",
+    "descripcion": "Shoe Machine Operators and Tenders"
+  },
+  {
+    "codigo": "51-6051.00",
+    "descripcion": "Sewers, Hand"
+  },
+  {
+    "codigo": "51-6052.00",
+    "descripcion": "Tailors, Dressmakers, and Custom Sewers"
+  },
+  {
+    "codigo": "51-6061.00",
+    "descripcion": "Textile Bleaching and Dyeing Machine Operators and Tenders"
+  },
+  {
+    "codigo": "51-6062.00",
+    "descripcion": "Textile Cutting Machine Setters, Operators, and Tenders"
+  },
+  {
+    "codigo": "51-6063.00",
+    "descripcion": "Textile Knitting and Weaving Machine Setters, Operators, and Tenders"
+  },
+  {
+    "codigo": "51-6064.00",
+    "descripcion": "Textile Winding, Twisting, and Drawing Out Machine Setters, Operators, and Tenders"
+  },
+  {
+    "codigo": "51-6091.00",
+    "descripcion": "Extruding and Forming Machine Setters, Operators, and Tenders, Synthetic and Glass Fibers"
+  },
+  {
+    "codigo": "51-6092.00",
+    "descripcion": "Fabric and Apparel Patternmakers"
+  },
+  {
+    "codigo": "51-6093.00",
+    "descripcion": "Upholsterers"
+  },
+  {
+    "codigo": "51-7011.00",
+    "descripcion": "Cabinetmakers and Bench Carpenters"
+  },
+  {
+    "codigo": "51-7021.00",
+    "descripcion": "Furniture Finishers"
+  },
+  {
+    "codigo": "51-7031.00",
+    "descripcion": "Model Makers, Wood"
+  },
+  {
+    "codigo": "51-7032.00",
+    "descripcion": "Patternmakers, Wood"
+  },
+  {
+    "codigo": "51-7041.00",
+    "descripcion": "Sawing Machine Setters, Operators, and Tenders, Wood"
+  },
+  {
+    "codigo": "51-7042.00",
+    "descripcion": "Woodworking Machine Setters, Operators, and Tenders, Except Sawing"
+  },
+  {
+    "codigo": "51-8011.00",
+    "descripcion": "Nuclear Power Reactor Operators"
+  },
+  {
+    "codigo": "51-8012.00",
+    "descripcion": "Power Distributors and Dispatchers"
+  },
+  {
+    "codigo": "51-8013.00",
+    "descripcion": "Power Plant Operators"
+  },
+  {
+    "codigo": "51-8013.03",
+    "descripcion": "Biomass Plant Technicians"
+  },
+  {
+    "codigo": "51-8013.04",
+    "descripcion": "Hydroelectric Plant Technicians"
+  },
+  {
+    "codigo": "51-8021.00",
+    "descripcion": "Stationary Engineers and Boiler Operators"
+  },
+  {
+    "codigo": "51-8031.00",
+    "descripcion": "Water and Wastewater Treatment Plant and System Operators"
+  },
+  {
+    "codigo": "51-8091.00",
+    "descripcion": "Chemical Plant and System Operators"
+  },
+  {
+    "codigo": "51-8092.00",
+    "descripcion": "Gas Plant Operators"
+  },
+  {
+    "codigo": "51-8093.00",
+    "descripcion": "Petroleum Pump System Operators, Refinery Operators, and Gaugers"
+  },
+  {
+    "codigo": "51-8099.01",
+    "descripcion": "Biofuels Processing Technicians"
+  },
+  {
+    "codigo": "51-9011.00",
+    "descripcion": "Chemical Equipment Operators and Tenders"
+  },
+  {
+    "codigo": "51-9012.00",
+    "descripcion": "Separating, Filtering, Clarifying, Precipitating, and Still Machine Setters, Operators, and Tenders"
+  },
+  {
+    "codigo": "51-9021.00",
+    "descripcion": "Crushing, Grinding, and Polishing Machine Setters, Operators, and Tenders"
+  },
+  {
+    "codigo": "51-9022.00",
+    "descripcion": "Grinding and Polishing Workers, Hand"
+  },
+  {
+    "codigo": "51-9023.00",
+    "descripcion": "Mixing and Blending Machine Setters, Operators, and Tenders"
+  },
+  {
+    "codigo": "51-9031.00",
+    "descripcion": "Cutters and Trimmers, Hand"
+  },
+  {
+    "codigo": "51-9032.00",
+    "descripcion": "Cutting and Slicing Machine Setters, Operators, and Tenders"
+  },
+  {
+    "codigo": "51-9041.00",
+    "descripcion": "Extruding, Forming, Pressing, and Compacting Machine Setters, Operators, and Tenders"
+  },
+  {
+    "codigo": "51-9051.00",
+    "descripcion": "Furnace, Kiln, Oven, Drier, and Kettle Operators and Tenders"
+  },
+  {
+    "codigo": "51-9061.00",
+    "descripcion": "Inspectors, Testers, Sorters, Samplers, and Weighers"
+  },
+  {
+    "codigo": "51-9071.00",
+    "descripcion": "Jewelers and Precious Stone and Metal Workers"
+  },
+  {
+    "codigo": "51-9071.06",
+    "descripcion": "Gem and Diamond Workers"
+  },
+  {
+    "codigo": "51-9081.00",
+    "descripcion": "Dental Laboratory Technicians"
+  },
+  {
+    "codigo": "51-9082.00",
+    "descripcion": "Medical Appliance Technicians"
+  },
+  {
+    "codigo": "51-9083.00",
+    "descripcion": "Ophthalmic Laboratory Technicians"
+  },
+  {
+    "codigo": "51-9111.00",
+    "descripcion": "Packaging and Filling Machine Operators and Tenders"
+  },
+  {
+    "codigo": "51-9123.00",
+    "descripcion": "Painting, Coating, and Decorating Workers"
+  },
+  {
+    "codigo": "51-9124.00",
+    "descripcion": "Coating, Painting, and Spraying Machine Setters, Operators, and Tenders"
+  },
+  {
+    "codigo": "51-9141.00",
+    "descripcion": "Semiconductor Processing Technicians"
+  },
+  {
+    "codigo": "51-9151.00",
+    "descripcion": "Photographic Process Workers and Processing Machine Operators"
+  },
+  {
+    "codigo": "51-9161.00",
+    "descripcion": "Computer Numerically Controlled Tool Operators"
+  },
+  {
+    "codigo": "51-9162.00",
+    "descripcion": "Computer Numerically Controlled Tool Programmers"
+  },
+  {
+    "codigo": "51-9191.00",
+    "descripcion": "Adhesive Bonding Machine Operators and Tenders"
+  },
+  {
+    "codigo": "51-9192.00",
+    "descripcion": "Cleaning, Washing, and Metal Pickling Equipment Operators and Tenders"
+  },
+  {
+    "codigo": "51-9193.00",
+    "descripcion": "Cooling and Freezing Equipment Operators and Tenders"
+  },
+  {
+    "codigo": "51-9194.00",
+    "descripcion": "Etchers and Engravers"
+  },
+  {
+    "codigo": "51-9195.00",
+    "descripcion": "Molders, Shapers, and Casters, Except Metal and Plastic"
+  },
+  {
+    "codigo": "51-9195.03",
+    "descripcion": "Stone Cutters and Carvers, Manufacturing"
+  },
+  {
+    "codigo": "51-9195.04",
+    "descripcion": "Glass Blowers, Molders, Benders, and Finishers"
+  },
+  {
+    "codigo": "51-9195.05",
+    "descripcion": "Potters, Manufacturing"
+  },
+  {
+    "codigo": "51-9196.00",
+    "descripcion": "Paper Goods Machine Setters, Operators, and Tenders"
+  },
+  {
+    "codigo": "51-9197.00",
+    "descripcion": "Tire Builders"
+  },
+  {
+    "codigo": "51-9198.00",
+    "descripcion": "Helpers--Production Workers"
+  },
+  {
+    "codigo": "53-1041.00",
+    "descripcion": "Aircraft Cargo Handling Supervisors"
+  },
+  {
+    "codigo": "53-1042.00",
+    "descripcion": "First-Line Supervisors of Helpers, Laborers, and Material Movers, Hand"
+  },
+  {
+    "codigo": "53-1042.01",
+    "descripcion": "Recycling Coordinators"
+  },
+  {
+    "codigo": "53-1043.00",
+    "descripcion": "First-Line Supervisors of Material-Moving Machine and Vehicle Operators"
+  },
+  {
+    "codigo": "53-2011.00",
+    "descripcion": "Airline Pilots, Copilots, and Flight Engineers"
+  },
+  {
+    "codigo": "53-2012.00",
+    "descripcion": "Commercial Pilots"
+  },
+  {
+    "codigo": "53-2021.00",
+    "descripcion": "Air Traffic Controllers"
+  },
+  {
+    "codigo": "53-2022.00",
+    "descripcion": "Airfield Operations Specialists"
+  },
+  {
+    "codigo": "53-2031.00",
+    "descripcion": "Flight Attendants"
+  },
+  {
+    "codigo": "53-3011.00",
+    "descripcion": "Ambulance Drivers and Attendants, Except Emergency Medical Technicians"
+  },
+  {
+    "codigo": "53-3031.00",
+    "descripcion": "Driver/Sales Workers"
+  },
+  {
+    "codigo": "53-3032.00",
+    "descripcion": "Heavy and Tractor-Trailer Truck Drivers"
+  },
+  {
+    "codigo": "53-3033.00",
+    "descripcion": "Light Truck Drivers"
+  },
+  {
+    "codigo": "53-3051.00",
+    "descripcion": "Bus Drivers, School"
+  },
+  {
+    "codigo": "53-3052.00",
+    "descripcion": "Bus Drivers, Transit and Intercity"
+  },
+  {
+    "codigo": "53-3053.00",
+    "descripcion": "Shuttle Drivers and Chauffeurs"
+  },
+  {
+    "codigo": "53-4011.00",
+    "descripcion": "Locomotive Engineers"
+  },
+  {
+    "codigo": "53-4013.00",
+    "descripcion": "Rail Yard Engineers, Dinkey Operators, and Hostlers"
+  },
+  {
+    "codigo": "53-4022.00",
+    "descripcion": "Railroad Brake, Signal, and Switch Operators and Locomotive Firers"
+  },
+  {
+    "codigo": "53-4031.00",
+    "descripcion": "Railroad Conductors and Yardmasters"
+  },
+  {
+    "codigo": "53-4041.00",
+    "descripcion": "Subway and Streetcar Operators"
+  },
+  {
+    "codigo": "53-5011.00",
+    "descripcion": "Sailors and Marine Oilers"
+  },
+  {
+    "codigo": "53-5021.00",
+    "descripcion": "Captains, Mates, and Pilots of Water Vessels"
+  },
+  {
+    "codigo": "53-5022.00",
+    "descripcion": "Motorboat Operators"
+  },
+  {
+    "codigo": "53-5031.00",
+    "descripcion": "Ship Engineers"
+  },
+  {
+    "codigo": "53-6011.00",
+    "descripcion": "Bridge and Lock Tenders"
+  },
+  {
+    "codigo": "53-6021.00",
+    "descripcion": "Parking Attendants"
+  },
+  {
+    "codigo": "53-6031.00",
+    "descripcion": "Automotive and Watercraft Service Attendants"
+  },
+  {
+    "codigo": "53-6041.00",
+    "descripcion": "Traffic Technicians"
+  },
+  {
+    "codigo": "53-6051.00",
+    "descripcion": "Transportation Inspectors"
+  },
+  {
+    "codigo": "53-6051.01",
+    "descripcion": "Aviation Inspectors"
+  },
+  {
+    "codigo": "53-6051.07",
+    "descripcion": "Transportation Vehicle, Equipment and Systems Inspectors, Except Aviation"
+  },
+  {
+    "codigo": "53-6061.00",
+    "descripcion": "Passenger Attendants"
+  },
+  {
+    "codigo": "53-7011.00",
+    "descripcion": "Conveyor Operators and Tenders"
+  },
+  {
+    "codigo": "53-7021.00",
+    "descripcion": "Crane and Tower Operators"
+  },
+  {
+    "codigo": "53-7031.00",
+    "descripcion": "Dredge Operators"
+  },
+  {
+    "codigo": "53-7041.00",
+    "descripcion": "Hoist and Winch Operators"
+  },
+  {
+    "codigo": "53-7051.00",
+    "descripcion": "Industrial Truck and Tractor Operators"
+  },
+  {
+    "codigo": "53-7061.00",
+    "descripcion": "Cleaners of Vehicles and Equipment"
+  },
+  {
+    "codigo": "53-7062.00",
+    "descripcion": "Laborers and Freight, Stock, and Material Movers, Hand"
+  },
+  {
+    "codigo": "53-7062.04",
+    "descripcion": "Recycling and Reclamation Workers"
+  },
+  {
+    "codigo": "53-7063.00",
+    "descripcion": "Machine Feeders and Offbearers"
+  },
+  {
+    "codigo": "53-7064.00",
+    "descripcion": "Packers and Packagers, Hand"
+  },
+  {
+    "codigo": "53-7065.00",
+    "descripcion": "Stockers and Order Fillers"
+  },
+  {
+    "codigo": "53-7071.00",
+    "descripcion": "Gas Compressor and Gas Pumping Station Operators"
+  },
+  {
+    "codigo": "53-7072.00",
+    "descripcion": "Pump Operators, Except Wellhead Pumpers"
+  },
+  {
+    "codigo": "53-7073.00",
+    "descripcion": "Wellhead Pumpers"
+  },
+  {
+    "codigo": "53-7081.00",
+    "descripcion": "Refuse and Recyclable Material Collectors"
+  },
+  {
+    "codigo": "53-7121.00",
+    "descripcion": "Tank Car, Truck, and Ship Loaders"
+  }
+]

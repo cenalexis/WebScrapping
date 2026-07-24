@@ -1,0 +1,1754 @@
+[
+  {
+    "codigo": "0110",
+    "descripcion": "OFICIALES DE LAS FUERZAS ARMADAS"
+  },
+  {
+    "codigo": "0210",
+    "descripcion": "SUBOFICIAL DE LAS FUERZAS ARMADAS"
+  },
+  {
+    "codigo": "0310",
+    "descripcion": "OTROS MIEMBROS DE LAS FUERZAS ARMADAS"
+  },
+  {
+    "codigo": "1111",
+    "descripcion": "MIEMBROS DEL PODER LEGISLATIVO"
+  },
+  {
+    "codigo": "1112",
+    "descripcion": "PERSONAL DIRECTIVO DE LA ADMINISTRACIÓN PÚBLICA"
+  },
+  {
+    "codigo": "1113",
+    "descripcion": "JEFES DE PEQUEÑAS POBLACIONES"
+  },
+  {
+    "codigo": "1114",
+    "descripcion": "DIRIGENTES DE ORGANIZACIONES QUE PRESENTAN UN INTERÉS ESPECIAL"
+  },
+  {
+    "codigo": "1115",
+    "descripcion": "MIEMBROS DEL PODER EJECUTIVO Y DE LOS GOBIERNOS LOCALES O SECCIONALES"
+  },
+  {
+    "codigo": "1116",
+    "descripcion": "MIEMBROS DEL PODER JUDICIAL"
+  },
+  {
+    "codigo": "1120",
+    "descripcion": "DIRECTORES GENERALES Y GERENTES GENERALES"
+  },
+  {
+    "codigo": "1211",
+    "descripcion": "DIRECTORES FINANCIEROS"
+  },
+  {
+    "codigo": "1212",
+    "descripcion": "DIRECTORES DE RECURSOS HUMANOS"
+  },
+  {
+    "codigo": "1213",
+    "descripcion": "DIRECTORES DE POLÍTICAS Y PLANIFICACIÓN"
+  },
+  {
+    "codigo": "1219",
+    "descripcion": "DIRECTORES DE ADMINISTRACIÓN Y SERVICIOS NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "1221",
+    "descripcion": "DIRECTORES DE VENTAS Y COMERCIALIZACIÓN"
+  },
+  {
+    "codigo": "1222",
+    "descripcion": "DIRECTORES DE PUBLICIDAD Y RELACIONES PÚBLICAS"
+  },
+  {
+    "codigo": "1223",
+    "descripcion": "DIRECTORES DE INVESTIGACIÓN Y DESARROLLO"
+  },
+  {
+    "codigo": "1311",
+    "descripcion": "DIRECTORES DE PRODUCCIÓN AGROPECUARIA Y SILVICULTURA"
+  },
+  {
+    "codigo": "1312",
+    "descripcion": "DIRECTORES DE PRODUCCIÓN DE PISCICULTURA Y PESCA"
+  },
+  {
+    "codigo": "1321",
+    "descripcion": "DIRECTORES DE INDUSTRIAS MANUFACTURERAS"
+  },
+  {
+    "codigo": "1322",
+    "descripcion": "DIRECTORES DE EXPLOTACIONES DE MINERÍA"
+  },
+  {
+    "codigo": "1323",
+    "descripcion": "DIRECTORES DE EMPRESAS DE CONSTRUCCIÓN"
+  },
+  {
+    "codigo": "1324",
+    "descripcion": "DIRECTORES DE EMPRESAS DE ABASTECIMIENTO, DISTRIBUCIÓN Y AFINES"
+  },
+  {
+    "codigo": "1330",
+    "descripcion": "DIRECTORES DE SERVICIOS DE TECNOLOGÍA DE LA INFORMACIÓN Y LAS COMUNICACIONES"
+  },
+  {
+    "codigo": "1341",
+    "descripcion": "DIRECTORES DE SERVICIOS DE CUIDADOS INFANTILES"
+  },
+  {
+    "codigo": "1342",
+    "descripcion": "DIRECTORES DE SERVICIOS DE SALUD"
+  },
+  {
+    "codigo": "1343",
+    "descripcion": "DIRECTORES DE SERVICIOS DE CUIDADO DE LAS PERSONAS DE EDAD"
+  },
+  {
+    "codigo": "1344",
+    "descripcion": "DIRECTORES DE SERVICIOS DE BIENESTAR SOCIAL"
+  },
+  {
+    "codigo": "1345",
+    "descripcion": "DIRECTORES DE SERVICIOS DE EDUCACIÓN"
+  },
+  {
+    "codigo": "1346",
+    "descripcion": "GERENTES DE SUCURSALES DE BANCOS, DE SERVICIOS FINANCIEROS Y DE SEGUROS"
+  },
+  {
+    "codigo": "1349",
+    "descripcion": "DIRECTORES Y GERENTES DE SERVICIOS PROFESIONALES NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "1411",
+    "descripcion": "GERENTES DE HOTELES"
+  },
+  {
+    "codigo": "1412",
+    "descripcion": "GERENTES DE RESTAURANTES"
+  },
+  {
+    "codigo": "1420",
+    "descripcion": "GERENTES DE COMERCIOS AL POR MAYOR Y AL POR MENOR"
+  },
+  {
+    "codigo": "1431",
+    "descripcion": "GERENTES DE CENTROS DEPORTIVOS, DE ESPARCIMIENTO Y CULTURALES"
+  },
+  {
+    "codigo": "1439",
+    "descripcion": "GERENTES DE SERVICIOS NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "2111",
+    "descripcion": "FÍSICOS Y ASTRÓNOMOS"
+  },
+  {
+    "codigo": "2112",
+    "descripcion": "METEORÓLOGOS"
+  },
+  {
+    "codigo": "2113",
+    "descripcion": "QUÍMICOS"
+  },
+  {
+    "codigo": "2114",
+    "descripcion": "GEÓLOGOS Y GEOFÍSICOS"
+  },
+  {
+    "codigo": "2120",
+    "descripcion": "MATEMÁTICOS, ACTUARIOS Y ESTADÍSTICOS"
+  },
+  {
+    "codigo": "2131",
+    "descripcion": "BIÓLOGOS, BOTÁNICOS, ZOÓLOGOS Y AFINES"
+  },
+  {
+    "codigo": "2132",
+    "descripcion": "AGRÓNOMOS Y AFINES"
+  },
+  {
+    "codigo": "2133",
+    "descripcion": "PROFESIONALES DE LA PROTECCIÓN MEDIO AMBIENTAL"
+  },
+  {
+    "codigo": "2141",
+    "descripcion": "INGENIEROS INDUSTRIALES Y DE PRODUCCIÓN"
+  },
+  {
+    "codigo": "2142",
+    "descripcion": "INGENIEROS CIVILES"
+  },
+  {
+    "codigo": "2143",
+    "descripcion": "INGENIEROS MEDIO AMBIENTALES"
+  },
+  {
+    "codigo": "2144",
+    "descripcion": "INGENIEROS MECÁNICOS"
+  },
+  {
+    "codigo": "2145",
+    "descripcion": "INGENIEROS QUÍMICOS"
+  },
+  {
+    "codigo": "2146",
+    "descripcion": "INGENIEROS DE MINAS, METALÚRGICOS Y AFINES"
+  },
+  {
+    "codigo": "2149",
+    "descripcion": "INGENIEROS NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "2151",
+    "descripcion": "INGENIEROS ELECTRICISTAS"
+  },
+  {
+    "codigo": "2152",
+    "descripcion": "INGENIEROS ELECTRÓNICOS"
+  },
+  {
+    "codigo": "2153",
+    "descripcion": "INGENIEROS EN TELECOMUNICACIONES"
+  },
+  {
+    "codigo": "2161",
+    "descripcion": "ARQUITECTOS"
+  },
+  {
+    "codigo": "2162",
+    "descripcion": "ARQUITECTOS PAISAJISTAS"
+  },
+  {
+    "codigo": "2163",
+    "descripcion": "DISEÑADORES DE PRODUCTOS Y DE PRENDAS"
+  },
+  {
+    "codigo": "2164",
+    "descripcion": "URBANISTAS E INGENIEROS DE TRÁNSITO"
+  },
+  {
+    "codigo": "2165",
+    "descripcion": "CARTÓGRAFOS Y AGRIMENSORES"
+  },
+  {
+    "codigo": "2166",
+    "descripcion": "DISEÑADORES GRÁFICOS Y MULTIMEDIA"
+  },
+  {
+    "codigo": "2211",
+    "descripcion": "MÉDICOS GENERALES"
+  },
+  {
+    "codigo": "2212",
+    "descripcion": "MÉDICOS ESPECIALISTAS"
+  },
+  {
+    "codigo": "2221",
+    "descripcion": "PROFESIONALES DE ENFERMERÍA"
+  },
+  {
+    "codigo": "2222",
+    "descripcion": "PROFESIONALES DE PARTERÍA"
+  },
+  {
+    "codigo": "2230",
+    "descripcion": "PROFESIONALES DE MEDICINA TRADICIONAL Y ALTERNATIVA"
+  },
+  {
+    "codigo": "2240",
+    "descripcion": "PRACTICANTES PARAMÉDICOS"
+  },
+  {
+    "codigo": "2250",
+    "descripcion": "VETERINARIOS"
+  },
+  {
+    "codigo": "2261",
+    "descripcion": "DENTISTAS"
+  },
+  {
+    "codigo": "2262",
+    "descripcion": "FARMACÉUTICOS"
+  },
+  {
+    "codigo": "2263",
+    "descripcion": "PROFESIONALES DE LA SALUD Y LA HIGIENE LABORAL Y AMBIENTAL"
+  },
+  {
+    "codigo": "2264",
+    "descripcion": "FISIOTERAPEUTAS"
+  },
+  {
+    "codigo": "2265",
+    "descripcion": "DIETISTAS Y NUTRICIONISTAS"
+  },
+  {
+    "codigo": "2266",
+    "descripcion": "AUDIÓLOGOS Y LOGOPEDAS"
+  },
+  {
+    "codigo": "2267",
+    "descripcion": "OPTOMETRISTAS"
+  },
+  {
+    "codigo": "2269",
+    "descripcion": "PROFESIONALES DE LA SALUD NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "2310",
+    "descripcion": "PROFESORES DE UNIVERSIDADES Y DE LA ENSEÑANZA SUPERIOR"
+  },
+  {
+    "codigo": "2320",
+    "descripcion": "PROFESORES DE FORMACIÓN PROFESIONAL"
+  },
+  {
+    "codigo": "2330",
+    "descripcion": "PROFESORES DE ENSEÑANZA SECUNDARIA"
+  },
+  {
+    "codigo": "2341",
+    "descripcion": "MAESTROS DE ENSEÑANZA PRIMARIA"
+  },
+  {
+    "codigo": "2342",
+    "descripcion": "MAESTROS PREESCOLARES"
+  },
+  {
+    "codigo": "2351",
+    "descripcion": "ESPECIALISTAS EN MÉTODOS PEDAGÓGICOS"
+  },
+  {
+    "codigo": "2352",
+    "descripcion": "EDUCADORES PARA NECESIDADES ESPECIALES"
+  },
+  {
+    "codigo": "2353",
+    "descripcion": "OTROS PROFESORES DE IDIOMAS"
+  },
+  {
+    "codigo": "2354",
+    "descripcion": "OTROS PROFESORES DE MÚSICA"
+  },
+  {
+    "codigo": "2355",
+    "descripcion": "OTROS PROFESORES DE ARTES"
+  },
+  {
+    "codigo": "2356",
+    "descripcion": "INSTRUCTORES EN TECNOLOGÍA DE LA INFORMACIÓN"
+  },
+  {
+    "codigo": "2359",
+    "descripcion": "PROFESIONALES DE LA ENSEÑANZA NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "2411",
+    "descripcion": "CONTABLES"
+  },
+  {
+    "codigo": "2412",
+    "descripcion": "ASESORES FINANCIEROS Y EN INVERSIONES"
+  },
+  {
+    "codigo": "2413",
+    "descripcion": "ANALISTAS FINANCIEROS"
+  },
+  {
+    "codigo": "2421",
+    "descripcion": "ANALISTAS DE GESTIÓN Y ORGANIZACIÓN"
+  },
+  {
+    "codigo": "2422",
+    "descripcion": "ESPECIALISTAS EN POLÍTICAS DE ADMINISTRACIÓN"
+  },
+  {
+    "codigo": "2423",
+    "descripcion": "ESPECIALISTAS EN POLÍTICAS Y SERVICIOS DE PERSONAL Y AFINES"
+  },
+  {
+    "codigo": "2424",
+    "descripcion": "ESPECIALISTA EN FORMACIÓN DEL PERSONAL"
+  },
+  {
+    "codigo": "2431",
+    "descripcion": "PROFESIONALES DE LA PUBLICIDAD Y LA COMERCIALIZACIÓN"
+  },
+  {
+    "codigo": "2432",
+    "descripcion": "PROFESIONALES DE RELACIONES PÚBLICAS"
+  },
+  {
+    "codigo": "2433",
+    "descripcion": "PROFESIONALES DE VENTAS TÉCNICAS Y MÉDICAS (EXCLUYENDO LA TIC)"
+  },
+  {
+    "codigo": "2434",
+    "descripcion": "PROFESIONALES DE VENTAS DE TECNOLOGÍA DE LA INFORMACIÓN Y LAS COMUNICACIONES"
+  },
+  {
+    "codigo": "2511",
+    "descripcion": "ANALISTAS DE SISTEMAS"
+  },
+  {
+    "codigo": "2512",
+    "descripcion": "DESARROLLADORES DE SOFTWARE"
+  },
+  {
+    "codigo": "2513",
+    "descripcion": "DESARROLLADORES WEB Y MULTIMEDIA"
+  },
+  {
+    "codigo": "2514",
+    "descripcion": "PROGRAMADORES DE APLICACIONES"
+  },
+  {
+    "codigo": "2519",
+    "descripcion": "DESARROLLADORES Y ANALISTAS DE SOFTWARE Y MULTIMEDIA Y ANALISTAS NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "2521",
+    "descripcion": "DISEÑADORES Y ADMINISTRADORES DE BASES DE DATOS"
+  },
+  {
+    "codigo": "2522",
+    "descripcion": "ADMINISTRADORES DE SISTEMAS"
+  },
+  {
+    "codigo": "2523",
+    "descripcion": "PROFESIONALES EN REDES DE COMPUTADORES"
+  },
+  {
+    "codigo": "2529",
+    "descripcion": "ESPECIALISTAS EN BASES DE DATOS Y EN REDES DE COMPUTADORES NO CLASIFICADOS BAJO OTROS EPÍGRAFES."
+  },
+  {
+    "codigo": "2611",
+    "descripcion": "ABOGADOS"
+  },
+  {
+    "codigo": "2612",
+    "descripcion": "JUECES"
+  },
+  {
+    "codigo": "2619",
+    "descripcion": "PROFESIONALES EN DERECHO NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "2621",
+    "descripcion": "ARCHIVISTAS Y CURADORES DE MUSEOS"
+  },
+  {
+    "codigo": "2622",
+    "descripcion": "BIBLIOTECARIOS, DOCUMENTALISTAS Y AFINES"
+  },
+  {
+    "codigo": "2631",
+    "descripcion": "ECONOMISTAS"
+  },
+  {
+    "codigo": "2632",
+    "descripcion": "SOCIÓLOGOS, ANTROPÓLOGOS Y AFINES"
+  },
+  {
+    "codigo": "2633",
+    "descripcion": "FILÓSOFOS, HISTORIADORES Y ESPECIALISTAS EN CIENCIAS POLÍTICAS"
+  },
+  {
+    "codigo": "2634",
+    "descripcion": "PSICÓLOGOS"
+  },
+  {
+    "codigo": "2635",
+    "descripcion": "PROFESIONALES DEL TRABAJO SOCIAL"
+  },
+  {
+    "codigo": "2636",
+    "descripcion": "PROFESIONALES RELIGIOSOS"
+  },
+  {
+    "codigo": "2641",
+    "descripcion": "Autores y otros escritores"
+  },
+  {
+    "codigo": "2642",
+    "descripcion": "PERIODISTAS"
+  },
+  {
+    "codigo": "2643",
+    "descripcion": "TRADUCTORES, INTÉRPRETES Y LINGÜISTAS"
+  },
+  {
+    "codigo": "2651",
+    "descripcion": "ARTISTAS DE ARTES PLÁSTICAS"
+  },
+  {
+    "codigo": "2652",
+    "descripcion": "MÚSICOS, CANTANTES Y COMPOSITORES"
+  },
+  {
+    "codigo": "2653",
+    "descripcion": "BAILARINES Y COREÓGRAFOS"
+  },
+  {
+    "codigo": "2654",
+    "descripcion": "DIRECTORES DE CINE, DE TEATRO Y AFINES"
+  },
+  {
+    "codigo": "2655",
+    "descripcion": "ACTORES"
+  },
+  {
+    "codigo": "2656",
+    "descripcion": "LOCUTORES DE RADIO, TELEVISIÓN Y OTROS MEDIOS DE COMUNICACIÓN"
+  },
+  {
+    "codigo": "2659",
+    "descripcion": "ARTISTAS CREATIVOS E INTERPRETATIVOS NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "3111",
+    "descripcion": "TÉCNICOS EN CIENCIAS FÍSICAS Y QUÍMICAS"
+  },
+  {
+    "codigo": "3112",
+    "descripcion": "TÉCNICOS EN INGENIERÍA CIVIL"
+  },
+  {
+    "codigo": "3113",
+    "descripcion": "ELECTROTÉCNICOS"
+  },
+  {
+    "codigo": "3114",
+    "descripcion": "TÉCNICOS EN ELECTRÓNICA"
+  },
+  {
+    "codigo": "3115",
+    "descripcion": "TÉCNICOS EN INGENIERÍA MECÁNICA"
+  },
+  {
+    "codigo": "3116",
+    "descripcion": "TÉCNICOS EN QUÍMICA INDUSTRIAL"
+  },
+  {
+    "codigo": "3117",
+    "descripcion": "TÉCNICOS EN INGENIERÍA DE MINAS Y METALURGIA"
+  },
+  {
+    "codigo": "3118",
+    "descripcion": "DELINEANTES Y DIBUJANTES TÉCNICOS"
+  },
+  {
+    "codigo": "3119",
+    "descripcion": "TÉCNICOS EN CIENCIAS FÍSICAS Y EN INGENIERÍA NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "3121",
+    "descripcion": "SUPERVISORES EN INGENIERÍA DE MINAS"
+  },
+  {
+    "codigo": "3122",
+    "descripcion": "SUPERVISORES DE INDUSTRIAS MANUFACTURERAS"
+  },
+  {
+    "codigo": "3123",
+    "descripcion": "SUPERVISORES DE LA CONSTRUCCIÓN"
+  },
+  {
+    "codigo": "3131",
+    "descripcion": "OPERADORES DE INSTALACIONES DE PRODUCCIÓN DE ENERGÍA"
+  },
+  {
+    "codigo": "3132",
+    "descripcion": "OPERADORES DE INCINERADORES, INSTALACIONES DE TRATAMIENTO DE AGUA Y AFINES"
+  },
+  {
+    "codigo": "3133",
+    "descripcion": "CONTROLADORES DE INSTALACIONES DE PROCESAMIENTO DE PRODUCTOS QUÍMICOS"
+  },
+  {
+    "codigo": "3134",
+    "descripcion": "OPERADORES DE INSTALACIONES DE REFINACIÓN DE PETRÓLEO Y GAS NATURAL"
+  },
+  {
+    "codigo": "3135",
+    "descripcion": "CONTROLADORES DE PROCESOS DE PRODUCCIÓN DE METALES"
+  },
+  {
+    "codigo": "3139",
+    "descripcion": "TÉCNICOS EN CONTROL DE PROCESOS NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "3141",
+    "descripcion": "TÉCNICOS EN CIENCIAS BIOLÓGICAS (EXCLUYENDO LA MEDICINA)"
+  },
+  {
+    "codigo": "3142",
+    "descripcion": "TÉCNICOS AGROPECUARIOS"
+  },
+  {
+    "codigo": "3143",
+    "descripcion": "TÉCNICOS FORESTALES"
+  },
+  {
+    "codigo": "3151",
+    "descripcion": "OFICIALES MAQUINISTAS EN NAVEGACIÓN"
+  },
+  {
+    "codigo": "3152",
+    "descripcion": "CAPITANES, OFICIALES DE CUBIERTA Y PRÁCTICOS"
+  },
+  {
+    "codigo": "3153",
+    "descripcion": "PILOTOS DE AVIACIÓN Y AFINES"
+  },
+  {
+    "codigo": "3154",
+    "descripcion": "CONTROLADORES DE TRÁFICO AÉREO"
+  },
+  {
+    "codigo": "3155",
+    "descripcion": "TÉCNICOS EN SEGURIDAD AERONÁUTICA"
+  },
+  {
+    "codigo": "3211",
+    "descripcion": "TÉCNICOS DE APARATOS DE DIAGNÓSTICO Y TRATAMIENTO MÉDICO"
+  },
+  {
+    "codigo": "3212",
+    "descripcion": "TÉCNICOS DE LABORATORIOS MÉDICOS"
+  },
+  {
+    "codigo": "3213",
+    "descripcion": "TÉCNICOS Y ASISTENTES FARMACÉUTICOS"
+  },
+  {
+    "codigo": "3214",
+    "descripcion": "TÉCNICOS DE PRÓTESIS MÉDICAS Y DENTALES"
+  },
+  {
+    "codigo": "3221",
+    "descripcion": "PROFESIONALES DE NIVEL MEDIO DE ENFERMERÍA"
+  },
+  {
+    "codigo": "3222",
+    "descripcion": "PROFESIONALES DE NIVEL MEDIO DE PARTERÍA"
+  },
+  {
+    "codigo": "3230",
+    "descripcion": "PROFESIONALES DE NIVEL MEDIO DE MEDICINA TRADICIONAL Y ALTERNATIVA"
+  },
+  {
+    "codigo": "3240",
+    "descripcion": "TÉCNICOS Y ASISTENTES VETERINARIOS"
+  },
+  {
+    "codigo": "3251",
+    "descripcion": "DENTISTAS AUXILIARES Y AYUDANTES DE ODONTOLOGÍA"
+  },
+  {
+    "codigo": "3252",
+    "descripcion": "TÉCNICOS EN DOCUMENTACIÓN SANITARIA"
+  },
+  {
+    "codigo": "3253",
+    "descripcion": "TRABAJADORES COMUNITARIOS DE LA SALUD"
+  },
+  {
+    "codigo": "3254",
+    "descripcion": "TÉCNICOS EN OPTOMETRÍA Y ÓPTICOS"
+  },
+  {
+    "codigo": "3255",
+    "descripcion": "TÉCNICOS Y ASISTENTES FISIOTERAPEUTAS"
+  },
+  {
+    "codigo": "3256",
+    "descripcion": "PRACTICANTES Y ASISTENTES MÉDICOS"
+  },
+  {
+    "codigo": "3257",
+    "descripcion": "INSPECTORES DE LA SALUD LABORAL, MEDIOAMBIENTAL Y AFINES"
+  },
+  {
+    "codigo": "3258",
+    "descripcion": "AYUDANTES DE AMBULANCIAS"
+  },
+  {
+    "codigo": "3259",
+    "descripcion": "PROFESIONALES DE LA SALUD DE NIVEL MEDIO NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "3311",
+    "descripcion": "AGENTES DE BOLSA, CAMBIO Y OTROS SERVICIOS FINANCIEROS"
+  },
+  {
+    "codigo": "3312",
+    "descripcion": "OFICIALES DE PRÉSTAMO Y CRÉDITOS"
+  },
+  {
+    "codigo": "3313",
+    "descripcion": "TENEDORES DE LIBROS"
+  },
+  {
+    "codigo": "3314",
+    "descripcion": "PROFESIONALES DE NIVEL MEDIO DE SERVICIOS ESTADÍSTICOS, MATEMÁTICOS Y AFINES."
+  },
+  {
+    "codigo": "3315",
+    "descripcion": "TASADORES"
+  },
+  {
+    "codigo": "3321",
+    "descripcion": "AGENTES DE SEGUROS"
+  },
+  {
+    "codigo": "3322",
+    "descripcion": "REPRESENTANTES COMERCIALES"
+  },
+  {
+    "codigo": "3323",
+    "descripcion": "AGENTES DE COMPRAS"
+  },
+  {
+    "codigo": "3324",
+    "descripcion": "AGENTES DE COMPRAS Y CONSIGNATARIOS"
+  },
+  {
+    "codigo": "3331",
+    "descripcion": "DECLARANTES O GESTORES DE ADUANA"
+  },
+  {
+    "codigo": "3332",
+    "descripcion": "ORGANIZADORES DE CONFERENCIAS Y EVENTOS"
+  },
+  {
+    "codigo": "3333",
+    "descripcion": "AGENTES DE EMPLEO Y CONTRATISTAS DE MANO DE OBRA"
+  },
+  {
+    "codigo": "3334",
+    "descripcion": "AGENTES DE INMOBILIARIOS"
+  },
+  {
+    "codigo": "3339",
+    "descripcion": "AGENTES DE SERVICIOS COMERCIALES NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "3341",
+    "descripcion": "SUPERVISORES DE SECRETARÍA"
+  },
+  {
+    "codigo": "3342",
+    "descripcion": "SECRETARIOS JURÍDICOS"
+  },
+  {
+    "codigo": "3343",
+    "descripcion": "SECRETARIOS ADMINISTRATIVOS Y EJECUTIVOS"
+  },
+  {
+    "codigo": "3344",
+    "descripcion": "SECRETARIOS MÉDICOS"
+  },
+  {
+    "codigo": "3351",
+    "descripcion": "AGENTES DE ADUANA E INSPECTORES DE FRONTERAS"
+  },
+  {
+    "codigo": "3352",
+    "descripcion": "AGENTES DE ADMINISTRACIÓN TRIBUTARIA"
+  },
+  {
+    "codigo": "3353",
+    "descripcion": "AGENTES DE SERVICIOS DE SEGURIDAD SOCIAL"
+  },
+  {
+    "codigo": "3354",
+    "descripcion": "AGENTES DE SERVICIOS DE EXPEDICIÓN DE LICENCIAS Y PERMISOS"
+  },
+  {
+    "codigo": "3355",
+    "descripcion": "INSPECTORES DE POLICÍA Y DETECTIVES"
+  },
+  {
+    "codigo": "3359",
+    "descripcion": "AGENTES DE LA ADMINISTRACIÓN PÚBLICA PARA LA APLICACIÓN DE LA LEY Y AFINES NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "3411",
+    "descripcion": "PROFESIONALES DE NIVEL MEDIO DEL DERECHO Y SERVICIOS LEGALES Y AFINES"
+  },
+  {
+    "codigo": "3412",
+    "descripcion": "TRABAJADORES Y ASISTENTES SOCIALES DE NIVEL MEDIO"
+  },
+  {
+    "codigo": "3413",
+    "descripcion": "AUXILIARES LAICOS DE LAS RELIGIONES"
+  },
+  {
+    "codigo": "3421",
+    "descripcion": "ATLETAS Y DEPORTISTAS"
+  },
+  {
+    "codigo": "3422",
+    "descripcion": "ENTRENADORES INSTRUCTORES Y ÁRBITROS DE ACTIVIDADES DEPORTIVAS"
+  },
+  {
+    "codigo": "3423",
+    "descripcion": "INSTRUCTORES DE EDUCACIÓN FÍSICA Y ACTIVIDADES RECREATIVAS"
+  },
+  {
+    "codigo": "3431",
+    "descripcion": "FOTÓGRAFOS"
+  },
+  {
+    "codigo": "3432",
+    "descripcion": "DISEÑADORES Y DECORADORES DE INTERIOR"
+  },
+  {
+    "codigo": "3433",
+    "descripcion": "TÉCNICOS EN GALERÍAS DE ARTE, MUSEOS Y BIBLIOTECAS"
+  },
+  {
+    "codigo": "3434",
+    "descripcion": "CHEFS"
+  },
+  {
+    "codigo": "3435",
+    "descripcion": "OTROS PROFESIONALES DE NIVEL MEDIO EN ACTIVIDADES CULTURALES Y ARTÍSTICAS"
+  },
+  {
+    "codigo": "3511",
+    "descripcion": "TÉCNICOS EN OPERACIONES DE TECNOLOGÍA DE LA INFORMACIÓN Y LAS COMUNICACIONES"
+  },
+  {
+    "codigo": "3512",
+    "descripcion": "TÉCNICOS EN ASISTENCIA AL USUARIO DE TECNOLOGÍA DE LA INFORMACIÓN Y LAS COMUNICACIONES"
+  },
+  {
+    "codigo": "3513",
+    "descripcion": "TÉCNICOS EN REDES Y SISTEMAS DE COMPUTADORES"
+  },
+  {
+    "codigo": "3514",
+    "descripcion": "TÉCNICOS DE LA WEB"
+  },
+  {
+    "codigo": "3521",
+    "descripcion": "TÉCNICOS DE RADIODIFUSIÓN Y GRABACIÓN AUDIO VISUAL"
+  },
+  {
+    "codigo": "3522",
+    "descripcion": "TÉCNICOS DE INGENIERÍA DE LAS TELECOMUNICACIONES"
+  },
+  {
+    "codigo": "4110",
+    "descripcion": "OFICINISTAS GENERALES"
+  },
+  {
+    "codigo": "4120",
+    "descripcion": "SECRETARIOS (GENERALES)"
+  },
+  {
+    "codigo": "4131",
+    "descripcion": "OPERADORES DE MÁQUINAS DE PROCESAMIENTO DE TEXTO Y MECANÓGRAFOS"
+  },
+  {
+    "codigo": "4132",
+    "descripcion": "GRABADORES DE DATOS"
+  },
+  {
+    "codigo": "4211",
+    "descripcion": "CAJEROS DE BANCOS Y AFINES"
+  },
+  {
+    "codigo": "4212",
+    "descripcion": "RECEPTORES DE APUESTAS Y AFINES"
+  },
+  {
+    "codigo": "4213",
+    "descripcion": "PRESTAMISTAS"
+  },
+  {
+    "codigo": "4214",
+    "descripcion": "COBRADORES Y AFINES"
+  },
+  {
+    "codigo": "4221",
+    "descripcion": "EMPLEADOS DE AGENCIAS DE VIAJES"
+  },
+  {
+    "codigo": "4222",
+    "descripcion": "EMPLEADOS DE CENTROS DE LLAMADAS"
+  },
+  {
+    "codigo": "4223",
+    "descripcion": "TELEFONISTAS"
+  },
+  {
+    "codigo": "4224",
+    "descripcion": "RECEPCIONISTAS DE HOTELES"
+  },
+  {
+    "codigo": "4225",
+    "descripcion": "EMPLEADOS DE VENTANILLA DE INFORMACIONES"
+  },
+  {
+    "codigo": "4226",
+    "descripcion": "RECEPCIONISTAS (GENERAL)"
+  },
+  {
+    "codigo": "4227",
+    "descripcion": "ENTREVISTADORES DE ENCUESTAS Y DE INVESTIGACIONES DE MERCADOS"
+  },
+  {
+    "codigo": "4229",
+    "descripcion": "EMPLEADOS DE SERVICIOS DE INFORMACIÓN AL CLIENTE NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "4311",
+    "descripcion": "EMPLEADOS DE CONTABILIDAD Y CÁLCULO DE COSTOS"
+  },
+  {
+    "codigo": "4312",
+    "descripcion": "EMPLEADOS DE SERVICIOS ESTADÍSTICOS, FINANCIEROS Y DE SEGUROS"
+  },
+  {
+    "codigo": "4313",
+    "descripcion": "EMPLEADOS ENCARGADOS DE LAS NÓMINAS"
+  },
+  {
+    "codigo": "4321",
+    "descripcion": "EMPLEADOS DE CONTROL DE ABASTECIMIENTOS E INVENTARIO"
+  },
+  {
+    "codigo": "4322",
+    "descripcion": "EMPLEADOS DE SERVICIOS DE APOYO A LA PRODUCCIÓN"
+  },
+  {
+    "codigo": "4323",
+    "descripcion": "EMPLEADOS DE SERVICIOS DE TRANSPORTE"
+  },
+  {
+    "codigo": "4411",
+    "descripcion": "EMPLEADOS DE BIBLIOTECAS"
+  },
+  {
+    "codigo": "4412",
+    "descripcion": "EMPLEADOS DE SERVICIOS DE CORREOS"
+  },
+  {
+    "codigo": "4413",
+    "descripcion": "CODIFICADORES DE DATOS, CORRECTORES DE PRUEBAS DE IMPRENTA Y AFINES"
+  },
+  {
+    "codigo": "4414",
+    "descripcion": "ESCRIBIENTES PÚBLICOS Y AFINES"
+  },
+  {
+    "codigo": "4415",
+    "descripcion": "EMPLEADOS DE ARCHIVO"
+  },
+  {
+    "codigo": "4416",
+    "descripcion": "EMPLEADOS DEL SERVICIO DE PERSONAL"
+  },
+  {
+    "codigo": "4419",
+    "descripcion": "PERSONAL DE APOYO ADMINISTRATIVO NO CLASIFICADO BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "5111",
+    "descripcion": "AUXILIARES DE SERVICIOS DE ABORDO"
+  },
+  {
+    "codigo": "5112",
+    "descripcion": "REVISORES Y COBRADORES DE LOS TRANSPORTES PÚBLICOS"
+  },
+  {
+    "codigo": "5113",
+    "descripcion": "GUÍAS DE TURISMO"
+  },
+  {
+    "codigo": "5120",
+    "descripcion": "COCINEROS"
+  },
+  {
+    "codigo": "5131",
+    "descripcion": "CAMAREROS DE MESAS"
+  },
+  {
+    "codigo": "5132",
+    "descripcion": "CAMAREROS DE BARRA"
+  },
+  {
+    "codigo": "5141",
+    "descripcion": "PELUQUEROS"
+  },
+  {
+    "codigo": "5142",
+    "descripcion": "ESPECIALISTAS EN TRATAMIENTO DE BELLEZA Y AFINES"
+  },
+  {
+    "codigo": "5151",
+    "descripcion": "SUPERVISORES DE MANTENIMIENTO Y LIMPIEZA EN OFICINAS, HOTELES Y OTROS ESTABLECIMIENTOS"
+  },
+  {
+    "codigo": "5152",
+    "descripcion": "ECÓNOMOS Y MAYORDOMOS DOMÉSTICOS"
+  },
+  {
+    "codigo": "5153",
+    "descripcion": "CONSERJES"
+  },
+  {
+    "codigo": "5161",
+    "descripcion": "ASTRÓLOGOS, ADIVINADORES Y AFINES"
+  },
+  {
+    "codigo": "5162",
+    "descripcion": "ACOMPAÑANTES Y AYUDANTES DE CÁMARA"
+  },
+  {
+    "codigo": "5163",
+    "descripcion": "PERSONAL DE POMPAS FÚNEBRES Y EMBALSAMADORES"
+  },
+  {
+    "codigo": "5164",
+    "descripcion": "CUIDADORES DE ANIMALES"
+  },
+  {
+    "codigo": "5165",
+    "descripcion": "INSTRUCTORES DE AUTOESCUELA"
+  },
+  {
+    "codigo": "5169",
+    "descripcion": "TRABAJADORES DE SERVICIOS PERSONALES NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "5211",
+    "descripcion": "VENDEDORES DE QUIOSCOS Y DE PUESTOS DE MERCADO"
+  },
+  {
+    "codigo": "5212",
+    "descripcion": "VENDEDORES AMBULANTES DE PRODUCTOS COMESTIBLES"
+  },
+  {
+    "codigo": "5221",
+    "descripcion": "COMERCIANTES DE TIENDAS"
+  },
+  {
+    "codigo": "5222",
+    "descripcion": "SUPERVISORES DE TIENDAS Y ALMACENES"
+  },
+  {
+    "codigo": "5223",
+    "descripcion": "ASISTENTES DE VENTA DE TIENDAS Y ALMACENES"
+  },
+  {
+    "codigo": "5230",
+    "descripcion": "CAJEROS Y EXPENDEDORES DE BILLETES"
+  },
+  {
+    "codigo": "5241",
+    "descripcion": "MODELOS DE MODA, ARTE Y PUBLICIDAD"
+  },
+  {
+    "codigo": "5242",
+    "descripcion": "DEMOSTRADORES DE TIENDAS"
+  },
+  {
+    "codigo": "5243",
+    "descripcion": "VENDEDORES PUERTA A PUERTA"
+  },
+  {
+    "codigo": "5244",
+    "descripcion": "VENDEDORES POR TELÉFONO"
+  },
+  {
+    "codigo": "5245",
+    "descripcion": "EXPENDEDORES DE GASOLINERAS"
+  },
+  {
+    "codigo": "5246",
+    "descripcion": "VENDEDORES DE COMIDAS AL MOSTRADOR"
+  },
+  {
+    "codigo": "5249",
+    "descripcion": "VENDEDORES NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "5311",
+    "descripcion": "CUIDADORES DE NIÑOS"
+  },
+  {
+    "codigo": "5312",
+    "descripcion": "AUXILIARES DE MAESTROS"
+  },
+  {
+    "codigo": "5321",
+    "descripcion": "TRABAJADORES DE LOS CUIDADOS PERSONALES EN INSTITUCIONES"
+  },
+  {
+    "codigo": "5322",
+    "descripcion": "TRABAJADORES DE LOS CUIDADOS PERSONALES A DOMICILIOS"
+  },
+  {
+    "codigo": "5329",
+    "descripcion": "TRABAJADORES DE LOS CUIDADOS PERSONALES EN SERVICIOS DE SALUD NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "5411",
+    "descripcion": "BOMBEROS"
+  },
+  {
+    "codigo": "5412",
+    "descripcion": "POLICÍAS"
+  },
+  {
+    "codigo": "5413",
+    "descripcion": "GUARDIANES DE PRISIÓN"
+  },
+  {
+    "codigo": "5414",
+    "descripcion": "GUARDIANES DE PROTECCIÓN"
+  },
+  {
+    "codigo": "5419",
+    "descripcion": "PERSONAL DE LOS SERVICIOS DE PROTECCION NO CLASIFICADOS BAJO OTROS EPIGRAFES"
+  },
+  {
+    "codigo": "6111",
+    "descripcion": "AGRICULTORES Y TRABAJADORES CALIFICADOS DE CULTIVOS EXTENSIVOS"
+  },
+  {
+    "codigo": "6112",
+    "descripcion": "AGRICULTORES Y TRABAJADORES CALIFICADOS DE PLANTACIONES DE ÁRBOLES Y ARBUSTOS"
+  },
+  {
+    "codigo": "6113",
+    "descripcion": "AGRICULTORES Y TRABAJADORES CALIFICADOS DE HUERTAS, INVERNADEROS, VIVEROS Y JARDINES"
+  },
+  {
+    "codigo": "6114",
+    "descripcion": "AGRICULTORES Y TRABAJADORES CALIFICADOS DE CULTIVOS MIXTOS"
+  },
+  {
+    "codigo": "6121",
+    "descripcion": "CRIADORES DE GANADO"
+  },
+  {
+    "codigo": "6122",
+    "descripcion": "AVICULTORES Y TRABAJADORES CALIFICADOS DE LA AVICULTURA"
+  },
+  {
+    "codigo": "6123",
+    "descripcion": "APICULTORES Y SERICULTORES Y TRABAJADORES CALIFICADOS DE LA APICULTURA Y LA SERICULTURA"
+  },
+  {
+    "codigo": "6129",
+    "descripcion": "CRIADORES Y TRABAJADORES PECUARIOS CALIFICADOS DE LA CRÍA DE ANIMALES NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "6130",
+    "descripcion": "PRODUCTORES Y TRABAJADORES CALIFICADOS DE EXPLOTACIONES AGROPECUARIAS MIXTAS CUYA PRODUCCIÓN SE DESTINA AL MERCADO"
+  },
+  {
+    "codigo": "6210",
+    "descripcion": "TRABAJADORES FORESTALES CALIFICADOS Y AFINES"
+  },
+  {
+    "codigo": "6221",
+    "descripcion": "TRABAJADORES DE EXPLOTACIÓN DE ACUICULTURA"
+  },
+  {
+    "codigo": "6222",
+    "descripcion": "PESCADORES DE AGUA DULCE Y EN AGUAS COSTERAS"
+  },
+  {
+    "codigo": "6223",
+    "descripcion": "PESCADORES DE ALTA MAR"
+  },
+  {
+    "codigo": "6224",
+    "descripcion": "CAZADORES Y TRAMPEROS"
+  },
+  {
+    "codigo": "6310",
+    "descripcion": "TRABAJADORES AGRÍCOLAS DE SUBSISTENCIA"
+  },
+  {
+    "codigo": "6320",
+    "descripcion": "TRABAJADORES PECUARIOS DE SUBSISTENCIA"
+  },
+  {
+    "codigo": "6330",
+    "descripcion": "TRABAJADORES AGROPECUARIOS DE SUBSISTENCIA"
+  },
+  {
+    "codigo": "6340",
+    "descripcion": "PESCADORES, CAZADORES, TRAMPEROS Y RECOLECTORES DE SUBSISTENCIA"
+  },
+  {
+    "codigo": "7111",
+    "descripcion": "CONSTRUCTORES DE CASAS"
+  },
+  {
+    "codigo": "7112",
+    "descripcion": "ALBAÑILES"
+  },
+  {
+    "codigo": "7113",
+    "descripcion": "MAMPOSTEROS, TRONZADORES, LABRANTES Y GRABADORES DE PIEDRA"
+  },
+  {
+    "codigo": "7114",
+    "descripcion": "OPERARIOS EN CEMENTO ARMADO, ENFOSCADORES Y AFINES"
+  },
+  {
+    "codigo": "7115",
+    "descripcion": "CARPINTEROS DE ARMAR Y DE OBRA BLANCA"
+  },
+  {
+    "codigo": "7119",
+    "descripcion": "OFICIALES Y OPERARIOS DE LA CONSTRUCCIÓN (OBRA GRUESA) Y AFINES NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "7121",
+    "descripcion": "TECHADORES"
+  },
+  {
+    "codigo": "7122",
+    "descripcion": "PARQUETEROS Y COLOCADORES DE SUELOS"
+  },
+  {
+    "codigo": "7123",
+    "descripcion": "REVOCADORES"
+  },
+  {
+    "codigo": "7124",
+    "descripcion": "INSTALADORES DE MATERIAL AISLANTE Y DE INSONORIZACIÓN"
+  },
+  {
+    "codigo": "7125",
+    "descripcion": "CRISTALEROS"
+  },
+  {
+    "codigo": "7126",
+    "descripcion": "FONTANEROS E INSTALADORES DE TUBERÍAS"
+  },
+  {
+    "codigo": "7127",
+    "descripcion": "MECÁNICOS - MONTADORES DE INSTALACIONES DE REFRIGERACIÓN Y CLIMATIZACIÓN"
+  },
+  {
+    "codigo": "7131",
+    "descripcion": "PINTORES Y EMPAPELADORES"
+  },
+  {
+    "codigo": "7132",
+    "descripcion": "BARNIZADORES Y AFINES"
+  },
+  {
+    "codigo": "7133",
+    "descripcion": "LIMPIADORES DE FACHADAS Y DESHOLLINADORES"
+  },
+  {
+    "codigo": "7211",
+    "descripcion": "MOLDEADORES Y MACHEROS"
+  },
+  {
+    "codigo": "7212",
+    "descripcion": "SOLDADORES Y OXICORTADORES"
+  },
+  {
+    "codigo": "7213",
+    "descripcion": "CHAPISTAS Y CALDEREROS"
+  },
+  {
+    "codigo": "7214",
+    "descripcion": "MONTADORES DE ESTRUCTURAS METÁLICAS"
+  },
+  {
+    "codigo": "7215",
+    "descripcion": "APAREJADORES Y EMPALMADORES DE CABLES"
+  },
+  {
+    "codigo": "7221",
+    "descripcion": "HERREROS Y FORJADORES"
+  },
+  {
+    "codigo": "7222",
+    "descripcion": "HERRAMENTISTAS Y AFINES"
+  },
+  {
+    "codigo": "7223",
+    "descripcion": "REGULADORES Y OPERADORES DE MÁQUINAS HERRAMIENTAS"
+  },
+  {
+    "codigo": "7224",
+    "descripcion": "PULIDORES DE METALES Y AFILADORES DE HERRAMIENTAS"
+  },
+  {
+    "codigo": "7231",
+    "descripcion": "MECÁNICOS Y REPARADORES DE VEHÍCULOS DE MOTOR"
+  },
+  {
+    "codigo": "7232",
+    "descripcion": "MECÁNICOS Y REPARADORES DE MOTORES DE AVIÓN"
+  },
+  {
+    "codigo": "7233",
+    "descripcion": "MECÁNICOS Y REPARADORES DE MÁQUINAS AGRÍCOLAS E INDUSTRIALES"
+  },
+  {
+    "codigo": "7234",
+    "descripcion": "REPARADORES DE BICICLETAS Y AFINES"
+  },
+  {
+    "codigo": "7311",
+    "descripcion": "MECÁNICOS Y REPARADORES DE INSTRUMENTOS DE PRECISIÓN"
+  },
+  {
+    "codigo": "7312",
+    "descripcion": "FABRICANTES Y AFINADORES DE INSTRUMENTOS MUSICALES"
+  },
+  {
+    "codigo": "7313",
+    "descripcion": "JOYEROS, ORFEBRES Y PLATEROS"
+  },
+  {
+    "codigo": "7314",
+    "descripcion": "ALFAREROS Y AFINES (BARRO, ARCILLA Y ABRASIVOS)"
+  },
+  {
+    "codigo": "7315",
+    "descripcion": "SOPLADORES, MODELADORES, LAMINADORES, CORTADORES Y PULIDORES DE VIDRIO"
+  },
+  {
+    "codigo": "7316",
+    "descripcion": "REDACTORES DE CARTELES, PINTORES DECORATIVOS Y GRABADORES"
+  },
+  {
+    "codigo": "7317",
+    "descripcion": "ARTESANOS EN MADERA, CESTERÍA Y MATERIALES SIMILARES"
+  },
+  {
+    "codigo": "7318",
+    "descripcion": "ARTESANOS DE LOS TEJIDOS, EL CUERO Y MATERIALES SIMILARES"
+  },
+  {
+    "codigo": "7319",
+    "descripcion": "ARTESANOS NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "7321",
+    "descripcion": "CAJISTAS, TIPÓGRAFOS Y AFINES"
+  },
+  {
+    "codigo": "7322",
+    "descripcion": "IMPRESORES"
+  },
+  {
+    "codigo": "7323",
+    "descripcion": "ENCUADERNADORES Y AFINES"
+  },
+  {
+    "codigo": "7411",
+    "descripcion": "ELECTRICISTAS DE OBRAS Y AFINES"
+  },
+  {
+    "codigo": "7412",
+    "descripcion": "MECÁNICOS Y AJUSTADORES ELECTRICISTAS"
+  },
+  {
+    "codigo": "7413",
+    "descripcion": "INSTALADORES Y REPARADORES DE LÍNEAS ELÉCTRICAS"
+  },
+  {
+    "codigo": "7421",
+    "descripcion": "MECÁNICOS Y REPARADORES EN ELECTRÓNICA"
+  },
+  {
+    "codigo": "7422",
+    "descripcion": "INSTALADORES Y REPARADORES EN TECNOLOGÍA DE LA INFORMACIÓN Y LAS COMUNICACIONES"
+  },
+  {
+    "codigo": "7511",
+    "descripcion": "CARNICEROS, PESCADEROS Y AFINES"
+  },
+  {
+    "codigo": "7512",
+    "descripcion": "PANADEROS, PASTELEROS Y CONFITEROS"
+  },
+  {
+    "codigo": "7513",
+    "descripcion": "OPERARIOS DE LA ELABORACIÓN DE PRODUCTOS LÁCTEOS"
+  },
+  {
+    "codigo": "7514",
+    "descripcion": "OPERARIOS DE LA CONSERVACIÓN DE FRUTAS, LEGUMBRES, VERDURAS Y AFINES"
+  },
+  {
+    "codigo": "7515",
+    "descripcion": "CATADORES Y CLASIFICADORES DE ALIMENTOS Y BEBIDAS"
+  },
+  {
+    "codigo": "7516",
+    "descripcion": "PREPARADORES Y ELABORADORES DE TABACOS Y SUS PRODUCTOS"
+  },
+  {
+    "codigo": "7521",
+    "descripcion": "OPERARIOS DEL TRATAMIENTO DE LA MADERA"
+  },
+  {
+    "codigo": "7522",
+    "descripcion": "EBANISTAS Y AFINES"
+  },
+  {
+    "codigo": "7523",
+    "descripcion": "REGULADORES Y OPERADORES DE MÁQUINAS DE LABRAR MADERA"
+  },
+  {
+    "codigo": "7531",
+    "descripcion": "SASTRES, MODISTOS, PELETEROS Y SOMBREREROS"
+  },
+  {
+    "codigo": "7532",
+    "descripcion": "PATRONISTAS Y CORTADORES DE TELA Y AFINES"
+  },
+  {
+    "codigo": "7533",
+    "descripcion": "COSTUREROS, BORDADORES Y AFINES"
+  },
+  {
+    "codigo": "7534",
+    "descripcion": "TAPICEROS, COLCHONEROS Y AFINES"
+  },
+  {
+    "codigo": "7535",
+    "descripcion": "APELAMBRADORES, PELLEJEROS Y CURTIDORES"
+  },
+  {
+    "codigo": "7536",
+    "descripcion": "ZAPATEROS Y AFINES"
+  },
+  {
+    "codigo": "7541",
+    "descripcion": "BUZOS"
+  },
+  {
+    "codigo": "7542",
+    "descripcion": "DINAMITEROS Y PEGADORES"
+  },
+  {
+    "codigo": "7543",
+    "descripcion": "CLASIFICADORES Y PROBADORES DE PRODUCTOS (EXCLUYENDO ALIMENTOS Y BEBIDAS)"
+  },
+  {
+    "codigo": "7544",
+    "descripcion": "FUMIGADORES Y OTROS CONTROLADORES DE PLAGAS Y MALAS HIERBAS"
+  },
+  {
+    "codigo": "7549",
+    "descripcion": "OFICIALES, OPERARIOS Y ARTESANOS DE ARTES MECÁNICAS Y DE OTROS OFICIOS NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "8111",
+    "descripcion": "MINEROS Y OPERADORES DE INSTALACIONES MINERAS"
+  },
+  {
+    "codigo": "8112",
+    "descripcion": "OPERADORES DE INSTALACIONES DE PROCESAMIENTO DE MINERALES Y ROCA"
+  },
+  {
+    "codigo": "8113",
+    "descripcion": "PERFORADORES Y SONDISTAS DE POZOS Y AFINES"
+  },
+  {
+    "codigo": "8114",
+    "descripcion": "OPERADORES DE MÁQUINAS PARA FABRICAR CEMENTO Y OTROS PRODUCTOS MINERALES"
+  },
+  {
+    "codigo": "8121",
+    "descripcion": "OPERADORES DE INSTALACIONES DE PROCESAMIENTO DE METALES"
+  },
+  {
+    "codigo": "8122",
+    "descripcion": "OPERADORES DE MÁQUINAS PULIDORAS, GALVANIZADORAS Y RECUBRIDORAS DE METALES"
+  },
+  {
+    "codigo": "8131",
+    "descripcion": "OPERADORES DE PLANTAS Y MÁQUINAS DE PRODUCTOS QUÍMICOS"
+  },
+  {
+    "codigo": "8132",
+    "descripcion": "OPERADORES DE MÁQUINAS PARA FABRICAR PRODUCTOS FOTOGRÁFICOS"
+  },
+  {
+    "codigo": "8141",
+    "descripcion": "OPERADORES DE MÁQUINAS PARA FABRICAR PRODUCTOS DE CAUCHO"
+  },
+  {
+    "codigo": "8142",
+    "descripcion": "OPERADORES DE MÁQUINAS PARA FABRICAR PRODUCTOS DE MATERIAL PLÁSTICO"
+  },
+  {
+    "codigo": "8143",
+    "descripcion": "OPERADORES DE MÁQUINAS PARA FABRICAR PRODUCTOS DE PAPEL"
+  },
+  {
+    "codigo": "8151",
+    "descripcion": "OPERADORES DE MÁQUINAS DE PREPARACIÓN DE FIBRAS, HILADO Y DEVANADO"
+  },
+  {
+    "codigo": "8152",
+    "descripcion": "OPERADORES DE TELARES Y OTRAS MÁQUINAS TEJEDORAS"
+  },
+  {
+    "codigo": "8153",
+    "descripcion": "OPERADORES DE MÁQUINAS DE COSER"
+  },
+  {
+    "codigo": "8154",
+    "descripcion": "OPERADORES DE MÁQUINAS DE BLANQUEAMIENTO, TEÑIDO Y LIMPIEZA DE TEJIDOS"
+  },
+  {
+    "codigo": "8155",
+    "descripcion": "OPERADORES DE MÁQUINAS DE TRATAMIENTO DE PIELES Y CUEROS"
+  },
+  {
+    "codigo": "8156",
+    "descripcion": "OPERADORES DE MÁQUINAS PARA LA FABRICACIÓN DE CALZADO Y AFINES"
+  },
+  {
+    "codigo": "8157",
+    "descripcion": "OPERADORES DE MÁQUINAS LAVARROPAS"
+  },
+  {
+    "codigo": "8159",
+    "descripcion": "OPERADORES DE MÁQUINAS PARA FABRICAR PRODUCTOS TEXTILES Y ARTÍCULOS DE PIEL Y CUERO NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "8160",
+    "descripcion": "OPERADORES DE MÁQUINAS PARA ELABORAR ALIMENTOS Y PRODUCTOS AFINES"
+  },
+  {
+    "codigo": "8171",
+    "descripcion": "OPERADORES DE INSTALACIONES PARA LA PREPARACIÓN DE PASTA PARA PAPEL"
+  },
+  {
+    "codigo": "8172",
+    "descripcion": "OPERADORES DE INSTALACIONES DE PROCESAMIENTO DE LA MADERA"
+  },
+  {
+    "codigo": "8181",
+    "descripcion": "OPERADORES DE INSTALACIONES DE VIDRIERÍA Y CERÁMICA"
+  },
+  {
+    "codigo": "8182",
+    "descripcion": "OPERADORES DE MÁQUINAS DE VAPOR Y CALDERAS"
+  },
+  {
+    "codigo": "8183",
+    "descripcion": "OPERADORES DE MÁQUINAS DE EMBALAJE, EMBOTELLAMIENTO Y ETIQUETADO"
+  },
+  {
+    "codigo": "8189",
+    "descripcion": "OPERADORES DE MÁQUINAS Y DE INSTALACIONES FIJAS NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "8211",
+    "descripcion": "ENSAMBLADORES DE MAQUINARIA MECÁNICA"
+  },
+  {
+    "codigo": "8212",
+    "descripcion": "ENSAMBLADORES DE EQUIPOS ELÉCTRICOS Y ELECTRÓNICOS"
+  },
+  {
+    "codigo": "8219",
+    "descripcion": "ENSAMBLADORES NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "8311",
+    "descripcion": "MAQUINISTAS DE LOCOMOTORAS"
+  },
+  {
+    "codigo": "8312",
+    "descripcion": "GUARDAFRENOS, GUARDAGUJAS Y AGENTES DE MANIOBRAS"
+  },
+  {
+    "codigo": "8321",
+    "descripcion": "CONDUCTORES DE MOTOCICLETAS"
+  },
+  {
+    "codigo": "8322",
+    "descripcion": "CONDUCTORES DE AUTOMÓVILES, TAXIS Y CAMIONETAS"
+  },
+  {
+    "codigo": "8331",
+    "descripcion": "CONDUCTORES DE AUTOBUSES Y TRANVÍAS"
+  },
+  {
+    "codigo": "8332",
+    "descripcion": "CONDUCTORES DE CAMIONES PESADOS"
+  },
+  {
+    "codigo": "8341",
+    "descripcion": "OPERADORES DE MAQUINARIA AGRÍCOLA Y FORESTAL MÓVIL"
+  },
+  {
+    "codigo": "8342",
+    "descripcion": "OPERADORES DE MÁQUINAS DE MOVIMIENTO DE TIERRA Y AFINES"
+  },
+  {
+    "codigo": "8343",
+    "descripcion": "OPERADORES DE GRÚAS, APARATOS ELEVADORES Y AFINES"
+  },
+  {
+    "codigo": "8344",
+    "descripcion": "OPERADORES DE AUTOELEVADORAS"
+  },
+  {
+    "codigo": "8350",
+    "descripcion": "MARINEROS DE CUBIERTA Y AFINES"
+  },
+  {
+    "codigo": "9111",
+    "descripcion": "LIMPIADORES Y ASISTENTES DOMÉSTICOS"
+  },
+  {
+    "codigo": "9112",
+    "descripcion": "LIMPIADORES Y ASISTENTES DE OFICINAS, HOTELES Y OTROS ESTABLECIMIENTOS"
+  },
+  {
+    "codigo": "9121",
+    "descripcion": "LAVANDEROS Y PLANCHADORES MANUALES"
+  },
+  {
+    "codigo": "9122",
+    "descripcion": "LAVADORES DE VEHÍCULOS"
+  },
+  {
+    "codigo": "9123",
+    "descripcion": "LAVADORES DE VENTANAS"
+  },
+  {
+    "codigo": "9129",
+    "descripcion": "OTRO PERSONAL DE LIMPIEZA"
+  },
+  {
+    "codigo": "9211",
+    "descripcion": "PEONES DE EXPLOTACIONES AGRÍCOLAS"
+  },
+  {
+    "codigo": "9212",
+    "descripcion": "PEONES DE EXPLOTACIONES GANADERAS"
+  },
+  {
+    "codigo": "9213",
+    "descripcion": "PEONES DE EXPLOTACIÓN DE CULTIVOS MIXTOS Y GANADEROS"
+  },
+  {
+    "codigo": "9214",
+    "descripcion": "PEONES DE JARDINERÍA Y HORTICULTURA"
+  },
+  {
+    "codigo": "9215",
+    "descripcion": "PEONES FORESTALES"
+  },
+  {
+    "codigo": "9216",
+    "descripcion": "PEONES DE PESCA Y ACUICULTURA"
+  },
+  {
+    "codigo": "9311",
+    "descripcion": "PEONES DE MINAS Y CANTERAS"
+  },
+  {
+    "codigo": "9312",
+    "descripcion": "PEONES DE OBRAS PÚBLICAS Y MANTENIMIENTO"
+  },
+  {
+    "codigo": "9313",
+    "descripcion": "PEONES DE LA CONSTRUCCIÓN DE EDIFICIOS"
+  },
+  {
+    "codigo": "9321",
+    "descripcion": "EMPACADORES MANUALES"
+  },
+  {
+    "codigo": "9329",
+    "descripcion": "PEONES DE LA INDUSTRIA MANUFACTURERA NO CLASIFICADOS BAJO OTROS EPÍGRAFES"
+  },
+  {
+    "codigo": "9331",
+    "descripcion": "CONDUCTORES DE VEHÍCULOS ACCIONADOS A PEDAL O A BRAZO"
+  },
+  {
+    "codigo": "9332",
+    "descripcion": "CONDUCTOR DE VEHÍCULOS Y MAQUINAS DE TRACCIÓN ANIMAL"
+  },
+  {
+    "codigo": "9333",
+    "descripcion": "PEONES DE CARGA"
+  },
+  {
+    "codigo": "9334",
+    "descripcion": "REPONEDORES DE ESTANTERÍAS"
+  },
+  {
+    "codigo": "9411",
+    "descripcion": "COCINEROS DE COMIDAS RÁPIDAS"
+  },
+  {
+    "codigo": "9412",
+    "descripcion": "AYUDANTES DE COCINA"
+  },
+  {
+    "codigo": "9510",
+    "descripcion": "TRABAJADORES AMBULANTES DE SERVICIOS Y AFINES"
+  },
+  {
+    "codigo": "9520",
+    "descripcion": "VENDEDORES AMBULANTES (EXCLUYENDO COMIDA)"
+  },
+  {
+    "codigo": "9611",
+    "descripcion": "RECOLECTORES DE BASURA Y MATERIAL RECICLABLE"
+  },
+  {
+    "codigo": "9612",
+    "descripcion": "CLASIFICADORES DE DESECHOS"
+  },
+  {
+    "codigo": "9613",
+    "descripcion": "BARRENDEROS Y AFINES"
+  },
+  {
+    "codigo": "9621",
+    "descripcion": "MENSAJEROS, MANDADEROS, MALETEROS Y REPARTIDORES"
+  },
+  {
+    "codigo": "9622",
+    "descripcion": "PERSONAS QUE REALIZAN TRABAJOS VARIOS"
+  },
+  {
+    "codigo": "9623",
+    "descripcion": "RECOLECTORES DE DINERO EN APARATOS DE VENTA AUTOMÁTICA Y LECTORES DE MEDIDORES"
+  },
+  {
+    "codigo": "9624",
+    "descripcion": "ACARREADORES DE AGUA Y RECOLECTORES DE LEÑA"
+  },
+  {
+    "codigo": "9629",
+    "descripcion": "OCUPACIONES ELEMENTALES NO CLASIFICADAS BAJO OTROS EPÍGRAFES"
+  }
+]

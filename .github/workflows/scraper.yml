@@ -15,9 +15,8 @@ jobs:
     timeout-minutes: 180   # 3 horas máximo (aumentar si se agregan más scrapers)
 
     env:
-      CHROME_VER: "0"               # 0 = auto-detectar versión instalada
-      DB_PATH: vacantes_laborales.db
-      EXPORTS_DIR: exports
+      DATABASE_URL:  ${{ secrets.DATABASE_URL }}
+      EXPORTS_DIR:   exports
       GDRIVE_CREDENTIALS_PATH: credentials.json
       GDRIVE_TOKEN_PATH: token.json
 
@@ -53,19 +52,8 @@ jobs:
         with:
           chrome-version: stable
 
-      # ── 4. Recuperar BD anterior ─────────────────────────────────────────────
-      - name: Descargar BD del release anterior
-        run: |
-          gh release download latest-data \
-            --pattern "vacantes_laborales.db" \
-            --dir . --clobber 2>/dev/null \
-            && echo "BD descargada." \
-            || echo "Primera ejecución — se crea una BD nueva."
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       # ══════════════════════════════════════════════════════════════════════════
-      # SCRAPERS  — agregar un bloque por cada portal nuevo
+      # SCRAPERS  — agregan datos directamente en Supabase (PostgreSQL)
       # ══════════════════════════════════════════════════════════════════════════
 
       - name: Scraper — Multitrabajos
@@ -79,12 +67,50 @@ jobs:
         run: python Notebooks/scraper_computrabajo.py
         continue-on-error: true
 
-      # Ejemplo de cómo agregar el siguiente portal (descomentar cuando esté listo):
-      # - name: Pausa entre portales
-      #   run: sleep 60
-      # - name: Scraper — SocioEmpleo
-      #   run: python Notebooks/scraper_socioempleo.py
-      #   continue-on-error: true
+      # ══════════════════════════════════════════════════════════════════════════
+      # CLASIFICACIÓN Y REVISIÓN — solo vacantes nuevas (filtro incremental);
+      # cada paso es idempotente, así que un fallo aquí no bloquea al siguiente
+      # ══════════════════════════════════════════════════════════════════════════
+
+      - name: Instalar modelo de español para spaCy
+        run: python -m spacy download es_core_news_sm
+
+      - name: NLP — clasificación semántica (CIUO/CIIU/carreras)
+        run: python Codes/nlp_pipeline.py
+        continue-on-error: true
+
+      - name: Corrector de anclas (1a pasada)
+        run: python Codes/corregir_codigos.py
+        continue-on-error: true
+
+      - name: Palabras clave (key_words)
+        run: python Codes/generar_keywords.py
+        continue-on-error: true
+
+      - name: Revisor IA — revisión con modelos de lenguaje
+        run: python Codes/revisar_ia.py --max 0
+        env:
+          CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        continue-on-error: true
+
+      - name: Revisor IA — aplicar correcciones
+        run: python Codes/revisar_ia.py --aplicar
+        continue-on-error: true
+
+      - name: Corrector de anclas (2a pasada)
+        run: python Codes/corregir_codigos.py
+        continue-on-error: true
+
+      - name: Recalcular carreras
+        run: python Codes/backfill_carreras.py
+        continue-on-error: true
+
+      - name: Generar dashboard
+        run: python Codes/generar_dashboard.py --todo
+        continue-on-error: true
 
       # ══════════════════════════════════════════════════════════════════════════
       # EXPORTAR
@@ -94,21 +120,21 @@ jobs:
         run: python exportar_excel.py
 
       # ══════════════════════════════════════════════════════════════════════════
-      # PUBLICAR — GitHub Release (siempre) + Google Drive (si hay token)
+      # PUBLICAR — GitHub Release + Google Drive
       # ══════════════════════════════════════════════════════════════════════════
 
-      - name: Publicar en release latest-data (GitHub)
+      - name: Publicar exports en release latest-data (GitHub)
         run: |
           gh release view latest-data 2>/dev/null || \
             gh release create latest-data \
               --title "Datos CISE 2026 — última actualización" \
-              --notes "Actualización automática. Descarga el .db, .xlsx o .csv." \
+              --notes "Actualización automática. Descarga el .xlsx o .csv." \
               --prerelease
 
           gh release upload latest-data \
-            vacantes_laborales.db \
             exports/vacantes_*.xlsx \
             exports/vacantes_*.csv \
+            exports/dashboard/CISE_Dashboard.html \
             --clobber
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -118,7 +144,6 @@ jobs:
           GDRIVE_CREDENTIALS: ${{ secrets.GDRIVE_CREDENTIALS }}
           GDRIVE_TOKEN: ${{ secrets.GDRIVE_TOKEN }}
         run: |
-          # printf preserva JSON multilinea correctamente (echo puede romperlo)
           printf '%s' "$GDRIVE_CREDENTIALS" > credentials.json
           printf '%s' "$GDRIVE_TOKEN"       > token.json
         continue-on-error: true
@@ -131,9 +156,29 @@ jobs:
       - name: Notificar éxito
         if: ${{ success() && secrets.NTFY_TOPIC != '' }}
         run: |
-          TOTAL=$(python -c "import sqlite3; c=sqlite3.connect('vacantes_laborales.db'); print(c.execute('SELECT COUNT(*) FROM vacantes').fetchone()[0])" 2>/dev/null || echo "?")
-          NUEVAS_MT=$(python -c "import sqlite3; c=sqlite3.connect('vacantes_laborales.db'); print(c.execute('SELECT COALESCE(total_nuevas,0) FROM ejecuciones WHERE portal_id=(SELECT id FROM portales WHERE nombre=\"multitrabajos\") ORDER BY id DESC LIMIT 1').fetchone()[0])" 2>/dev/null || echo "?")
-          NUEVAS_CT=$(python -c "import sqlite3; c=sqlite3.connect('vacantes_laborales.db'); print(c.execute('SELECT COALESCE(total_nuevas,0) FROM ejecuciones WHERE portal_id=(SELECT id FROM portales WHERE nombre=\"computrabajo\") ORDER BY id DESC LIMIT 1').fetchone()[0])" 2>/dev/null || echo "?")
+          TOTAL=$(python -c "
+from db import conectar
+conn = conectar()
+cur = conn.cursor()
+cur.execute('SELECT COUNT(*) FROM vacantes')
+print(cur.fetchone()[0])
+" 2>/dev/null || echo "?")
+          NUEVAS_MT=$(python -c "
+from db import conectar
+conn = conectar()
+cur = conn.cursor()
+cur.execute(\"SELECT COALESCE(total_nuevas,0) FROM ejecuciones WHERE portal_id=(SELECT id FROM portales WHERE nombre='multitrabajos') ORDER BY id DESC LIMIT 1\")
+r = cur.fetchone()
+print(r[0] if r else 0)
+" 2>/dev/null || echo "?")
+          NUEVAS_CT=$(python -c "
+from db import conectar
+conn = conectar()
+cur = conn.cursor()
+cur.execute(\"SELECT COALESCE(total_nuevas,0) FROM ejecuciones WHERE portal_id=(SELECT id FROM portales WHERE nombre='computrabajo') ORDER BY id DESC LIMIT 1\")
+r = cur.fetchone()
+print(r[0] if r else 0)
+" 2>/dev/null || echo "?")
           curl -s -X POST \
             -H "Title: CISE 2026 — Scraping completado ✅" \
             -H "Priority: default" -H "Tags: white_check_mark,chart_with_upwards_trend" \
@@ -158,7 +203,7 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| Archivo | Tamaño |" >> $GITHUB_STEP_SUMMARY
           echo "|---------|--------|" >> $GITHUB_STEP_SUMMARY
-          for f in vacantes_laborales.db exports/vacantes_*; do
+          for f in exports/vacantes_*; do
             [ -f "$f" ] && echo "| \`$(basename $f)\` | $(du -sh $f | cut -f1) |" >> $GITHUB_STEP_SUMMARY
           done
           echo "" >> $GITHUB_STEP_SUMMARY
